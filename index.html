@@ -1,0 +1,1330 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Plant Parent: houseplant care that follows your weather. عناية بنباتاتك المنزلية على قدّ طقسك.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2715%27 fill=%27%234fb06f%27/%3E%3Cpath d=%27M9 23C9 14 14 9 23 9c0 9-5 14-12 14M9 23c3-5 6-8 9-10%27 fill=%27none%27 stroke=%27%230f2f20%27 stroke-width=%272.4%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Plant Parent</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: cream-white ground (60%), glossy leaf green for panels and actions (30%), deep forest for type and details (10%), one blossom-pink accent. */
+:root{
+  --forest-900:#0f2f20; --forest-800:#17432d; --forest-700:#1f5a3c; --forest-600:#2f7a50; --forest-500:#3f9a63;
+  --leaf-100:#eaf7df; --leaf-200:#d2f0c0; --leaf-300:#aee39e; --leaf-400:#86d296; --leaf-500:#4fb06f;
+  --cream:#fdfcf6; --cream-2:#eef2e0; --bloom:#ff9aa5; --bloom-100:#ffe3e1; --rose:#d9485f;
+  --bg:#f4f8ec; --ink:var(--forest-900); --ink-dim:rgba(15,47,32,.72); --ink-faint:rgba(15,47,32,.5);
+  --line:rgba(47,122,80,.24);
+  --f-display:'Fraunces','Amiri',Georgia,serif;
+  --f-body:'Manrope','IBM Plex Sans Arabic',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+[lang="ar"]{ --f-display:'Amiri','Fraunces',serif; --f-body:'IBM Plex Sans Arabic','Manrope',system-ui,sans-serif; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.6;
+  padding-block:0 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));
+  min-height:100vh;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:clip;
+  background:
+    radial-gradient(900px 600px at 90% -10%,rgba(174,227,158,.75),transparent 60%),
+    radial-gradient(700px 500px at -10% 45%,rgba(255,227,225,.85),transparent 60%),
+    radial-gradient(800px 500px at 60% 105%,rgba(134,210,150,.4),transparent 60%),
+    linear-gradient(180deg,#f8fcf1,#eef6e2)}
+.wrap{max-width:1160px;margin-inline:auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--forest-600);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* gloss primitives */
+.gloss{position:relative;isolation:isolate}
+.gloss::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:linear-gradient(158deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.14) 30%,rgba(255,255,255,0) 46%)}
+.gloss::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .35s;
+  background:radial-gradient(260px 200px at var(--mx,30%) var(--my,0%),rgba(255,255,255,.7),transparent 70%)}
+.leaf-card.gloss::before{background:linear-gradient(158deg,rgba(255,255,255,.28),rgba(255,255,255,.05) 30%,rgba(255,255,255,0) 46%)}
+.gloss:hover::after{opacity:1}
+.card{border-radius:26px;border:1px solid var(--line);
+  background:linear-gradient(155deg,#fff,#f1f9e8 62%,var(--leaf-200));
+  box-shadow:inset 0 2px 0 #fff,inset 0 -16px 30px rgba(79,176,111,.16),0 18px 40px rgba(31,90,60,.16)}
+.leaf-card{border-radius:30px;color:var(--forest-900);border:1px solid rgba(255,255,255,.7);
+  background:linear-gradient(155deg,var(--leaf-100),var(--leaf-300) 50%,var(--leaf-500));
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.9),inset 0 -22px 40px rgba(31,90,60,.3),0 24px 50px rgba(31,90,60,.28)}
+.paper-card{border-radius:30px;color:var(--forest-900);border:1px solid var(--line);
+  background:linear-gradient(155deg,#fff,var(--cream) 60%,var(--cream-2));
+  box-shadow:inset 0 2px 0 #fff,inset 0 -22px 40px rgba(79,176,111,.1),0 24px 50px rgba(31,90,60,.16)}
+
+/* buttons */
+.btn{position:relative;overflow:hidden;border:0;cursor:pointer;border-radius:999px;padding:.78em 1.4em;font-weight:700;font-size:.95rem;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:.55em;transition:transform .25s var(--ease),filter .25s,box-shadow .25s;white-space:nowrap}
+.btn svg{width:1.15em;height:1.15em;flex:none}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn[disabled]{opacity:.55;pointer-events:none}
+.btn::after{content:"";position:absolute;top:-20%;bottom:-20%;width:34%;inset-inline-start:-50%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);transition:inset-inline-start .6s var(--ease)}
+.btn:hover::after{inset-inline-start:130%}
+.btn-leaf{color:var(--forest-900);
+  background:linear-gradient(180deg,#e4f8d4 0%,var(--leaf-400) 49%,var(--leaf-500) 51%,var(--leaf-400) 100%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 -2px 6px rgba(31,90,60,.35),0 10px 24px rgba(79,176,111,.4)}
+.btn-ghost{background:rgba(255,255,255,.55);border:1px solid rgba(31,90,60,.35);color:var(--forest-800);box-shadow:inset 0 1px 0 #fff}
+.btn-ghost:hover{background:#fff}
+.btn-cream{color:var(--forest-900);background:linear-gradient(180deg,#fff 0%,var(--cream) 49%,var(--cream-2) 51%,var(--cream) 100%);
+  box-shadow:inset 0 1px 0 #fff,0 8px 20px rgba(31,90,60,.2);border:1px solid var(--line)}
+.btn-dark{color:var(--cream);background:linear-gradient(180deg,var(--forest-500) 0%,var(--forest-600) 49%,var(--forest-800) 51%,var(--forest-700) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 8px 20px rgba(15,47,32,.3)}
+.btn-sm{padding:.55em 1.05em;font-size:.86rem}
+.icon-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.75);cursor:pointer;display:grid;place-items:center;color:var(--ink-dim);transition:.2s}
+.icon-btn:hover{background:var(--leaf-200);color:var(--forest-900)}
+.icon-btn svg{width:16px;height:16px}
+.icon-btn.armed{background:var(--rose);color:#fff;border-color:transparent;width:auto;padding-inline:.8em;border-radius:999px;font-size:.78rem;font-weight:700}
+
+/* header */
+.top{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:20;margin-top:10px;
+  display:flex;align-items:center;gap:14px;padding:9px 12px 9px 18px;border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(234,247,223,.9));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line);box-shadow:inset 0 1px 0 #fff,0 12px 30px rgba(31,90,60,.18)}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:600;font-size:1.25rem;text-decoration:none;color:var(--forest-900);margin-inline-end:auto;white-space:nowrap}
+.logo i{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--forest-800);
+  background:radial-gradient(circle at 30% 25%,#fff,var(--leaf-300) 55%,var(--leaf-500));box-shadow:inset 0 -3px 6px rgba(31,90,60,.4),0 4px 10px rgba(31,90,60,.25)}
+.logo svg{width:18px;height:18px}
+.nav{display:flex;gap:4px}
+.nav a{color:var(--ink-dim);text-decoration:none;font-weight:600;font-size:.92rem;padding:.5em 1em;border-radius:999px;transition:.2s}
+.nav a:hover{background:rgba(79,176,111,.18);color:var(--forest-900)}
+.lang{border:0;cursor:pointer;border-radius:999px;padding:.5em 1.1em;font-weight:700;font-size:.9rem}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;padding-block:44px 28px}
+.eyebrow{display:inline-flex;align-items:center;gap:.6em;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--forest-600)}
+[lang="ar"] .eyebrow{letter-spacing:0;text-transform:none;font-size:.95rem}
+.eyebrow::before{content:"";width:26px;height:2px;background:linear-gradient(90deg,var(--forest-500),transparent);border-radius:2px}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5rem);margin-block:16px 18px;letter-spacing:-.02em;color:var(--forest-900)}
+[lang="ar"] .hero h1{letter-spacing:0;line-height:1.25}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--forest-500)}
+[lang="ar"] .hero h1 em{font-style:normal}
+.hero .sub{max-width:52ch;color:var(--ink-dim);font-size:1.08rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.stat{padding:12px 18px;min-width:110px}
+.stat b{display:block;font-family:var(--f-display);font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.8rem;color:var(--ink-dim)}
+.art{position:relative;width:100%;max-width:460px;aspect-ratio:1/1.04;margin-inline:auto;--px:0;--py:0}
+.blob{position:absolute;animation:morph 14s ease-in-out infinite;transition:transform .5s var(--ease)}
+@keyframes morph{0%,100%{border-radius:58% 42% 55% 45%/52% 55% 45% 48%}33%{border-radius:44% 56% 42% 58%/58% 44% 56% 42%}66%{border-radius:52% 48% 60% 40%/46% 58% 42% 54%}}
+.b-forest{width:82%;height:60%;bottom:3%;left:9%;
+  background:radial-gradient(55% 38% at 28% 20%,rgba(255,255,255,.75),transparent 62%),linear-gradient(160deg,var(--leaf-400),var(--leaf-500) 45%,var(--forest-600));
+  box-shadow:inset 0 -26px 44px rgba(15,47,32,.4),inset 0 12px 28px rgba(255,255,255,.3),0 36px 60px rgba(31,90,60,.35);
+  transform:translate(calc(var(--px)*-14px),calc(var(--py)*-10px))}
+.b-mint{width:48%;height:36%;top:10%;inset-inline-end:-2%;animation-delay:-4s;
+  background:radial-gradient(55% 40% at 30% 22%,rgba(255,255,255,.95),transparent 62%),linear-gradient(160deg,var(--leaf-100),var(--leaf-300) 55%,var(--leaf-400));
+  box-shadow:inset 0 -16px 28px rgba(31,90,60,.3),0 24px 40px rgba(31,90,60,.28);
+  transform:translate(calc(var(--px)*22px),calc(var(--py)*16px))}
+.b-bloom{width:32%;height:25%;top:34%;inset-inline-start:0;animation-delay:-8s;
+  background:radial-gradient(55% 40% at 30% 22%,#fff,transparent 62%),linear-gradient(160deg,var(--bloom-100),var(--bloom) 70%,#f27a88);
+  box-shadow:inset 0 -12px 22px rgba(143,43,61,.3),0 20px 34px rgba(143,43,61,.25);
+  transform:translate(calc(var(--px)*30px),calc(var(--py)*-18px))}
+.plant{position:absolute;inset:2% 12% 8%;width:76%;height:90%;transform-origin:50% 95%;animation:sway 7s ease-in-out infinite;
+  transform:translate(calc(var(--px)*8px),calc(var(--py)*6px));filter:drop-shadow(0 14px 18px rgba(15,47,32,.3))}
+@keyframes sway{0%,100%{rotate:-1.4deg}50%{rotate:1.6deg}}
+
+/* sections */
+section{padding-block:26px}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.sec-head h2{font-size:clamp(1.8rem,3.6vw,2.6rem)}
+.sec-head p{color:var(--ink-dim);margin-top:6px;max-width:56ch}
+
+/* weather + today */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.weather{padding:26px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.weather h2{font-size:1.5rem}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field>label,.lbl{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+[lang="ar"] .field>label,[lang="ar"] .lbl{letter-spacing:0;text-transform:none;font-size:.88rem}
+select,input[type=text]{width:100%;border-radius:16px;padding:.7em 1em;border:1px solid rgba(31,90,60,.28);background:rgba(255,255,255,.85);color:var(--forest-900);font-weight:600;
+  box-shadow:inset 0 2px 4px rgba(31,90,60,.1);appearance:none;-webkit-appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--forest-700) 50%),linear-gradient(135deg,var(--forest-700) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;background-size:6px 6px;background-repeat:no-repeat;padding-inline-end:2.4em}
+[dir="rtl"] select{background-position:20px 55%,14px 55%}
+.climate{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.temp{font-family:var(--f-display);font-size:4rem;line-height:1;font-variant-numeric:tabular-nums}
+.temp small{font-size:1.4rem;opacity:.7}
+.kv{display:flex;flex-direction:column;font-size:.9rem}
+.kv b{font-size:1.15rem;font-variant-numeric:tabular-nums}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid rgba(31,90,60,.3);background:rgba(255,255,255,.6);color:var(--forest-900);border-radius:999px;padding:.45em .95em;font-weight:600;font-size:.88rem;cursor:pointer;transition:.2s}
+.seg button:hover{background:#fff}
+.seg button[aria-pressed="true"]{background:linear-gradient(180deg,var(--forest-500),var(--forest-700));color:var(--cream);border-color:transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 14px rgba(15,47,32,.3)}
+.pace{display:flex;gap:10px;flex-wrap:wrap}
+.pace div{flex:1 1 140px;background:rgba(255,255,255,.65);border-radius:18px;padding:10px 14px;box-shadow:inset 0 1px 0 #fff}
+.pace b{display:block;font-family:var(--f-display);font-size:1.5rem;font-variant-numeric:tabular-nums}
+.pace span{font-size:.8rem}
+.note{font-size:.84rem;opacity:.8}
+
+.today{align-self:start;padding:26px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.today-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.today-head h2{font-size:1.5rem}
+.badge{font-variant-numeric:tabular-nums;font-weight:700;border-radius:999px;padding:.15em .8em;background:var(--forest-800);color:var(--cream);font-size:.9rem}
+.tasks{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.task{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:20px;background:rgba(79,176,111,.1);border:1px solid var(--line);animation:rise .5s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.task .dot{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;color:var(--forest-800)}
+.task .dot svg{width:20px;height:20px}
+.dot.w{background:radial-gradient(circle at 30% 25%,#fff,var(--leaf-300) 55%,var(--leaf-500));box-shadow:inset 0 -3px 6px rgba(31,90,60,.3)}
+.dot.f{background:radial-gradient(circle at 30% 25%,#fff,var(--bloom-100) 50%,var(--bloom));color:#8f2b3d;box-shadow:inset 0 -3px 6px rgba(143,43,61,.25)}
+.task .tx{flex:1;min-width:0}
+.task .tx b{display:block;overflow-wrap:anywhere}
+.task .tx span{font-size:.82rem;color:var(--ink-dim)}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:24px 12px;color:var(--ink-dim)}
+.empty .orb{width:64px;height:64px}
+.rain-note{font-size:.84rem;color:var(--forest-700);background:rgba(63,154,99,.15);border-radius:14px;padding:8px 12px}
+
+/* garden */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.plant-card{padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s;transform-style:preserve-3d;will-change:transform}
+.pc-top{display:flex;gap:14px;align-items:center}
+.orb{width:54px;height:54px;border-radius:50%;flex:none;display:grid;place-items:center;position:relative;overflow:hidden}
+.orb svg{width:60%;height:60%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;position:relative}
+.orb::before{content:"";position:absolute;inset:6% 18% 54% 14%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0))}
+.o-leaf{color:var(--forest-800);background:radial-gradient(circle at 30% 25%,#fff,var(--leaf-300) 55%,var(--leaf-500));box-shadow:inset 0 -5px 10px rgba(31,90,60,.4),0 6px 14px rgba(31,90,60,.28)}
+.o-cream{color:var(--forest-700);background:radial-gradient(circle at 30% 25%,#fff,var(--cream-2) 55%,#cfd8bd);box-shadow:inset 0 -5px 10px rgba(31,90,60,.2),0 6px 14px rgba(31,90,60,.22)}
+.o-forest{color:var(--cream);background:radial-gradient(circle at 30% 25%,var(--leaf-500),var(--forest-600) 55%,var(--forest-900));box-shadow:inset 0 -5px 10px rgba(0,0,0,.35),0 6px 14px rgba(15,47,32,.3)}
+.o-bloom{color:#8f2b3d;background:radial-gradient(circle at 30% 25%,#fff,var(--bloom-100) 45%,var(--bloom));box-shadow:inset 0 -5px 10px rgba(143,43,61,.3),0 6px 14px rgba(143,43,61,.22)}
+.pc-name{min-width:0;flex:1}
+.pc-name h3{font-size:1.35rem;overflow-wrap:anywhere}
+.pc-name span{font-size:.85rem;color:var(--ink-dim)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:.72rem;font-weight:700;padding:.15em .7em;border-radius:999px;background:var(--leaf-200);color:var(--forest-700);border:1px solid var(--line)}
+.tag.ex{background:var(--forest-800);color:var(--cream);border-color:transparent}
+.rows{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:18px;background:rgba(79,176,111,.12)}
+.ring{position:relative;width:52px;height:52px;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:5}
+.ring .bg{stroke:rgba(31,90,60,.14)}
+.ring .fg{stroke:var(--leaf-500);stroke-linecap:round;transition:stroke-dashoffset .9s var(--ease),stroke .3s;filter:drop-shadow(0 0 3px rgba(79,176,111,.5))}
+.ring.now .fg{stroke:var(--forest-600)}
+.ring.late .fg{stroke:var(--rose)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:.9rem;font-variant-numeric:tabular-nums}
+.ring b svg{width:20px;height:20px;transform:none}
+.row .tx{flex:1;min-width:0;line-height:1.35}
+.row .tx span{display:block;font-size:.78rem;color:var(--ink-dim)}
+.row .tx b{font-size:.95rem}
+.pc-actions{display:flex;gap:8px;align-items:center}
+.pc-actions .btn{flex:1}
+.drop{position:absolute;top:-10px;width:8px;height:12px;border-radius:50% 50% 55% 55%/65% 65% 40% 40%;background:linear-gradient(180deg,var(--leaf-300),var(--leaf-500));z-index:5;pointer-events:none;animation:fall .9s ease-in forwards}
+@keyframes fall{to{transform:translateY(240px);opacity:0}}
+.pulse{animation:pulse .7s var(--ease)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(79,176,111,.6)}100%{box-shadow:0 0 0 26px rgba(79,176,111,0)}}
+.sync{display:inline-flex;align-items:center;gap:.55em;margin-top:10px;font-size:.8rem;font-weight:600;padding:.25em .9em;border-radius:999px;background:rgba(255,255,255,.75);border:1px solid var(--line);color:var(--forest-700)}
+.sync::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink-faint)}
+.sync.on::before{background:var(--leaf-500);box-shadow:0 0 0 3px rgba(79,176,111,.28)}
+.sync.err::before{background:var(--rose)}
+.garden-empty{grid-column:1/-1;padding:40px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+
+/* diagnose */
+.dx{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.dx-form{padding:24px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.drop-zone{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;min-height:190px;padding:18px;
+  border-radius:24px;border:2px dashed rgba(47,122,80,.5);background:rgba(174,227,158,.22);cursor:pointer;transition:.25s;overflow:hidden}
+.drop-zone:hover,.drop-zone.over{background:rgba(174,227,158,.45);border-color:var(--forest-600);transform:scale(1.01)}
+.drop-zone .orb{width:56px;height:56px}
+.drop-zone img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+.drop-zone .clear{position:absolute;top:10px;inset-inline-end:10px;z-index:3}
+.drop-zone .scan{position:absolute;inset-inline:0;height:70px;z-index:2;background:linear-gradient(180deg,transparent,rgba(79,176,111,.6),transparent);animation:scan 1.6s ease-in-out infinite}
+@keyframes scan{0%{top:-70px}100%{top:100%}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid rgba(31,90,60,.3);background:rgba(255,255,255,.75);color:var(--forest-900);border-radius:999px;padding:.45em 1em;font-size:.88rem;font-weight:600;cursor:pointer;transition:.2s}
+.chip:hover{background:#fff}
+.chip[aria-pressed="true"]{background:linear-gradient(180deg,#e4f8d4,var(--leaf-400) 50%,var(--leaf-500) 52%,var(--leaf-400));color:var(--forest-900);border-color:transparent;box-shadow:inset 0 1px 0 #fff,0 6px 14px rgba(79,176,111,.35)}
+.dx-out{padding:26px;min-height:340px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.dx-out h3{font-size:1.7rem}
+.dx-out .placeholder{margin:auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:.8;max-width:30ch}
+.dx-out .orb{width:60px;height:60px}
+.sev{display:inline-block;font-size:.78rem;font-weight:700;border-radius:999px;padding:.2em .9em}
+.sev.low{background:var(--leaf-300);color:var(--forest-900)}
+.sev.medium{background:var(--forest-600);color:var(--cream)}
+.sev.high{background:var(--rose);color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.conf{display:flex;align-items:center;gap:8px;font-size:.82rem}
+.conf i{display:block;width:90px;height:7px;border-radius:7px;background:rgba(31,90,60,.15);overflow:hidden}
+.conf i::after{content:"";display:block;height:100%;width:var(--c,0%);background:linear-gradient(90deg,var(--leaf-500),var(--forest-600));border-radius:7px}
+.dx-out h4{margin:0 0 6px;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;opacity:.65}
+[lang="ar"] .dx-out h4{letter-spacing:0;text-transform:none;font-size:.9rem}
+.dx-out ul,.dx-out ol{margin:0;padding-inline-start:1.3em;display:flex;flex-direction:column;gap:6px}
+.dx-out .blk+.blk{border-top:1px solid rgba(31,90,60,.15);padding-top:14px}
+.dx-out .foot{font-size:.8rem;opacity:.7;margin-top:auto}
+.shimmer{height:14px;border-radius:8px;background:linear-gradient(90deg,rgba(79,176,111,.12),rgba(79,176,111,.32),rgba(79,176,111,.12));background-size:200% 100%;animation:sh 1.2s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+
+/* modal + toast */
+.veil{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:rgba(15,47,32,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fade .25s both}
+@keyframes fade{from{opacity:0}}
+.modal{width:min(620px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:26px;display:flex;flex-direction:column;gap:18px;animation:rise .35s var(--ease) both}
+.modal h2{font-size:1.8rem}
+.sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px;max-height:min(42vh,320px);overflow:auto;padding:4px;margin:-4px;overscroll-behavior:contain}
+.sp{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:12px 8px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.75);color:var(--forest-900);cursor:pointer;transition:.2s}
+.sp:hover{background:#fff}
+.sp .orb{width:42px;height:42px}
+.sp b{font-size:.88rem;line-height:1.25}
+.sp span{font-size:.72rem;color:var(--ink-dim)}
+.sp[aria-pressed="true"]{background:linear-gradient(180deg,#e4f8d4,var(--leaf-400) 50%,var(--leaf-500) 52%,var(--leaf-400));border-color:transparent;box-shadow:0 8px 20px rgba(79,176,111,.4)}
+.sp[aria-pressed="true"] span{color:var(--forest-800)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.toast{position:fixed;inset-inline:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));margin-inline:auto;width:max-content;max-width:calc(100% - 32px);z-index:60;
+  padding:.7em 1.4em;border-radius:999px;font-weight:700;color:var(--cream);background:linear-gradient(180deg,var(--forest-600),var(--forest-900));box-shadow:0 14px 34px rgba(15,47,32,.4);
+  transform:translateY(30px);opacity:0;pointer-events:none;transition:.35s var(--ease)}
+.toast.on{transform:none;opacity:1}
+footer{padding-block:30px 10px;color:var(--ink-faint);font-size:.85rem;text-align:center}
+
+@media (max-width:860px){
+  .hero,.duo,.dx{grid-template-columns:1fr}
+  .art{max-width:360px;order:-1}
+  .hero{padding-top:24px}
+  .nav{display:none}
+}
+@media (max-width:480px){
+  .form-row{grid-template-columns:1fr}
+  .temp{font-size:3.2rem}
+  .top{padding-inline-start:14px}
+  .modal{padding:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* 3D plant renders + category icons */
+.p3d{display:grid;place-items:center;width:58px;height:58px;flex:none;perspective:300px}
+.p3d.big{width:84px;height:84px}
+.p3d svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 6px 6px rgba(15,47,32,.25));transform-style:preserve-3d;animation:p3dSway 5s ease-in-out infinite}
+.sp .p3d{width:64px;height:64px}
+.sp:hover .p3d svg,.plant-card:hover .p3d svg{animation:p3dSpin 1.6s var(--ease) 1}
+@keyframes p3dSway{0%,100%{transform:rotateY(-14deg) rotateX(4deg)}50%{transform:rotateY(14deg) rotateX(-2deg)}}
+@keyframes p3dSpin{to{transform:rotateY(360deg)}}
+@media (prefers-reduced-motion:reduce){.p3d svg{animation:none!important}}
+.sp .al,.pc-name .al{display:block;font-style:normal;font-size:.7rem;line-height:1.3;color:var(--forest-600);opacity:.95}
+.sp-grid{max-height:min(46vh,380px)}
+.seg button{display:inline-flex;align-items:center;gap:.4em}
+.seg .ci{display:inline-grid;width:1.25em;height:1.25em}
+.seg .ci svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.p3d{position:relative}
+.p3d img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:18px;border:2px solid #fff;box-shadow:0 6px 14px rgba(15,47,32,.3);animation:rise .4s var(--ease) both}
+.p3d.has-photo svg{opacity:0}
+.sp .p3d{width:76px;height:76px}.p3d.big{width:92px;height:92px}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#top" aria-label="Plant Parent"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 10 11 4 20 4c0 9-6 15-13 15M5 19c3-5 6-8 10-10"/></svg></i>Plant Parent</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#care" data-i18n="navCare"></a>
+      <a href="#garden" data-i18n="navGarden"></a>
+      <a href="#doctor" data-i18n="navDoctor"></a>
+    </nav>
+    <button class="lang btn-cream btn" id="langBtn" type="button" aria-label="Language / اللغة">EN</button>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <span class="eyebrow" data-i18n="eyebrow"></span>
+        <h1 id="heroTitle"></h1>
+        <p class="sub" data-i18n="sub"></p>
+        <div class="cta">
+          <button class="btn btn-leaf" id="heroAdd" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span data-i18n="ctaAdd"></span></button>
+          <a class="btn btn-ghost" href="#doctor" data-i18n="ctaDx"></a>
+        </div>
+        <div class="stats">
+          <div class="stat card gloss"><b id="stPlants">0</b><span data-i18n="stPlants"></span></div>
+          <div class="stat card gloss"><b id="stDue">0</b><span data-i18n="stDue"></span></div>
+          <div class="stat card gloss"><b id="stTemp">0°</b><span data-i18n="stTemp"></span></div>
+        </div>
+      </div>
+      <div class="art" id="art" aria-hidden="true">
+        <div class="blob b-forest"></div><div class="blob b-mint"></div><div class="blob b-bloom"></div>
+        <svg class="plant" viewBox="0 0 300 390">
+          <defs>
+            <linearGradient id="gLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ecfadf"/><stop offset=".5" stop-color="#8fd49a"/><stop offset="1" stop-color="#3f9a63"/></linearGradient>
+            <linearGradient id="gPot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c9704a"/><stop offset=".3" stop-color="#f4a77f"/><stop offset=".7" stop-color="#e08e66"/><stop offset="1" stop-color="#b9603c"/></linearGradient>
+            <g id="leaf"><path d="M0 0C25-44 82-48 114 0C82 48 25 44 0 0Z"/><path d="M8 0C44-5 82-5 106 0" fill="none" stroke="rgba(31,90,60,.5)" stroke-width="2"/><path d="M22-14C44-30 74-32 96-14" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-linecap="round"/></g>
+          </defs>
+          <path d="M150 312C152 250 146 190 150 112" stroke="#2f7a50" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <g fill="url(#gLeaf)">
+            <use href="#leaf" transform="translate(150 300) rotate(-162) scale(.95)"/>
+            <use href="#leaf" transform="translate(150 292) rotate(-18) scale(.95)"/>
+            <use href="#leaf" transform="translate(150 244) rotate(-138) scale(.85)"/>
+            <use href="#leaf" transform="translate(150 236) rotate(-42) scale(.85)"/>
+            <use href="#leaf" transform="translate(149 190) rotate(-122) scale(.72)"/>
+            <use href="#leaf" transform="translate(150 182) rotate(-58) scale(.72)"/>
+            <use href="#leaf" transform="translate(150 118) rotate(-90) scale(.66)"/>
+          </g>
+          <ellipse cx="150" cy="304" rx="58" ry="10" fill="#4a3322"/>
+          <rect x="88" y="298" width="124" height="24" rx="12" fill="url(#gPot)"/>
+          <path d="M96 318H204L194 376Q193 384 184 384H116Q107 384 106 376Z" fill="url(#gPot)"/>
+          <path d="M108 326L114 372" stroke="#fff" stroke-opacity=".85" stroke-width="5" stroke-linecap="round"/>
+          <path d="M100 306H122" stroke="#fff" stroke-opacity=".9" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <section id="care" class="duo" aria-label="Care">
+      <div class="weather leaf-card gloss" id="weatherCard">
+        <h2 data-i18n="wTitle"></h2>
+        <div class="field"><label for="citySel" data-i18n="wCity"></label><select id="citySel"></select></div>
+        <div class="climate">
+          <div class="temp" id="wTemp"></div>
+          <div class="kv"><span data-i18n="wHum"></span><b id="wHum"></b></div>
+          <div class="kv"><span id="wMonthLbl"></span><b id="wMonth"></b></div>
+        </div>
+        <div class="field"><span class="lbl" data-i18n="wCond"></span><div class="seg" id="condSeg" role="group"></div></div>
+        <div class="pace" id="pace"></div>
+        <p class="note" data-i18n="wNote"></p>
+      </div>
+      <div class="today card gloss" id="todayCard">
+        <div class="today-head"><h2 data-i18n="tTitle"></h2><span class="badge" id="dueBadge">0</span></div>
+        <div class="rain-note" id="rainNote" hidden></div>
+        <ul class="tasks" id="tasks"></ul>
+      </div>
+    </section>
+
+    <section id="garden" aria-label="Garden">
+      <div class="sec-head">
+        <div><h2 data-i18n="gTitle"></h2><p data-i18n="gSub"></p><span class="sync" id="sync"></span></div>
+        <button class="btn btn-leaf" id="addBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span data-i18n="ctaAdd"></span></button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="doctor" aria-label="Leaf doctor">
+      <div class="sec-head"><div><h2 data-i18n="dTitle"></h2><p data-i18n="dSub"></p></div></div>
+      <div class="dx">
+        <div class="dx-form card gloss">
+          <label class="drop-zone" id="dz" for="photo">
+            <input class="sr" type="file" id="photo" accept="image/jpeg,image/png,image/webp,image/gif">
+            <div class="orb o-leaf" id="dzIcon"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4zM12 17a4 4 0 100-8 4 4 0 000 8z"/></svg></div>
+            <b data-i18n="dDrop"></b>
+            <span style="font-size:.84rem;color:var(--ink-dim)" data-i18n="dDropHint"></span>
+          </label>
+          <div class="field"><label for="dxPlant" data-i18n="dPlant"></label><select id="dxPlant"></select></div>
+          <div class="field"><span class="lbl" style="color:var(--ink-dim)" data-i18n="dSym"></span><div class="chips" id="symChips" role="group"></div></div>
+          <button class="btn btn-leaf" id="dxGo" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg><span data-i18n="dGo"></span></button>
+        </div>
+        <div class="dx-out paper-card gloss" id="dxOut" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+  <footer data-i18n="foot"></footer>
+</div>
+
+<div id="modalRoot"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- data ---------- */
+const SP=[
+ /* foliage and indoor */
+ ['pothos','Pothos','بوتس',7,30,'tropical'],['monstera','Monstera','مونستيرا',7,30,'tropical'],['peace','Peace lily','زنبق السلام',5,30,'tropical'],
+ ['fiddle','Fiddle-leaf fig','تين الكمان',7,30,'tropical'],['spider','Spider plant','نبات العنكبوت',7,30,'tropical'],['philodendron','Philodendron','فيلوديندرون',7,30,'tropical'],
+ ['rubber','Rubber plant','نبات المطاط',8,30,'tropical'],['benjamina','Weeping fig (Ficus)','فيكس بنجامينا',7,30,'tropical'],['dracaena','Dracaena','دراسينا',10,45,'tropical'],
+ ['dieffen','Dieffenbachia','ديفنباخيا',7,30,'tropical'],['aglaonema','Chinese evergreen','أغلونيما',8,30,'tropical'],['calathea','Calathea','كالاثيا',5,30,'tropical'],
+ ['fern','Boston fern','سرخس بوسطن',3,21,'tropical'],['areca','Areca palm','نخيل الأريكا',6,30,'tropical'],['parlor','Parlor palm','نخيل الصالون',7,30,'tropical'],
+ ['ivy','English ivy','اللبلاب',6,30,'tropical'],['croton','Croton','كروتون',6,21,'tropical'],['schefflera','Schefflera','شفليرا',8,30,'tropical'],
+ ['yucca','Yucca','يوكا',12,45,'tropical'],['luckybamboo','Lucky bamboo','خيزران الحظ',7,60,'tropical'],['alocasia','Alocasia','ألوكاسيا',6,30,'tropical'],
+ ['peperomia','Peperomia','بيبرومبيا',10,45,'tropical'],['birdofparadise','Bird of paradise','طائر الجنة',7,30,'tropical'],['hoya','Hoya (wax plant)','هويا',12,45,'tropical'],
+ ['tradescantia','Tradescantia','تريديسكانتيا',6,30,'tropical'],['aspidistra','Cast-iron plant','أسبيديسترا',9,45,'tropical'],['syngonium','Arrowhead plant','سينغونيوم',7,30,'tropical'],
+ /* succulents and cacti */
+ ['snake','Snake plant','لسان الحماة',14,60,'succulent'],['zz','ZZ plant','نبات الزاميا',14,60,'succulent'],['aloe','Aloe vera','الألوفيرا',14,60,'succulent'],
+ ['cactus','Cactus','الصبّار',21,90,'succulent'],['jade','Jade plant','شجرة اليشم',14,60,'succulent'],['echeveria','Echeveria','إكيفيريا',12,60,'succulent'],
+ ['haworthia','Haworthia','هاوورثيا',14,60,'succulent'],['agave','Agave','أغاف',21,90,'succulent'],['pricklypear','Prickly pear','التين الشوكي (الصبر)',14,60,'succulent'],
+ ['sedum','Sedum','سيدم',12,60,'succulent'],['aeonium','Aeonium','إيونيوم',12,60,'succulent'],['stringpearls','String of pearls','عقد اللؤلؤ',14,60,'succulent'],
+ ['xmascactus','Christmas cactus','صبّار عيد الميلاد',10,30,'succulent'],['lithops','Lithops (living stones)','الأحجار الحية',30,120,'succulent'],['ponytail','Ponytail palm','نخلة ذيل الحصان',18,60,'succulent'],
+ ['euphorbia','Euphorbia','يوفوربيا',14,60,'succulent'],['kalanchoe','Kalanchoe','كالانشو',12,45,'succulent'],['desertrose','Desert rose (Adenium)','وردة الصحراء',10,30,'succulent'],
+ /* herbs */
+ ['basil','Basil','الريحان',2,14,'herb'],['mint','Mint','النعناع',3,14,'herb'],['parsley','Parsley','البقدونس',3,14,'herb'],['coriander','Coriander','الكزبرة',3,14,'herb'],
+ ['thyme','Thyme','الزعتر',5,21,'herb'],['wildthyme','Za\'atar (wild thyme)','الزعتر البلدي',5,21,'herb'],['sage','Sage','المريمية',5,21,'herb'],['rosemary','Rosemary','إكليل الجبل',6,30,'herb'],
+ ['oregano','Oregano','الأوريجانو',5,21,'herb'],['marjoram','Marjoram','المردقوش',5,21,'herb'],['dill','Dill','الشبت',3,14,'herb'],['chives','Chives','الثوم المعمّر (الكراث)',3,14,'herb'],
+ ['arugula','Arugula','الجرجير',3,14,'herb'],['lemongrass','Lemongrass','عشبة الليمون',4,21,'herb'],['lemonbalm','Lemon balm','الترنجان',4,21,'herb'],['verbena','Lemon verbena','اللويزة',4,21,'herb'],
+ ['fenugreek','Fenugreek','الحلبة',3,14,'herb'],['nigella','Nigella (black seed)','حبة البركة',5,21,'herb'],['anise','Anise','اليانسون',5,21,'herb'],['chamomile','Chamomile','البابونج',4,21,'herb'],
+ ['stevia','Stevia','ستيفيا',4,21,'herb'],['laurel','Bay laurel','الغار',8,30,'herb'],['lavender','Lavender','اللافندر',8,30,'herb'],
+ /* flowers */
+ ['jasmine','Jasmine (Damascus)','الياسمين الشامي',4,21,'flower'],['arabjasmine','Arabian jasmine','الفلّ',3,21,'flower'],['rose','Rose','الورد',3,21,'flower'],
+ ['damask','Damask rose','الورد الجوري (الدمشقي)',3,21,'flower'],['orchid','Orchid','الأوركيد',7,21,'flower'],['bougainvillea','Bougainvillea','الجهنمية',5,21,'flower'],
+ ['geranium','Geranium','الغرنوقي (جيرانيوم)',5,21,'flower'],['petunia','Petunia','البتونيا',3,14,'flower'],['marigold','Marigold','القطيفة',3,14,'flower'],
+ ['chrysanth','Chrysanthemum','الأقحوان',4,21,'flower'],['hibiscus','Hibiscus','الخبازى (هيبيسكس)',4,21,'flower'],['gardenia','Gardenia','الغاردينيا',4,21,'flower'],
+ ['oleander','Oleander','الدفلى',6,30,'flower'],['lantana','Lantana','اللانتانا',6,30,'flower'],['zinnia','Zinnia','الزينيا',4,21,'flower'],['pansy','Pansy','البانسيه',3,14,'flower'],
+ ['carnation','Carnation','القرنفل',4,21,'flower'],['gerbera','Gerbera','الجربيرا',4,21,'flower'],['lily','Lily','الزنبق',5,21,'flower'],['tulip','Tulip','التوليب',5,21,'flower'],
+ ['narcissus','Narcissus (daffodil)','النرجس',5,21,'flower'],['cyclamen','Cyclamen','السيكلامين',5,21,'flower'],['anemone','Anemone','شقائق النعمان',5,21,'flower'],
+ ['iris','Iris','السوسن',6,30,'flower'],['snapdragon','Snapdragon','حنك السبع',4,21,'flower'],['sunflower','Sunflower','دوّار الشمس',3,21,'flower'],
+ ['vinca','Vinca (periwinkle)','الونكا',5,21,'flower'],['portulaca','Portulaca','البورتولاكا',6,30,'flower'],['plumeria','Plumeria (frangipani)','الفرانجيباني',6,30,'flower'],
+ ['africanviolet','African violet','البنفسج الأفريقي',6,21,'flower'],['anthurium','Anthurium','أنثوريوم',6,21,'flower'],['begonia','Begonia','البيغونيا',5,21,'flower'],
+ ['impatiens','Impatiens','الحناء الزينة (إمباتينز)',3,14,'flower'],['dahlia','Dahlia','الضاليا',4,21,'flower'],['hollyhock','Hollyhock','الخطمي',5,21,'flower'],
+ ['poinsettia','Poinsettia','بونسيتيا',7,30,'flower'],
+ /* trees, palms and shrubs */
+ ['olive','Olive','الزيتون',10,45,'tree'],['lemon','Lemon','الليمون',4,30,'tree'],['lime','Lime','الليمون الحامض (لايم)',4,30,'tree'],['orange','Orange','البرتقال',5,30,'tree'],
+ ['mandarin','Mandarin','اليوسفي',5,30,'tree'],['kumquat','Kumquat','الكمكوات',5,30,'tree'],['grapefruit','Grapefruit','الجريب فروت',5,30,'tree'],['fig','Fig','التين',7,45,'tree'],
+ ['pomegranate','Pomegranate','الرمان',6,30,'tree'],['datepalm','Date palm','نخيل التمر',10,45,'tree'],['grape','Grapevine','العنب',7,30,'tree'],['almond','Almond','اللوز',14,60,'tree'],
+ ['apricot','Apricot','المشمش',10,45,'tree'],['peach','Peach','الخوخ',8,45,'tree'],['plum','Plum','البرقوق',8,45,'tree'],['cherry','Cherry','الكرز',8,45,'tree'],
+ ['apple','Apple','التفاح',8,45,'tree'],['pear','Pear','الكمثرى',8,45,'tree'],['quince','Quince','السفرجل',8,45,'tree'],['walnut','Walnut','الجوز',10,45,'tree'],
+ ['mulberry','Mulberry','التوت',8,45,'tree'],['loquat','Loquat (akidenia)','الإكيدنيا (الأسكدنيا)',8,45,'tree'],['guava','Guava','الجوافة',6,30,'tree'],['banana','Banana','الموز',4,30,'tree'],
+ ['persimmon','Persimmon','الكاكا',8,45,'tree'],['mango','Mango','المانجو',6,30,'tree'],['papaya','Papaya','البابايا',5,30,'tree'],['avocado','Avocado','الأفوكادو',5,30,'tree'],
+ ['carob','Carob','الخروب',21,90,'tree'],['jujube','Jujube (sidr)','العنّاب (السدر)',14,60,'tree'],['moringa','Moringa','المورينغا',10,45,'tree'],['neem','Neem','النيم',14,60,'tree'],
+ ['cypress','Cypress','السرو',14,60,'tree'],['pine','Pine','الصنوبر',14,60,'tree'],['oak','Oak','البلوط',14,60,'tree'],['acacia','Acacia','الأكاسيا (السنط)',14,60,'tree'],
+ ['ghaf','Ghaf','الغاف',21,90,'tree'],['tamarisk','Tamarisk','الأثل',14,60,'tree'],['eucalyptus','Eucalyptus','الكافور (أوكالبتوس)',12,60,'tree'],['jacaranda','Jacaranda','الجاكاراندا',10,45,'tree'],
+ ['myrtle','Myrtle','الآس',6,30,'tree'],['boxwood','Boxwood','الشمشاد',7,30,'tree'],['washingtonia','Washingtonia palm','نخيل واشنطونيا',10,45,'tree'],['sago','Sago palm','نخيل الساغو',10,45,'tree'],
+ /* vegetables and fruit */
+ ['tomato','Tomato','البندورة (الطماطم)',3,14,'veg'],['cucumber','Cucumber','الخيار',2,14,'veg'],['pepper','Sweet pepper','الفلفل الحلو',3,14,'veg'],['chili','Hot pepper','الفلفل الحار',3,14,'veg'],
+ ['eggplant','Eggplant','الباذنجان',3,14,'veg'],['zucchini','Zucchini','الكوسا',3,14,'veg'],['lettuce','Lettuce','الخس',2,14,'veg'],['spinach','Spinach','السبانخ',3,14,'veg'],
+ ['carrot','Carrot','الجزر',4,21,'veg'],['radish','Radish','الفجل',3,21,'veg'],['onion','Onion','البصل',6,21,'veg'],['garlic','Garlic','الثوم',7,30,'veg'],
+ ['potato','Potato','البطاطا',4,21,'veg'],['okra','Okra','البامية',3,14,'veg'],['molokhia','Molokhia (jute mallow)','الملوخية',3,14,'veg'],['purslane','Purslane','البقلة (الرجلة)',4,21,'veg'],
+ ['strawberry','Strawberry','الفراولة',2,14,'veg'],['watermelon','Watermelon','البطيخ',4,21,'veg'],['melon','Melon','الشمّام',4,21,'veg'],['beans','Green beans','الفاصولياء',3,21,'veg'],
+ ['peas','Peas','البازلاء',3,21,'veg'],['chard','Swiss chard','السلق',4,21,'veg'],['cabbage','Cabbage','الملفوف',4,21,'veg'],['cauliflower','Cauliflower','القرنبيط',4,21,'veg'],
+ ['pumpkin','Pumpkin','اليقطين',5,21,'veg'],['corn','Corn','الذرة',3,21,'veg'],['mallow','Mallow (khubeiza)','الخبيزة',3,14,'veg'],['artichoke','Artichoke','الخرشوف',5,21,'veg'],
+ ['ficuselastica','Burgundy rubber tree','فيكس إيلاستيكا بورغندي',8,30,'tropical'],['maranta','Prayer plant','نبات الصلاة (ماراتا)',5,30,'tropical'],['chlorophytum','Variegated spider plant','كلوروفيتم',7,30,'tropical'],
+ ['zamioculcas2','Raven ZZ','زاميا السوداء',14,60,'succulent'],['sansevieriacyl','Cylindrical snake plant','سانسيفيريا أسطوانية',14,60,'succulent'],['burrotail','Burro\'s tail','ذيل الحمار',14,60,'succulent'],
+ ['gasteria','Gasteria','غاستيريا',14,60,'succulent'],['crassula','Crassula (money plant)','كراسولا',14,60,'succulent'],['hensandchicks','Hens and chicks','سيمبرفيفوم',12,60,'succulent'],
+ ['barrelcactus','Golden barrel cactus','صبار البرميل الذهبي',21,90,'succulent'],['moonCactus','Moon cactus','صبار القمر',21,90,'succulent'],['mammillaria','Mammillaria','ماميلاريا',21,90,'succulent'],
+ ['rue','Rue','السذاب',6,30,'herb'],['catmint','Catnip','النعناع البري (حشيشة القط)',4,21,'herb'],['peppermint','Peppermint','النعناع الفلفلي',3,14,'herb'],
+ ['savory','Savory','السعتر الصيفي',5,21,'herb'],['sorrel','Sorrel','الحُمّيض',3,14,'herb'],['watercress','Watercress','الجرجير المائي (حَبّ الرشاد)',2,14,'herb'],
+ ['cress','Garden cress','حب الرشاد',2,14,'herb'],['sumac','Sumac','السماق',12,60,'herb'],['hyssop','Hyssop','الزوفا',6,30,'herb'],['tarragon','Tarragon','الطرخون',4,21,'herb'],
+ ['purpleBasil','Holy basil (tulsi)','الريحان المقدس (الحبق)',2,14,'herb'],['cumin','Cumin','الكمّون',5,21,'herb'],['fennel','Fennel','الشومر (البسباس)',4,21,'herb'],['caraway','Caraway','الكراويا',5,21,'herb'],
+ ['calendula','Calendula (pot marigold)','الأقحوان البرتقالي (كالنديولا)',4,21,'flower'],['cosmos','Cosmos','الكوزموس',5,21,'flower'],['sweetpea','Sweet pea','البازلاء العطرة',3,14,'flower'],
+ ['lilac','Lilac','الليلك',6,30,'flower'],['wisteria','Wisteria','الوستارية',6,30,'flower'],['magnolia','Magnolia','المغنوليا',6,30,'flower'],['camellia','Camellia','الكاميليا',5,21,'flower'],
+ ['hydrangea','Hydrangea','الكوبية (هيدرانجيا)',3,21,'flower'],['freesia','Freesia','الفريزيا',5,21,'flower'],['gladiolus','Gladiolus','الجلاديولس',5,21,'flower'],['ranunculus','Ranunculus','الرانونكولس',4,21,'flower'],
+ ['lotus','Lotus','اللوتس',1,30,'flower'],['mimosa','Mimosa','الميموزا',6,30,'flower'],['bellflower','Bellflower','الجرسية',5,21,'flower'],['honeysuckle','Honeysuckle','المجنونة (زهرة العسل)',5,21,'flower'],
+ ['pomelo','Pomelo','البوميلو',5,30,'tree'],['bitterorange','Bitter orange','النارنج (الكباد)',5,30,'tree'],['citron','Citron','الأترج',5,30,'tree'],['pistachio','Pistachio','الفستق الحلبي',12,60,'tree'],
+ ['hazelnut','Hazelnut','البندق',10,45,'tree'],['chestnut','Chestnut','الكستناء',10,45,'tree'],['cedar','Cedar','الأرز',14,60,'tree'],['palmcoconut','Coconut palm','نخيل جوز الهند',7,30,'tree'],
+ ['dragonfruit','Dragon fruit','فاكهة التنين (البيتايا)',10,30,'tree'],['tamarind','Tamarind','التمر هندي',10,45,'tree'],['pepperTree','Pink peppercorn tree','الفلفل الكاذب',10,45,'tree'],['ficusCarica','Sycamore fig','الجميز',10,45,'tree'],
+ ['zucchiniLeb','Lebanese squash','الكوسا اللبنانية (القرع الحلو)',3,14,'veg'],['turnip','Turnip','اللفت',4,21,'veg'],['beet','Beetroot','الشمندر (البنجر)',4,21,'veg'],['celery','Celery','الكرفس',3,14,'veg'],
+ ['leek','Leek','الكراث',5,21,'veg'],['broccoli','Broccoli','البروكلي',4,21,'veg'],['kohlrabi','Kohlrabi','كرنب (لِفت الكرنب)',4,21,'veg'],['broadbeans','Fava beans','الفول',4,21,'veg'],
+ ['chickpea','Chickpea','الحمّص',6,21,'veg'],['lentil','Lentil','العدس',6,21,'veg'],['sweetpotato','Sweet potato','البطاطا الحلوة',4,21,'veg'],['bitterMelon','Armenian cucumber','القثاء (الفقّوس)',3,14,'veg'],
+ ['rocketWild','Wild chicory','الهندباء (العلت)',3,21,'veg'],['blueberry','Blueberry','التوت الأزرق',3,21,'veg'],['raspberry','Raspberry','العليق',3,21,'veg'],['blackberry','Blackberry','التوت الأسود (العُلَّيق)',4,21,'veg'],
+ ['other','Other plant','نبات آخر',7,30,'tropical']
+].map(([id,en,ar,w,f,type])=>({id,en,ar,w,f,type}));
+const SPM=Object.fromEntries(SP.map(s=>[s.id,s]));
+const AL={
+ pothos:{ar:['عنب الشيطان','بوتس ذهبي','نبات المال','الفل الأخضر'],en:['Devil\'s ivy','Golden pothos']},
+ monstera:{ar:['ضلع آدم','جبنة سويسرية'],en:['Swiss cheese plant','Split-leaf philodendron']},
+ peace:{ar:['سباتيفيلوم','زنبقة السلام'],en:['Spathiphyllum']},
+ fiddle:{ar:['فيكس ليراتا','تين الكمان الورقي'],en:['Ficus lyrata']},
+ spider:{ar:['كلوروفيتم','نبات الحبل','العنكبوتي'],en:['Airplane plant','Chlorophytum']},
+ rubber:{ar:['فيكس مطاطي','شجرة المطاط'],en:['Ficus elastica']},
+ benjamina:{ar:['فيكس','فيكس بنيامين','التين الباكي'],en:['Ficus benjamina','Benjamin fig']},
+ dracaena:{ar:['دراسينا','شجرة التنين','دراسينيا'],en:['Dragon tree']},
+ dieffen:{ar:['ديفن','نبات الغبي','قصب الصمت'],en:['Dumb cane']},
+ fern:{ar:['سرخس','نفروليبيس','الخنشار'],en:['Sword fern']},
+ areca:{ar:['بالم أريكا','نخلة الأريكا','نخلة الفراشة'],en:['Butterfly palm','Golden cane palm']},
+ ivy:{ar:['لبلاب','اللبلاب الإنجليزي','عشق الشجر'],en:['Hedera helix']},
+ yucca:{ar:['يوكا','شجرة اليوكا'],en:['Spineless yucca']},
+ luckybamboo:{ar:['بامبو الحظ','خيزران','الخيزران السعيد'],en:['Dracaena sanderiana']},
+ birdofparadise:{ar:['ستريليتزيا','زهرة الجنة'],en:['Strelitzia','Crane flower']},
+ snake:{ar:['سانسيفيريا','لسان العصفور','لسان البقرة','سيف الحماة'],en:['Mother-in-law\'s tongue','Sansevieria','Viper\'s bowstring hemp']},
+ zz:{ar:['زاميا','زميا','زاميوكولكاس','نبات المال الأسود'],en:['Zamioculcas','Eternity plant']},
+ aloe:{ar:['صبر','ألوي فيرا','الصبار الطبي','صبر طبي'],en:['Aloe','Burn plant']},
+ cactus:{ar:['صبار','صبّار','كاكتس'],en:['Cacti']},
+ jade:{ar:['جيد','شجرة المال','كراسولا','نبتة الحظ'],en:['Money plant','Lucky plant','Crassula ovata']},
+ pricklypear:{ar:['صبر','الصبّار الشوكي','تين البربري','الصبر'],en:['Nopal','Cactus fig','Barbary fig']},
+ xmascactus:{ar:['صبار الشكر','صبار الميلاد'],en:['Thanksgiving cactus','Holiday cactus','Schlumbergera']},
+ ponytail:{ar:['نخلة القدم','بيوكارنيا'],en:['Elephant foot','Beaucarnea']},
+ desertrose:{ar:['أدينيوم','وردة الصحراء'],en:['Adenium','Impala lily']},
+ basil:{ar:['حبق','ريحان','الحبق','ريحان أخضر'],en:['Sweet basil']},
+ mint:{ar:['نعنع','نعناع بلدي','النعنع'],en:['Spearmint','Garden mint']},
+ parsley:{ar:['معدنوس','بقدونس','المعدنوس'],en:['Flat-leaf parsley']},
+ coriander:{ar:['كزبرة','كسبرة','قزبر','الكسبرة'],en:['Cilantro','Chinese parsley']},
+ thyme:{ar:['زعتر','صعتر','الصعتر'],en:['Common thyme']},
+ wildthyme:{ar:['زعتر بري','زعتر أخضر','صعتر بلدي'],en:['Za\'atar','Syrian oregano']},
+ sage:{ar:['ميرمية','مريمية','الميرامية','قويسة'],en:['Salvia']},
+ rosemary:{ar:['روزماري','حصا لبان','الروزمارين'],en:['Rosmarinus']},
+ oregano:{ar:['زعتر الأوريجانو','أوريجانو','بردقوش'],en:['Wild marjoram']},
+ marjoram:{ar:['بردقوش','مردقوش','المردكوش'],en:['Sweet marjoram']},
+ dill:{ar:['شبث','الشبت','شمر بري'],en:['Dill weed']},
+ chives:{ar:['ثوم معمر','كراث','الثوم الصيني'],en:['Garlic chives']},
+ arugula:{ar:['رشاد','جرجير','الجرجير البلدي'],en:['Rocket','Rucola','Eruca']},
+ lemongrass:{ar:['حشيشة الليمون','حشيشة الليمون','الليمون العشبي'],en:['Citronella grass']},
+ lemonbalm:{ar:['ميليسا','حشيشة النحل','ترنجان'],en:['Melissa','Bee balm']},
+ verbena:{ar:['لويزة','عطر الليل','لوزية'],en:['Lippia citriodora']},
+ fenugreek:{ar:['حلبة','الحلبة الخضراء','الحلبة'],en:['Methi']},
+ nigella:{ar:['حبة السوداء','الحبة السوداء','كمون أسود','قزحة'],en:['Black cumin','Kalonji']},
+ anise:{ar:['أنيسون','ينسون','يانسون'],en:['Aniseed']},
+ chamomile:{ar:['بابونج','البابونج','بابونك','أقحوان'],en:['Camomile']},
+ stevia:{ar:['ستيفيا','نبات السكر','عشبة العسل'],en:['Sweet leaf','Sugar leaf']},
+ laurel:{ar:['غار','ورق الغار','الرند','ورق اللورا'],en:['Bay leaf','Laurus nobilis','Sweet bay']},
+ lavender:{ar:['خزامى','الخزامى','لافندر','اللافندر'],en:['Lavandula']},
+ jasmine:{ar:['ياسمين','ياسمين شامي','الياسمين الأبيض','فل'],en:['Common jasmine','Jasminum officinale']},
+ arabjasmine:{ar:['فل','الفل العربي','فل بلدي','مليتي'],en:['Sambac','Jasminum sambac']},
+ rose:{ar:['وردة','ورد','الوردة الجورية'],en:['Garden rose']},
+ damask:{ar:['ورد جوري','وردة جورية','ورد شامي','ورد دمشقي'],en:['Rosa damascena','Old rose']},
+ orchid:{ar:['أوركيد','الأوركيدا','الفراشة','فالينوبسيس'],en:['Phalaenopsis','Moth orchid']},
+ bougainvillea:{ar:['جهنمية','بوغانفيليا','بوجنفيليا','ورق الورد'],en:['Paper flower']},
+ geranium:{ar:['غرنوقي','عطرة','جيرانيوم','إبرة الراعي','العطرشة'],en:['Pelargonium','Cranesbill']},
+ petunia:{ar:['بتونيا','عباد الشمس الصغير'],en:['Garden petunia']},
+ marigold:{ar:['قطيفة','قطيفة مخملية','القطيفه','زهرة الموتى'],en:['Tagetes','French marigold']},
+ chrysanth:{ar:['أقحوان','الأقحوان','قرنفل الهند','شبرة'],en:['Mum','Chrysanthemum']},
+ hibiscus:{ar:['خبازى','هيبسكس','الكركديه','ورد النيل','جهنمي'],en:['Rose mallow','China rose']},
+ gardenia:{ar:['غاردينيا','جاردينيا','الكاردينيا'],en:['Cape jasmine']},
+ oleander:{ar:['دفلى','الدفلا','دفلة','الدفنة','عشق الرياح'],en:['Nerium','Rose bay']},
+ lantana:{ar:['لانتانا','حنة الجبل','لنتانا','أم الولدين'],en:['Shrub verbena','Lantana camara']},
+ carnation:{ar:['قرنفل','قرنفلة','الميخك','ميخك'],en:['Dianthus','Clove pink']},
+ gerbera:{ar:['جربيرا','جيربيرا','أقحوان الأفريقي'],en:['Barberton daisy','Transvaal daisy']},
+ lily:{ar:['زنبق','سوسن أبيض','الزنبقة'],en:['Lilium']},
+ tulip:{ar:['توليب','لالة','الخزامى الهولندي','التوليب'],en:['Tulipa']},
+ narcissus:{ar:['نرجس','النرجس الأبيض','الشقيق'],en:['Daffodil','Jonquil','Paperwhite']},
+ anemone:{ar:['شقائق','شقائق النعمان','الحنون','حنون','الدحنون'],en:['Windflower','Poppy anemone']},
+ iris:{ar:['سوسن','السوسنة','سوسنة','زنبق الماء'],en:['Flag iris','Fleur-de-lis']},
+ snapdragon:{ar:['فم السبع','حنك السبع','بوق الأسد','أنتيرينم'],en:['Antirrhinum','Dragon flower']},
+ sunflower:{ar:['زهرة الشمس','دوار الشمس','عباد الشمس','دوّار الشمس'],en:['Helianthus']},
+ vinca:{ar:['ونكا','عين البقرة','الونكة','كاثارانثوس'],en:['Madagascar periwinkle','Catharanthus']},
+ portulaca:{ar:['بورتولاكا','رجلة الزينة','ورد الحجر','أبو شوكة'],en:['Moss rose','Rock rose']},
+ plumeria:{ar:['فرانجيباني','بلوميريا','زهرة الهاواي','ياسمين الهند'],en:['Frangipani','Temple tree']},
+ africanviolet:{ar:['بنفسج أفريقي','سانت بوليا','بنفسج'],en:['Saintpaulia']},
+ anthurium:{ar:['أنثوريوم','زهرة الفلامنجو','أنتوريوم'],en:['Flamingo flower','Laceleaf']},
+ begonia:{ar:['بيغونيا','بيجونيا','بغونية'],en:['Begonia rex']},
+ impatiens:{ar:['حناء الزينة','حياء','لا تلمسني','إمباتينز'],en:['Busy Lizzie','Touch-me-not']},
+ dahlia:{ar:['داليا','ضاليا','الداليا'],en:['Dahlia pinnata']},
+ hollyhock:{ar:['خطمية','الخطمي','ورد الخطمي'],en:['Alcea','Marshmallow flower']},
+ poinsettia:{ar:['نجمة الميلاد','بونسيتيا','بنت القنصل','زهرة الميلاد'],en:['Christmas star','Euphorbia pulcherrima']},
+ olive:{ar:['زيتون','الزيتونة','الزيتونه','شجرة الزيتون'],en:['Olea europaea']},
+ lemon:{ar:['ليمون','الليمونة','حامض','ليمون بلدي'],en:['Lemon tree']},
+ lime:{ar:['لايم','ليمون أخضر','ليمون حامض','الليمون الأخضر','ليمون هندي'],en:['Key lime','Lemon (green)']},
+ orange:{ar:['برتقال','البرتقالة','برتقال بلدي'],en:['Sweet orange']},
+ mandarin:{ar:['يوسفي','مندرين','كلمنتين','يوسف أفندي','ماندرين'],en:['Tangerine','Clementine']},
+ kumquat:{ar:['كمكوات','برتقال صيني','برتقال الصين'],en:['Cumquat']},
+ grapefruit:{ar:['جريب فروت','الليمون الهندي','ستروس','غريب فروت','بوملي'],en:['Pomelo-grapefruit']},
+ fig:{ar:['تين','التينة','تين بلدي'],en:['Ficus carica','Common fig']},
+ pomegranate:{ar:['رمان','الرمانة','رمّان'],en:['Punica']},
+ datepalm:{ar:['نخل','نخلة','تمر','نخلة التمر','نخيل'],en:['Date','Phoenix dactylifera']},
+ grape:{ar:['عنب','دالية','العريشة','الكرمة','كرمة'],en:['Vine','Grape vine']},
+ almond:{ar:['لوز','اللوزة','شجرة اللوز'],en:['Prunus dulcis']},
+ apricot:{ar:['مشمش','المشماشة','برقوق مشمشي'],en:['Prunus armeniaca']},
+ peach:{ar:['دراق','خوخ','الدراقن','الخوخة'],en:['Nectarine']},
+ plum:{ar:['برقوق','إجاص','خوخ شامي','عجرم'],en:['Prune','Prunus domestica']},
+ cherry:{ar:['كرز','كريز','شيري','حب الملوك','كرزة'],en:['Sweet cherry','Sour cherry']},
+ apple:{ar:['تفاح','التفاحة','تفاحة'],en:['Malus']},
+ pear:{ar:['كمثرى','إجاص','أجاص','كمثري','نجاص'],en:['Pyrus']},
+ quince:{ar:['سفرجل','السفرجلة','سفرجلة'],en:['Cydonia']},
+ walnut:{ar:['جوز','عين الجمل','الجوزة','جوز بلدي'],en:['English walnut']},
+ mulberry:{ar:['توت','التوتة','توت أبيض','توت شامي'],en:['Morus']},
+ loquat:{ar:['إكيدنيا','أسكدنيا','مشمش هندي','الأسكدنيا','إكدنيا','اكيدنيا'],en:['Japanese plum','Chinese plum']},
+ guava:{ar:['جوافة','الجوافة','جوافا'],en:['Psidium']},
+ banana:{ar:['موز','الموزة','موزة'],en:['Musa']},
+ persimmon:{ar:['كاكا','لوتس','كاكي','خرما','الكاكي'],en:['Kaki','Sharon fruit']},
+ mango:{ar:['مانجو','منجا','مانغا','المنجة','عنبة'],en:['Mangifera']},
+ papaya:{ar:['باباي','بابايا','الباباظ','عنبة'],en:['Pawpaw']},
+ avocado:{ar:['أفوكادو','أفوكاتو','البقرة','زبدية'],en:['Alligator pear','Persea']},
+ carob:{ar:['خروب','الخرنوب','خرنوب','الخروبة'],en:['Ceratonia']},
+ jujube:{ar:['عناب','سدر','نبق','النبق','الزيزفون'],en:['Ziziphus','Chinese date','Christ\'s thorn']},
+ moringa:{ar:['مورينجا','شجرة المعجزة','البان','حب الغار','المورينغا'],en:['Drumstick tree','Horseradish tree']},
+ neem:{ar:['نيم','الشجرة المعجزة','السنط الهندي','اللّيم'],en:['Margosa','Indian lilac']},
+ cypress:{ar:['سرو','السروة','سرو أخضر'],en:['Cupressus']},
+ pine:{ar:['صنوبر','الصنوبر الحلبي','الصنوبرة'],en:['Aleppo pine','Pinus']},
+ oak:{ar:['بلوط','السنديان','سنديان','الملول','البلوط'],en:['Quercus']},
+ acacia:{ar:['سنط','أكاسيا','طلح','سمر','السمرة'],en:['Wattle','Thorn tree']},
+ ghaf:{ar:['غاف','الغاف','غاف الإمارات','الحرمل'],en:['Prosopis cineraria']},
+ tamarisk:{ar:['أثل','طرفاء','الأثلة','الطرفة'],en:['Tamarix','Salt cedar']},
+ eucalyptus:{ar:['كينا','كافور','أوكالبتوس','الكينا'],en:['Gum tree']},
+ jacaranda:{ar:['جاكاراندا','جكاراندا','خشب الورد الأزرق'],en:['Blue jacaranda']},
+ myrtle:{ar:['آس','ريحان الجنة','مرسين','الريحان الجبلي','حبق'],en:['Myrtus communis']},
+ boxwood:{ar:['شمشاد','البقس','بقس'],en:['Buxus','Box']},
+ washingtonia:{ar:['واشنطونيا','نخل الزينة','نخيل المروحة'],en:['Fan palm','California fan palm']},
+ sago:{ar:['ساغو','سيكاس','نخلة الساغو','سيكاس ريفولوتا'],en:['Cycas','King sago']},
+ tomato:{ar:['بندورة','طماطم','قوطة','طماطة','بنادورة'],en:['Tomatoes','Solanum lycopersicum']},
+ cucumber:{ar:['خيار','الخيارة','قثاء','خيار بلدي'],en:['Cuke']},
+ pepper:{ar:['فلفل رومي','فلفل أخضر','فلفل ألوان','فلفل حلو','بابريكا','فلفل بارد'],en:['Bell pepper','Capsicum']},
+ chili:{ar:['فلفل حار','شطة','فلفل حر','فلفل أحمر','فلفل هندي','شطه'],en:['Chilli','Cayenne','Hot chili']},
+ eggplant:{ar:['باذنجان','بيتنجان','بتنجان','الباذنجان'],en:['Aubergine','Brinjal']},
+ zucchini:{ar:['كوسا','كوسى','قرع','قرع الكوسا','كوسة'],en:['Courgette','Summer squash']},
+ lettuce:{ar:['خس','الخس الروماني','هس','خس رومي'],en:['Romaine','Salad lettuce']},
+ spinach:{ar:['سبانخ','السبانخ','إسبانخ','سلق أخضر'],en:['Palak']},
+ carrot:{ar:['جزر','الجزرة','جزر أحمر'],en:['Daucus']},
+ radish:{ar:['فجل','الفجل الأحمر','فجل أحمر','فجلة'],en:['Daikon','Red radish']},
+ onion:{ar:['بصل','البصلة','بصل أخضر','بصل يابس'],en:['Scallion','Allium cepa']},
+ garlic:{ar:['ثوم','الثومة','فص ثوم','توم'],en:['Allium sativum']},
+ potato:{ar:['بطاطس','بطاطا','بطاطه','قولوقاسيا','بطيطا'],en:['Spud','Potatoes']},
+ okra:{ar:['بامية','بامية بلدي','باميه','البامياء','ملوخية'],en:['Lady\'s fingers','Gumbo','Bhindi']},
+ molokhia:{ar:['ملوخية','المولوخية','ملوخية خضراء','الملوخيّة','جريجير'],en:['Jew\'s mallow','Molokhia','Egyptian spinach']},
+ purslane:{ar:['رجلة','بقلة','فرفحينة','فرفحين','البقلة','الفرفحينة'],en:['Verdolaga','Pigweed']},
+ strawberry:{ar:['فراولة','فريز','فراولا','الفريز','فراوله'],en:['Fragaria']},
+ watermelon:{ar:['بطيخ','حبحب','جبس','الحبحب','البطيخ الأحمر'],en:['Citrullus']},
+ melon:{ar:['شمام','قاوون','كنتالوب','الشمّام','بطيخ أصفر','عجور'],en:['Cantaloupe','Honeydew','Muskmelon']},
+ beans:{ar:['لوبيا خضراء','فاصوليا','فاصولياء خضراء','لوبية','فاصوليا خضرا'],en:['String beans','Snap beans','French beans']},
+ peas:{ar:['بازيلاء','بسلّة','بازلا','جلبان','بازلاء خضراء','بسلة'],en:['Garden peas','Green peas']},
+ chard:{ar:['سلق','السلق','سلق أبيض','الشمندر الورقي'],en:['Silverbeet','Beet greens']},
+ cabbage:{ar:['ملفوف','كرنب','لهانة','كرنب أبيض','لفت','الكرنب'],en:['White cabbage','Brassica']},
+ cauliflower:{ar:['قرنبيط','زهرة','القرنبيط','قنبيط','قرنابيط','أخضر القرنبيط'],en:['Cauli']},
+ pumpkin:{ar:['يقطين','قرع','قرع عسلي','دباء','قرعة'],en:['Squash','Cucurbita']},
+ corn:{ar:['ذرة','ذرة صفراء','كوز ذرة','الذرة الشامية','ذرة بيضاء'],en:['Maize','Sweet corn']},
+ mallow:{ar:['خبيزة','الخبيزة','خبيزة بلدي','خُبيزة','خبّيزة'],en:['Malva','Common mallow','Cheeseweed']},
+ artichoke:{ar:['خرشوف','أرضي شوكي','الخرشوف','كنار','أرضي شوكي'],en:['Globe artichoke']},
+ ficuselastica:{ar:['فيكس مطاطي أحمر','فيكس أسود'],en:['Ficus Burgundy']},
+ maranta:{ar:['نبات الدعاء','ماراتا','نبات الصلاة'],en:['Maranta leuconeura']},
+ burrotail:{ar:['ذيل الحمار','سيدم موركيانوم'],en:['Donkey tail','Sedum morganianum']},
+ hensandchicks:{ar:['الدجاجة وفراخها','سمبرفيفم','نبات الدجاجة'],en:['Sempervivum','Houseleek']},
+ barrelcactus:{ar:['صبار البرميل','كرسي حماتي'],en:['Echinocactus','Mother-in-law\'s cushion']},
+ rue:{ar:['سذاب','شجرة السذاب','الفيجن'],en:['Herb of grace','Ruta graveolens']},
+ catmint:{ar:['نعناع القط','قطمنت','نبتة القط'],en:['Catnip','Nepeta']},
+ sorrel:{ar:['حمّاض','حميض','حماضة','الحمّاضة'],en:['Rumex','Dock']},
+ watercress:{ar:['رشاد الماء','جرجير الماء','رشاد'],en:['Nasturtium']},
+ cress:{ar:['رشاد','رشاد حب','حب الرشاد','الثفاء'],en:['Lepidium sativum']},
+ sumac:{ar:['سماق','السماق','سماق شامي'],en:['Rhus coriaria']},
+ tarragon:{ar:['طرخون','الطرخون','الطرخون الأخضر'],en:['Artemisia dracunculus']},
+ purpleBasil:{ar:['حبق مقدس','ريحان هندي','توليسي'],en:['Tulsi','Ocimum tenuiflorum']},
+ cumin:{ar:['كمون','الكمون','كمون أبيض'],en:['Cuminum cyminum']},
+ fennel:{ar:['شمر','الشمر','بسباس','حبة حلوة','رازيانج'],en:['Foeniculum']},
+ calendula:{ar:['كالنديولا','أقحوان','عين القط','زهرة المقابر'],en:['Pot marigold']},
+ cosmos:{ar:['كوزموس','زهرة الكون','الكوزموس'],en:['Mexican aster']},
+ sweetpea:{ar:['بازلاء عطرية','بسلة الزينة','حمص الزينة'],en:['Lathyrus odoratus']},
+ lilac:{ar:['ليلك','ليلكي','الليلك'],en:['Syringa']},
+ wisteria:{ar:['وستارية','وسترية','الجلسين','الوستيريا'],en:['Wisteria sinensis']},
+ magnolia:{ar:['ماغنوليا','مغنوليا','ماغنولية'],en:['Magnolia grandiflora']},
+ hydrangea:{ar:['هيدرانجيا','كوبية','الكوبي','هيدرانجا','كوبية'],en:['Hortensia']},
+ freesia:{ar:['فريزيا','فريسيا','فريزة'],en:['Freesia']},
+ gladiolus:{ar:['جلاديولس','سيف الغراب','غلاديولس','جلاديولي'],en:['Sword lily']},
+ ranunculus:{ar:['رانونكولوس','الشقيق','حنون','كأس الذهب'],en:['Buttercup','Persian buttercup']},
+ lotus:{ar:['لوتس','زهرة اللوتس','لوتس مصري','نيلوفر','ورد النيل'],en:['Water lily','Nelumbo']},
+ mimosa:{ar:['ميموزا','المستحية','لا تلمسني','حساسة'],en:['Sensitive plant','Silver wattle']},
+ bellflower:{ar:['جرسية','كامبانولا','جرس الراعي'],en:['Campanula']},
+ honeysuckle:{ar:['زهرة العسل','المجنونة','عصفورة','يسمين'],en:['Lonicera']},
+ pomelo:{ar:['بوميلو','أم الخلول','بوملي','شادوك'],en:['Shaddock','Pummelo']},
+ bitterorange:{ar:['نارنج','كباد','بيرغاموت','ليمون مر'],en:['Seville orange','Citrus aurantium']},
+ citron:{ar:['أترج','كباد','أترنج','أترجة','الأترنج'],en:['Citrus medica','Etrog']},
+ pistachio:{ar:['فستق حلبي','فستق','فستق عبيد','فستق الحلب'],en:['Pistacia vera']},
+ hazelnut:{ar:['بندق','البندقة','بندق تركي'],en:['Filbert','Corylus']},
+ chestnut:{ar:['كستناء','قسطل','شاهبلوط','كستنة'],en:['Castanea']},
+ cedar:{ar:['أرز','أرز لبنان','الأرز'],en:['Cedrus libani','Cedar of Lebanon']},
+ palmcoconut:{ar:['جوز الهند','نارجيل','نخلة الهند','النارجيل'],en:['Cocos nucifera']},
+ dragonfruit:{ar:['فاكهة التنين','بيتايا','تنين','الفاكهة التنين'],en:['Pitaya','Pitahaya','Hylocereus']},
+ tamarind:{ar:['تمر هندي','تمرهندي','عرق السوس','التمر الهندي'],en:['Tamarindus indica','Indian date']},
+ turnip:{ar:['لفت','اللفت','لفت أبيض','لفت أحمر'],en:['Brassica rapa']},
+ beet:{ar:['شمندر','بنجر','شوندر','الشمندر','سلق أحمر','بطاطا حمراء'],en:['Beet','Red beet']},
+ celery:{ar:['كرفس','الكرفس','كرفس أخضر','ورق الكرفس'],en:['Apium graveolens']},
+ leek:{ar:['كراث','الكراث','كراث شامي','البصل الأخضر'],en:['Allium porrum']},
+ broccoli:{ar:['بروكلي','بروكولي','قرنبيط أخضر','برقولي','القرنبيط الأخضر'],en:['Brassica oleracea']},
+ broadbeans:{ar:['فول','فول أخضر','فول بلدي','فول مدمس','الباقلاء','باقلاء'],en:['Faba beans','Broad beans','Vicia faba']},
+ chickpea:{ar:['حمص','الحمص','حمّص','حمص أخضر','حمصاني'],en:['Garbanzo','Cicer arietinum']},
+ lentil:{ar:['عدس','العدس','عدس أصفر','عدس أحمر'],en:['Lens culinaris']},
+ sweetpotato:{ar:['بطاطا حلوة','بطاطا','بطاطا مسكرة','البطاطا الحلوة'],en:['Yam','Ipomoea batatas']},
+ bitterMelon:{ar:['قثاء','فقوس','فقوس','عجور','قثاء بلدي','فقوس بلدي'],en:['Snake melon','Cucumis melo']},
+ rocketWild:{ar:['هندباء','علت','عليق','شيكوريا','الهندباء البرية','هندبا'],en:['Chicory','Endive','Dandelion greens']},
+ blueberry:{ar:['توت أزرق','بلوبري','عنب الدب'],en:['Vaccinium']},
+ raspberry:{ar:['توت العليق','توت أحمر','عليق','فرامبوز'],en:['Rubus idaeus']},
+ blackberry:{ar:['توت أسود','عليق أسود','علّيق','العُلَّيق'],en:['Rubus fruticosus','Bramble']}
+};
+SP.forEach(s=>{const a=AL[s.id]||{};s.aa=[...new Set(a.ar||[])].filter(x=>x!==s.ar);s.ae=(a.en||[]).filter(x=>x!==s.en)});
+const alts=s=>(S.lang==='ar'?s.aa:s.ae);
+const hay=s=>norm([s.en,s.ar,...s.aa,...s.ae].join(' '));
+
+const ICONS={
+ tropical:'<path d="M5 19C5 10 11 4 20 4c0 9-6 15-13 15M5 19c3-5 6-8 10-10"/>',
+ succulent:'<path d="M12 21V8M12 21C9 16 7 12 6 7M12 21c3-5 5-9 6-14M12 21c-5-3-8-6-9-9M12 21c5-3 8-6 9-9"/>',
+ herb:'<path d="M12 21V6M12 12c-4 0-6-3-6-6 4 0 6 2 6 6zM12 15c4 0 6-3 6-6-4 0-6 2-6 6z"/>',
+ tree:'<path d="M12 21v-6M12 15c-4 0-6-3-6-6 0-3 2-5 6-5s6 2 6 5c0 3-2 6-6 6z"/>',
+ veg:'<circle cx="12" cy="13.5" r="6.5"/><path d="M12 7V3M9 5l3 2 3-2"/>',
+ flower:'<circle cx="12" cy="10" r="3"/><path d="M12 7c0-3 2-4 3-4 0 2-1 4-3 4zM12 13v8M9.5 8.5C7 7 6 5 6 4c2 0 4 1 5 3M14.5 8.5C17 7 18 5 18 4c-2 0-4 1-5 3"/>'
+};
+ICONS.all='<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>';
+const ORB={tropical:'o-leaf',succulent:'o-cream',herb:'o-forest',flower:'o-bloom',tree:'o-forest',veg:'o-cream'};
+const SENS={tropical:1,succulent:.6,herb:1.1,flower:1,tree:.85,veg:1.15};
+const CATS=['all','tropical','succulent','herb','flower','tree','veg'];
+
+/* ---------- procedural 3D plant renders ---------- */
+const SHAPE={snake:'spike',sansevieriacyl:'spike',yucca:'spike',agave:'rosette',aloe:'rosette',haworthia:'rosette',echeveria:'rosette',aeonium:'rosette',lithops:'rosette',hensandchicks:'rosette',gasteria:'rosette',
+ cactus:'cactus',barrelcactus:'barrel',moonCactus:'cactus',mammillaria:'barrel',pricklypear:'pad',xmascactus:'pad',datepalm:'palm',areca:'palm',parlor:'palm',washingtonia:'palm',sago:'palm',ponytail:'palm',palmcoconut:'palm',
+ stringpearls:'trail',burrotail:'trail',ivy:'trail',tradescantia:'trail',pothos:'trail',hoya:'trail',
+ tomato:'fruit',pepper:'fruit',chili:'fruit',eggplant:'fruit',strawberry:'fruit',pumpkin:'fruit',watermelon:'fruit',melon:'fruit',cucumber:'fruit',zucchini:'fruit',blueberry:'fruit',raspberry:'fruit',blackberry:'fruit',dragonfruit:'fruit',
+ carrot:'root',radish:'root',beet:'root',turnip:'root',onion:'root',garlic:'root',potato:'root',sweetpotato:'root',
+ cypress:'cone',pine:'cone',cedar:'cone',
+ sunflower:'flower',tulip:'flower',lily:'flower',narcissus:'flower',gerbera:'flower',rose:'flower',damask:'flower',orchid:'flower',jasmine:'flower',arabjasmine:'flower',hibiscus:'flower',lotus:'flower',iris:'flower',dahlia:'flower',cosmos:'flower',calendula:'flower',chrysanth:'flower',marigold:'flower',zinnia:'flower',
+ corn:'spike',lemongrass:'spike',chives:'spike',leek:'spike'};
+const PAL={tropical:['#6fd08a','#1f7a45'],succulent:['#a6e0b8','#3f9a7a'],herb:['#9be07a','#3c9a3a'],flower:['#ff9aa5','#d9485f'],tree:['#7fcf6a','#2a7a3a'],veg:['#ff8a6a','#c8402f']};
+const PETAL={sunflower:'#ffd23f',tulip:'#ff6b81',lily:'#fff1f0',narcissus:'#ffe66d',gerbera:'#ff8c42',orchid:'#e8a7ff',jasmine:'#ffffff',arabjasmine:'#fffdf5',hibiscus:'#ff4d6d',lotus:'#ffc2d9',iris:'#8a7cff',dahlia:'#ff5d8f',cosmos:'#ff9ecb',calendula:'#ffa500',chrysanth:'#ffd166',marigold:'#ff9f1c',zinnia:'#ff4f5e',rose:'#e63950',damask:'#ff7a93',lavender:'#a98bff',wisteria:'#b79cff',lilac:'#c8a2ff',hydrangea:'#8fb4ff'};
+const FRUIT={tomato:'#e63946',pepper:'#ffb703',chili:'#d00000',eggplant:'#5b2a86',strawberry:'#e5383b',pumpkin:'#f77f00',watermelon:'#2d9a4a',melon:'#f4c95d',cucumber:'#3a9a3a',zucchini:'#4a9a2a',blueberry:'#3f5bd6',raspberry:'#d62860',blackberry:'#2a1a40',dragonfruit:'#ff3d8b'};
+const ROOT={carrot:'#ff8a1f',radish:'#e5383b',beet:'#9b1d5a',turnip:'#f2e6ff',onion:'#e8b46a',garlic:'#f6efe0',potato:'#c9a06a',sweetpotato:'#c8603a'};
+let G3=0;
+function hue(id){let n=0;for(const c of id)n=(n*31+c.charCodeAt(0))%360;return n}
+function sh(c,a){const n=parseInt(c.slice(1),16);let r=n>>16,g=n>>8&255,b=n&255;const f=v=>Math.max(0,Math.min(255,Math.round(v+a)));return'#'+[f(r),f(g),f(b)].map(v=>v.toString(16).padStart(2,'0')).join('')}
+function plant3d(s){
+  const u='g'+(++G3),k=SHAPE[s.id]||({flower:'bush',tree:'tree',herb:'herb',tropical:'leaves',succulent:'rosette',veg:'herb'})[s.type];
+  const base=PAL[s.type],dh=(hue(s.id)%40)-20;
+  const c1=base[0],c2=base[1];
+  const lf=`<linearGradient id="${u}l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>`;
+  const pot=`<radialGradient id="${u}p" cx=".3" cy=".25" r=".9"><stop offset="0" stop-color="#f6c79a"/><stop offset=".6" stop-color="#d9824f"/><stop offset="1" stop-color="#8f4a26"/></radialGradient><radialGradient id="${u}s" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#0f2f20" stop-opacity=".35"/><stop offset="1" stop-color="#0f2f20" stop-opacity="0"/></radialGradient>`;
+  const L=`fill="url(#${u}l)" stroke="${sh('#2f7a50',-40)}" stroke-opacity=".35" stroke-width=".6"`;
+  const leaf=(x,y,r,l=26,w=8)=>`<path ${L} transform="translate(${x} ${y}) rotate(${r})" d="M0 0C${w} -${l*.35} ${w} -${l*.8} 0 -${l}C-${w} -${l*.8} -${w} -${l*.35} 0 0Z"/>`;
+  let b='';
+  if(k==='leaves'||k==='herb'){const n=k==='herb'?9:7;for(let i=0;i<n;i++){const r=-70+i*(140/(n-1));b+=leaf(50,64,r,k==='herb'?24:30,k==='herb'?5:9)}}
+  else if(k==='spike'){[-22,-8,6,20,0].forEach((r,i)=>b+=leaf(50+r/3,66,r,[34,40,36,32,44][i],5))}
+  else if(k==='rosette'){for(let i=0;i<11;i++){const r=-85+i*17;b+=leaf(50,62,r,18+((i%3)*3),6)}b+=`<circle cx="50" cy="56" r="4" fill="${sh(c1,30)}"/>`}
+  else if(k==='cactus'){b+=`<rect x="42" y="30" width="16" height="38" rx="8" ${L}/><rect x="26" y="44" width="10" height="20" rx="5" ${L}/><path d="M31 54h11" stroke="${c2}" stroke-width="5" stroke-linecap="round"/><rect x="64" y="38" width="10" height="22" rx="5" ${L}/><path d="M58 54h10" stroke="${c2}" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="31" r="3" fill="#ff7ca0"/>`}
+  else if(k==='barrel'){b+=`<ellipse cx="50" cy="52" rx="19" ry="17" ${L}/>`+[-10,-4,2,8,14].map(x=>`<path d="M${50+x*1.2} 36 Q${50+x*2} 52 ${50+x*1.2} 68" stroke="${sh(c2,-20)}" stroke-width=".9" fill="none" opacity=".6"/>`).join('')+`<circle cx="50" cy="37" r="3" fill="#ffd23f"/>`}
+  else if(k==='pad'){b+=`<ellipse cx="44" cy="52" rx="14" ry="17" ${L} transform="rotate(-12 44 52)"/><ellipse cx="62" cy="36" rx="11" ry="14" ${L} transform="rotate(18 62 36)"/><circle cx="64" cy="22" r="3.5" fill="#ff5d8f"/>`}
+  else if(k==='palm'){for(let i=0;i<7;i++){const r=-75+i*25;b+=`<path d="M50 66 Q${50+r*.5} ${40-Math.abs(r)*.1} ${50+r*.9} ${30+Math.abs(r)*.25}" stroke="url(#${u}l)" stroke-width="3.2" fill="none" stroke-linecap="round"/>`}b+=`<rect x="48.5" y="44" width="3" height="24" rx="1.5" fill="#9a6b3f"/>`}
+  else if(k==='trail'){b+=leaf(50,64,-50,22,7)+leaf(50,64,50,22,7)+leaf(50,64,0,26,7);b+=[34,66].map(x=>`<path d="M${x} 64 Q${x+(x<50?-8:8)} 80 ${x+(x<50?-4:4)} 94" stroke="${c2}" stroke-width="1.6" fill="none"/>`+[78,88].map(y=>`<circle cx="${x+(x<50?-5:5)}" cy="${y}" r="2.8" fill="${c1}"/>`).join('')).join('')}
+  else if(k==='fruit'){const fc=FRUIT[s.id]||'#e63946';b+=`<path d="M50 66V44M50 54c-10 0-16-6-16-14 8 0 14 4 16 14zM50 50c10 0 16-6 16-14-8 0-14 4-16 14z" stroke="${c2}" fill="${c1}" stroke-width="1"/>`+[[40,48],[60,44],[50,36]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${6.5-i}" fill="${fc}"/><circle cx="${x-2}" cy="${y-2}" r="1.8" fill="#fff" opacity=".7"/>`).join('')}
+  else if(k==='root'){const rc=ROOT[s.id]||'#ff8a1f';b+=leaf(50,52,-30,22,4)+leaf(50,52,0,26,4)+leaf(50,52,30,22,4)+`<path d="M38 52 Q50 46 62 52 Q58 70 50 76 Q42 70 38 52Z" fill="${rc}"/><path d="M42 56 Q50 52 58 56" stroke="#fff" stroke-opacity=".5" fill="none"/>`}
+  else if(k==='cone'){b+=`<path d="M50 14 L68 66 L32 66Z" ${L}/><path d="M50 14 L59 66 L50 66Z" fill="#0f2f20" opacity=".18"/>`}
+  else if(k==='tree'){b+=`<rect x="47" y="44" width="6" height="24" rx="2" fill="#9a6b3f"/><circle cx="50" cy="34" r="19" ${L}/><circle cx="40" cy="38" r="11" ${L}/><circle cx="61" cy="39" r="11" ${L}/>`+[[44,30],[58,34],[50,42]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.6" fill="${sh(c1,40)}"/>`).join('')}
+  else if(k==='flower'||k==='bush'){const pc=PETAL[s.id]||`hsl(${(340+dh+360)%360} 85% 72%)`;const f=(x,y,r)=>{let o='';for(let i=0;i<8;i++)o+=`<ellipse cx="${x}" cy="${y-r}" rx="${r*.5}" ry="${r*.9}" fill="${pc}" stroke="#fff" stroke-opacity=".5" stroke-width=".5" transform="rotate(${i*45} ${x} ${y})"/>`;return o+`<circle cx="${x}" cy="${y}" r="${r*.45}" fill="${s.id==='sunflower'?'#6b3f1d':'#ffd23f'}"/>`};b+=`<path d="M50 68V44M50 58C42 58 36 54 34 48 42 48 48 52 50 58zM50 54C58 54 64 50 66 44 58 44 52 48 50 54z" stroke="${c2}" fill="${c1}" stroke-width="1.2"/>`+f(50,32,10)+(k==='bush'?f(34,44,6)+f(66,42,6):'')}
+  return `<svg data-sp="${s.id}" viewBox="0 0 100 100" aria-hidden="true"><defs>${lf}${pot}</defs><ellipse cx="50" cy="93" rx="30" ry="5" fill="url(#${u}s)"/>${b}<path d="M30 68h40l-5 22c-.5 2-2 3-4 3H39c-2 0-3.500-1-4-3z" fill="url(#${u}p)"/><ellipse cx="50" cy="68" rx="20" ry="4.500" fill="#b86a3d"/><ellipse cx="50" cy="67.500" rx="17" ry="3" fill="#4a2f1b"/><path d="M36 72l2 14" stroke="#fff" stroke-opacity=".45" stroke-width="2.400" stroke-linecap="round"/></svg>`;
+}
+
+/* ---------- real photos (Wikipedia, lazy, cached) ---------- */
+const WT={rose:'Rose',lily:'Lilium',sage:'Salvia officinalis',mint:'Mentha',cherry:'Cherry',pine:'Pinus halepensis',oak:'Quercus',fig:'Ficus carica',date:'Phoenix dactylifera',grape:'Vitis vinifera',melon:'Cantaloupe',corn:'Maize',pepper:'Bell pepper',chili:'Chili pepper',potato:'Potato',onion:'Onion',garlic:'Garlic',cactus:'Cactus',aloe:'Aloe vera',snake:'Dracaena trifasciata',zz:'Zamioculcas',ivy:'Hedera helix',iris:'Iris (plant)',tulip:'Tulip',jasmine:'Jasminum officinale',arabjasmine:'Jasminum sambac',damask:'Rosa × damascena',wildthyme:'Origanum syriacum',nigella:'Nigella sativa',mallow:'Malva',molokhia:'Corchorus olitorius',purslane:'Portulaca oleracea',pricklypear:'Opuntia ficus-indica',jujube:'Ziziphus jujuba',loquat:'Loquat',persimmon:'Persimmon',carob:'Ceratonia siliqua',chives:'Chives',coriander:'Coriander',arugula:'Eruca vesicaria',lime:'Lime (fruit)',lemon:'Lemon',orange:'Orange (fruit)',olive:'Olive',almond:'Almond',apricot:'Apricot',peach:'Peach',plum:'Plum',apple:'Apple',pear:'Pear',walnut:'Walnut',mulberry:'Mulberry',banana:'Banana',guava:'Guava',other:null};
+const PC=(()=>{try{return JSON.parse(localStorage.getItem('pp-img-v1')||'{}')}catch(e){return{}}})();
+const savePC=()=>{try{localStorage.setItem('pp-img-v1',JSON.stringify(PC))}catch(e){}};
+const inflight={};let running=0;const wait=[];
+function fetchPhoto(id){
+  if(id in PC)return Promise.resolve(PC[id]);
+  if(inflight[id])return inflight[id];
+  const sp=SPM[id];if(!sp||WT[id]===null)return Promise.resolve(null);
+  const q=WT[id]||sp.en.replace(/\(.*?\)/g,'').trim()+' plant';
+  const url='https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrlimit=5&prop=pageimages&piprop=thumbnail&pithumbsize=360&gsrsearch='+encodeURIComponent(q);
+  return inflight[id]=new Promise(res=>{
+    const go=()=>{running++;fetch(url).then(r=>r.json()).then(d=>{
+      const pg=Object.values((d.query||{}).pages||{}).sort((a,b)=>a.index-b.index).find(x=>x.thumbnail);
+      const u=pg?pg.thumbnail.source:null;PC[id]=u;savePC();res(u)}).catch(()=>res(null)).finally(()=>{running--;if(wait.length)wait.shift()()})};
+    running<4?go():wait.push(go)});
+}
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);hydrate(e.target)}),{rootMargin:'120px'}):null;
+function hydrate(el){
+  const sv=el.querySelector('svg[data-sp]');if(!sv||el.classList.contains('has-photo'))return;
+  fetchPhoto(sv.dataset.sp).then(u=>{if(!u||!el.isConnected)return;
+    const im=new Image();im.alt='';im.loading='lazy';im.onload=()=>{el.classList.add('has-photo');el.append(im)};im.src=u});
+}
+new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType!==1)return;
+  (n.matches&&n.matches('.p3d')?[n]:[...n.querySelectorAll?n.querySelectorAll('.p3d'):[]]).forEach(el=>io?io.observe(el):hydrate(el))}))).observe(document.body,{childList:true,subtree:true});
+
+const norm=x=>String(x).toLowerCase().replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').trim();
+const CITIES={
+ amman:{en:'Amman',ar:'عمّان',t:[8,9,12,16,21,24,26,26,24,20,14,10],h:[72,68,58,45,38,40,45,50,48,50,58,70]},
+ riyadh:{en:'Riyadh',ar:'الرياض',t:[15,17,21,26,32,35,36,36,33,28,21,16],h:[45,35,30,25,15,10,10,12,15,20,35,45]},
+ dubai:{en:'Dubai',ar:'دبي',t:[19,20,23,27,31,33,35,35,33,30,25,21],h:[65,65,60,52,50,55,55,56,60,60,62,65]},
+ doha:{en:'Doha',ar:'الدوحة',t:[17,18,21,25,31,34,36,36,34,30,24,19],h:[70,68,62,55,48,50,55,60,62,62,65,70]},
+ cairo:{en:'Cairo',ar:'القاهرة',t:[14,15,18,22,26,28,29,29,27,24,20,15],h:[58,52,46,40,38,45,55,58,56,56,58,60]},
+ beirut:{en:'Beirut',ar:'بيروت',t:[14,14,16,19,22,25,28,29,27,24,19,16],h:[70,68,66,64,66,68,70,70,66,64,66,70]},
+ baghdad:{en:'Baghdad',ar:'بغداد',t:[10,13,17,24,31,35,38,37,33,27,18,12],h:[68,55,45,35,22,15,15,17,22,32,52,68]},
+ casablanca:{en:'Casablanca',ar:'الدار البيضاء',t:[13,14,16,17,19,22,24,25,23,21,17,14],h:[78,78,76,76,76,76,76,76,78,78,78,78]},
+ istanbul:{en:'Istanbul',ar:'إسطنبول',t:[6,6,8,13,18,22,25,25,21,16,12,8],h:[78,76,72,70,68,62,60,64,70,76,78,78]},
+ london:{en:'London',ar:'لندن',t:[5,5,8,10,14,17,19,19,16,12,8,6],h:[82,78,72,68,66,66,68,70,74,80,84,84]},
+ newyork:{en:'New York',ar:'نيويورك',t:[0,2,6,12,18,23,26,25,21,14,8,3],h:[62,60,58,55,60,62,62,64,64,62,62,63]}
+};
+const CONDS=['auto','hot','rain','cold','dry'];
+const SYM={
+ yellow:{sev:1,en:'Yellowing leaves',ar:'اصفرار الأوراق',
+  cause:{en:['Overwatering: the soil stays wet and the roots cannot breathe.','Low light or a hungry plant (older leaves yellow first).'],ar:['ريّ زائد: تبقى التربة رطبة والجذور تختنق.','ضوء قليل أو نقص تغذية (تصفرّ الأوراق القديمة أولًا).']},
+  steps:{en:['Push a finger 3 cm into the soil. If it is damp, wait before watering again.','Check that the pot drains freely and empty the saucer.','Snip fully yellow leaves at the base.','If the soil is dry and it is growing season, feed at half strength.'],ar:['اغرس إصبعك 3 سم في التربة؛ إن كانت رطبة فأجّل الري.','تأكد أن الأصيص يصرّف الماء وأفرغ الصحن.','قصّ الأوراق الصفراء تمامًا من القاعدة.','إن كانت التربة جافة وفي موسم النمو فسمّد بنصف التركيز.']},
+  prev:{en:'Water only when the top 3 cm are dry.',ar:'اسقِ فقط حين تجفّ أول 3 سم من التربة.'}},
+ browntips:{sev:0,en:'Brown tips or edges',ar:'أطراف أو حواف بنية',
+  cause:{en:['Dry air, common with heaters and air conditioning.','Mineral salts from tap water, or uneven watering.'],ar:['هواء جاف، شائع مع المدافئ والمكيفات.','أملاح معدنية من ماء الصنبور أو ريّ غير منتظم.']},
+  steps:{en:['Flush the soil with plenty of water until it runs out the bottom.','Use rested or filtered water from now on.','Group plants together or add a wet pebble tray for humidity.','Trim brown tips following the leaf shape.'],ar:['اشطف التربة بكمية وفيرة من الماء حتى يخرج من الأسفل.','استخدم ماءً مُرتاحًا أو مفلترًا من الآن.','اجمع النباتات معًا أو ضع صينية حصى مبللة لزيادة الرطوبة.','قصّ الأطراف البنية بما يتبع شكل الورقة.']},
+  prev:{en:'Keep plants away from vents and heaters.',ar:'أبعد النباتات عن فتحات التكييف والمدافئ.'}},
+ spots:{sev:1,en:'Dark spots',ar:'بقع داكنة',
+  cause:{en:['Fungal or bacterial leaf spot, spread by water sitting on leaves.','Sunburn, if the patches are pale and papery.'],ar:['تبقّع فطري أو بكتيري ينتشر مع بلل الأوراق.','حروق شمس إذا كانت البقع شاحبة وورقية.']},
+  steps:{en:['Isolate the plant from the others.','Remove badly spotted leaves and bin them.','Water the soil, not the leaves, and keep air moving.','If spots keep spreading, treat with a copper or sulfur fungicide.'],ar:['اعزل النبات عن البقية.','أزل الأوراق المتضررة بشدة وتخلّص منها.','اسقِ التربة لا الأوراق، وحافظ على تهوية جيدة.','إن استمر الانتشار فاستخدم مبيدًا فطريًا نحاسيًا أو كبريتيًا.']},
+  prev:{en:'Water in the morning so leaves dry quickly.',ar:'اسقِ صباحًا لتجفّ الأوراق بسرعة.'}},
+ powder:{sev:1,en:'White powder',ar:'مسحوق أبيض',
+  cause:{en:['Powdery mildew, which likes stuffy, humid air.','Crowded plants with little airflow.'],ar:['البياض الدقيقي، يفضّل الهواء الراكد الرطب.','ازدحام النباتات وقلة التهوية.']},
+  steps:{en:['Isolate the plant.','Wipe leaves with a damp cloth.','Spray weekly with neem oil, or 1 tsp baking soda in 1 litre of water.','Give plants more space and airflow.'],ar:['اعزل النبات.','امسح الأوراق بقطعة قماش مبللة.','رشّ أسبوعيًا بزيت النيم أو بملعقة صغيرة صودا الخبز في لتر ماء.','أعطِ النباتات مساحة وتهوية أكثر.']},
+  prev:{en:'Avoid wetting leaves late in the day.',ar:'تجنّب بلّ الأوراق في آخر النهار.'}},
+ droop:{sev:1,en:'Drooping',ar:'ذبول وتدلّي',
+  cause:{en:['Thirst: the plant has used up its water.','Root rot from overwatering also causes drooping.'],ar:['عطش: استهلك النبات ماءه.','تعفّن الجذور من الريّ الزائد يسبب الذبول أيضًا.']},
+  steps:{en:['Check the soil first, since the fix depends on it.','If dry, water slowly until it drains; it should perk up within hours.','If wet and smelly, unpot and inspect the roots.','Move it out of harsh afternoon sun.'],ar:['افحص التربة أولًا فالعلاج يعتمد عليها.','إن كانت جافة فاسقِ ببطء حتى يخرج الماء من الأسفل؛ ينتعش النبات خلال ساعات.','إن كانت رطبة ورائحتها كريهة فأخرجه وافحص الجذور.','انقله بعيدًا عن شمس العصر القوية.']},
+  prev:{en:'Lift the pot: a light pot means it is time to water.',ar:'ارفع الأصيص: الأصيص الخفيف يعني أن وقت الري حان.'}},
+ curl:{sev:0,en:'Curling leaves',ar:'التفاف الأوراق',
+  cause:{en:['Heat or dry air makes leaves curl to save water.','Thrips or other tiny pests, if leaves are also speckled.'],ar:['الحر أو جفاف الهواء يجعل الأوراق تلتف لحفظ الماء.','حشرات الثرِبس الصغيرة إن ظهرت نقاط على الأوراق.']},
+  steps:{en:['Move away from hot windows and vents.','Water deeply, then let the top soil dry.','Inspect leaf undersides for tiny insects.','Wipe leaves with soapy water if you find any.'],ar:['ابعده عن النوافذ الحارة وفتحات التكييف.','اسقِ بعمق ثم دع الطبقة العليا تجفّ.','افحص الجهة السفلية للأوراق بحثًا عن حشرات صغيرة.','امسح الأوراق بماء وصابون إن وجدت حشرات.']},
+  prev:{en:'Mist or group plants during heatwaves.',ar:'رشّ الماء أو اجمع النباتات أثناء موجات الحر.'}},
+ pests:{sev:1,en:'Insects or sticky film',ar:'حشرات أو مادة لزجة',
+  cause:{en:['Aphids, spider mites or mealybugs: sticky residue, webbing or white fluff.','Weak plants attract pests more easily.'],ar:['منّ أو عنكبوت أحمر أو بق دقيقي: مادة لزجة أو خيوط أو زغب أبيض.','النباتات الضعيفة تجذب الآفات بسهولة.']},
+  steps:{en:['Isolate the plant right away.','Rinse leaves in the shower, tops and undersides.','Wipe with soapy water or neem oil.','Repeat every 5 to 7 days for three weeks.'],ar:['اعزل النبات فورًا.','اغسل الأوراق تحت الدش من الأعلى والأسفل.','امسحها بماء وصابون أو زيت النيم.','كرّر كل 5 إلى 7 أيام لمدة ثلاثة أسابيع.']},
+  prev:{en:'Check new plants for a week before placing them with others.',ar:'افحص النباتات الجديدة أسبوعًا قبل وضعها مع غيرها.'}},
+ leggy:{sev:0,en:'Leggy, pale growth',ar:'نمو طويل باهت',
+  cause:{en:['Not enough light: the plant stretches toward the window.','Pale new leaves also point to low light.'],ar:['ضوء غير كافٍ: يمتدّ النبات نحو النافذة.','الأوراق الجديدة الباهتة تدل أيضًا على قلة الضوء.']},
+  steps:{en:['Move closer to a bright window with indirect light.','Rotate the pot a quarter turn every week.','Prune stretched stems to encourage bushy growth.'],ar:['انقله قرب نافذة مشرقة بضوء غير مباشر.','أدر الأصيص ربع دورة كل أسبوع.','قصّ السيقان الممتدة لتشجيع نمو كثيف.']},
+  prev:{en:'Wipe dust off leaves so they catch more light.',ar:'امسح الغبار عن الأوراق لتلتقط ضوءًا أكثر.'}},
+ mushy:{sev:2,en:'Mushy base or bad smell',ar:'قاعدة طرية أو رائحة',
+  cause:{en:['Root rot: roots sit in water and begin to decay.','A pot without drainage, or soil that stays soggy.'],ar:['تعفّن الجذور: تبقى الجذور في الماء وتتحلل.','أصيص بلا تصريف أو تربة تبقى مشبعة.']},
+  steps:{en:['Slide the plant out and rinse the roots.','Cut away everything black, brown or mushy with clean scissors.','Repot in fresh, airy mix in a pot with drainage holes.','Water lightly and wait a week before watering fully.'],ar:['أخرج النبات واشطف الجذور.','اقطع كل جزء أسود أو بني أو طري بمقص نظيف.','أعد زراعته في تربة جديدة مهوّاة في أصيص بثقوب تصريف.','اسقِ قليلًا وانتظر أسبوعًا قبل الري الكامل.']},
+  prev:{en:'Never leave water standing in the saucer.',ar:'لا تترك الماء راكدًا في الصحن أبدًا.'}}
+};
+const SEV=['low','medium','high'];
+
+const L={
+ en:{
+  navCare:'Care',navGarden:'My garden',navDoctor:'Leaf doctor',
+  eyebrow:'Houseplant care that follows your weather',
+  sub:'Add your plants. Plant Parent schedules watering and feeding by species and your local climate, and diagnoses a sick leaf from one photo.',
+  ctaAdd:'Add a plant',ctaDx:'Diagnose a leaf',
+  stPlants:'Plants',stDue:'Due today',stTemp:'Climate now',
+  wTitle:'Your climate',wCity:'City',wHum:'Humidity',wCond:"Today's conditions",
+  wNote:'Based on typical monthly climate for your city. Pick today\'s conditions to adjust every schedule.',
+  c_auto:'As usual',c_hot:'Heatwave',c_rain:'Rainy',c_cold:'Cold snap',c_dry:'Dry wind',
+  paceOut:'Outdoor plants',paceIn:'Indoor plants',
+  tTitle:"Today's care",tNone:'Everything is watered and fed. Check back tomorrow.',
+  rainNote:'Rain today, so outdoor plants skip watering.',
+  taskW:'Water {n}',taskF:'Feed {n}',done:'Done',
+  gTitle:'My garden',gSub:'Each plant gets its own schedule, adjusted to your climate.',
+  gEmptyT:'Your garden is empty',gEmptyP:'Add your first plant and the schedule starts today.',
+  ex:'Example',indoor:'Indoor',outdoor:'Outdoor',
+  water:'Water',feed:'Feed',watered:'Watered',fed:'Fed',
+  today:'Today',tomorrow:'Tomorrow',resting:'Resting while it is cold',
+  remove:'Remove',confirmRm:'Tap again',
+  mTitle:'Add a plant',mSpecies:'Choose a species',mName:'Nickname (optional)',mNamePh:'e.g. Goldie',mWhere:'Where does it live?',mLast:'Last watered',
+  l0:'Today',l1:'Yesterday',l3:'3 days ago',l7:'A week ago',save:'Add to my garden',cancel:'Cancel',
+  tAdded:'Added to your garden',tWatered:'Watered. Next one is scheduled.',tFed:'Fed. Next one is scheduled.',tRemoved:'Plant removed',
+  dTitle:'Leaf doctor',dSub:'Upload a photo of the sick leaf and tick what you see. You get likely causes and a plan.',
+  dDrop:'Drop a leaf photo here, or tap to choose',dDropHint:'JPG, PNG or WebP. Close-up, good light.',
+  dPlant:'Which plant?',dUnknown:'Not sure',dSym:'What do you see?',dGo:'Diagnose',dStop:'Stop',
+  dHolder:'Your diagnosis appears here.',dHolderSub:'Add a photo, tick symptoms, or both.',
+  dBusy:'Examining the leaf...',dNeed:'Add a photo or tick at least one symptom.',
+  dNoAI:'Photo analysis is not available in this view. Tick symptoms to get a result.',
+  dAIFail:'Photo analysis did not work this time, so this result comes from the symptoms you ticked.',
+  dRate:'Too many requests right now. Try again in a minute.',dErr:'Could not analyse the photo. Try a clearer close-up.',
+  dNotPlant:'This does not look like a plant leaf. Try a close-up of the affected leaf.',
+  rCause:'Likely causes',rSteps:'What to do',rPrev:'Prevent it',rConf:'Confidence',rClear:'Remove photo',
+  sev0:'Mild',sev1:'Moderate',sev2:'Serious',
+  srcLocal:'Based on the symptoms you ticked. Add a photo for a closer look.',srcAI:'Photo analysis by Claude. For serious cases, check the roots and ask a nursery.',
+  foot:'Schedules are guidance. Always check the soil with a finger before watering.',
+  heroA:'Every leaf,',heroB:'right on time.',
+  inD:n=>n===1?'in 1 day':`in ${n} days`,lateD:n=>n===1?'1 day late':`${n} days late`,everyD:n=>`Every ${n} days`,
+  resumes:'Feeding paused',paceMore:p=>`${p}% more often`,paceLess:p=>`${p}% less often`,paceSame:'Standard pace',
+  monthLbl:'Month',
+  cat_all:'All',cat_tropical:'Foliage',cat_succulent:'Succulents',cat_herb:'Herbs',cat_flower:'Flowers',cat_tree:'Trees & palms',cat_veg:'Vegetables & fruit',
+  syncOn:'Synced to your account, on every device',syncOff:'Saved on this device only',syncErr:'Could not sync. Saved on this device.',
+  mSearch:'Search {n} plants',noMatch:'No match. Pick "Other plant" below and name it yourself.'
+ },
+ ar:{
+  navCare:'العناية',navGarden:'حديقتي',navDoctor:'طبيب الأوراق',
+  eyebrow:'عناية بنباتاتك المنزلية على قدّ طقسك',
+  sub:'أضف نباتاتك، وسيجدول لك Plant Parent الري والتسميد حسب نوع النبات ومناخ منطقتك، ويشخّص الورقة المريضة من صورة واحدة.',
+  ctaAdd:'أضف نباتًا',ctaDx:'شخّص ورقة',
+  stPlants:'نباتات',stDue:'مستحق اليوم',stTemp:'مناخك الآن',
+  wTitle:'مناخ منطقتك',wCity:'المدينة',wHum:'الرطوبة',wCond:'طقس اليوم',
+  wNote:'مبني على معدلات المناخ الشهرية لمدينتك. اختر طقس اليوم لتعديل كل الجداول.',
+  c_auto:'كالمعتاد',c_hot:'موجة حر',c_rain:'ماطر',c_cold:'برد شديد',c_dry:'رياح جافة',
+  paceOut:'النباتات الخارجية',paceIn:'النباتات الداخلية',
+  tTitle:'عناية اليوم',tNone:'كل شيء مسقيّ ومسمَّد. تفقّد غدًا.',
+  rainNote:'مطر اليوم، فالنباتات الخارجية لا تحتاج ريًّا.',
+  taskW:'اسقِ {n}',taskF:'سمّد {n}',done:'تم',
+  gTitle:'حديقتي',gSub:'لكل نبات جدوله الخاص، معدّلًا حسب مناخك.',
+  gEmptyT:'حديقتك فارغة',gEmptyP:'أضف أول نبات ويبدأ الجدول من اليوم.',
+  ex:'مثال',indoor:'داخلي',outdoor:'خارجي',
+  water:'الري',feed:'التسميد',watered:'تم الري',fed:'تم التسميد',
+  today:'اليوم',tomorrow:'غدًا',resting:'استراحة بسبب البرد',
+  remove:'حذف',confirmRm:'اضغط مجددًا',
+  mTitle:'أضف نباتًا',mSpecies:'اختر النوع',mName:'اسم مستعار (اختياري)',mNamePh:'مثال: ياسمينة',mWhere:'أين يعيش؟',mLast:'آخر ري',
+  l0:'اليوم',l1:'أمس',l3:'قبل 3 أيام',l7:'قبل أسبوع',save:'أضف إلى حديقتي',cancel:'إلغاء',
+  tAdded:'تمت الإضافة إلى حديقتك',tWatered:'تم الري. الموعد القادم محدّد.',tFed:'تم التسميد. الموعد القادم محدّد.',tRemoved:'تم حذف النبات',
+  dTitle:'طبيب الأوراق',dSub:'ارفع صورة الورقة المريضة وحدّد ما تراه. تحصل على الأسباب المحتملة وخطة علاج.',
+  dDrop:'اسحب صورة الورقة هنا، أو اضغط للاختيار',dDropHint:'JPG أو PNG أو WebP. صورة قريبة وإضاءة جيدة.',
+  dPlant:'أي نبات؟',dUnknown:'لا أعرف',dSym:'ماذا تلاحظ؟',dGo:'شخّص',dStop:'إيقاف',
+  dHolder:'يظهر تشخيصك هنا.',dHolderSub:'أضف صورة، أو حدّد أعراضًا، أو الاثنين معًا.',
+  dBusy:'جارٍ فحص الورقة...',dNeed:'أضف صورة أو حدّد عرضًا واحدًا على الأقل.',
+  dNoAI:'تحليل الصور غير متاح في هذا العرض. حدّد الأعراض لتحصل على نتيجة.',
+  dAIFail:'لم ينجح تحليل الصورة هذه المرة، فهذه النتيجة مبنية على الأعراض التي حدّدتها.',
+  dRate:'طلبات كثيرة الآن. حاول بعد دقيقة.',dErr:'تعذّر تحليل الصورة. جرّب صورة أوضح وأقرب.',
+  dNotPlant:'لا تبدو الصورة ورقة نبات. جرّب صورة قريبة للورقة المصابة.',
+  rCause:'الأسباب المحتملة',rSteps:'ماذا تفعل',rPrev:'لتجنّبها لاحقًا',rConf:'الثقة',rClear:'إزالة الصورة',
+  sev0:'خفيف',sev1:'متوسط',sev2:'خطير',
+  srcLocal:'مبنية على الأعراض التي حدّدتها. أضف صورة لفحص أدق.',srcAI:'تحليل الصورة بواسطة Claude. في الحالات الخطيرة افحص الجذور واسأل مشتلًا.',
+  foot:'الجداول إرشادية. تحقّق دائمًا من رطوبة التربة بإصبعك قبل الري.',
+  heroA:'كل ورقة',heroB:'بموعدها الصحيح.',
+  inD:n=>n===1?'بعد يوم':n===2?'بعد يومين':n<=10?`بعد ${n} أيام`:`بعد ${n} يومًا`,
+  lateD:n=>n===1?'متأخر يومًا':n===2?'متأخر يومين':n<=10?`متأخر ${n} أيام`:`متأخر ${n} يومًا`,
+  everyD:n=>n===1?'كل يوم':n===2?'كل يومين':n<=10?`كل ${n} أيام`:`كل ${n} يومًا`,
+  resumes:'التسميد متوقف',paceMore:p=>`أكثر تكرارًا بنسبة ${p}%`,paceLess:p=>`أقل تكرارًا بنسبة ${p}%`,paceSame:'وتيرة معتادة',
+  monthLbl:'الشهر',
+  cat_all:'الكل',cat_tropical:'ورقية داخلية',cat_succulent:'عصاريات وصبّار',cat_herb:'أعشاب',cat_flower:'زهور',cat_tree:'أشجار ونخيل',cat_veg:'خضار وفواكه',
+  syncOn:'متزامنة مع حسابك على كل أجهزتك',syncOff:'محفوظة على هذا الجهاز فقط',syncErr:'تعذّرت المزامنة. محفوظة على هذا الجهاز.',
+  mSearch:'ابحث بين {n} نباتًا',noMatch:'لا توجد نتيجة. اختر "نبات آخر" بالأسفل وسمّه كما تريد.'
+ }
+};
+
+/* ---------- state ---------- */
+const $=s=>document.querySelector(s);
+const TODAY=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);
+const KEY='plant-parent-v1';
+let S={lang:(navigator.language||'').toLowerCase().startsWith('en')?'en':'ar',city:'amman',cond:'auto',condDay:TODAY,plants:null};
+try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);Object.assign(S,o)}}catch(e){}
+if(S.condDay!==TODAY){S.cond='auto';S.condDay=TODAY}
+if(!CITIES[S.city])S.city='amman';
+if(!Array.isArray(S.plants)){
+  const ar=S.lang==='ar';
+  S.plants=[
+    {id:'e1',sp:'pothos',name:ar?'ذهبية':'Goldie',where:'in',lw:TODAY-5,lf:TODAY-20,ex:true},
+    {id:'e2',sp:'monstera',name:ar?'مونا الكبيرة':'Big Mo',where:'in',lw:TODAY-7,lf:TODAY-33,ex:true},
+    {id:'e3',sp:'jasmine',name:ar?'ياسمينة':'Yasmine',where:'out',lw:TODAY-2,lf:TODAY-10,ex:true},
+    {id:'e4',sp:'aloe',name:ar?'ألوفيرا':'Aloe',where:'in',lw:TODAY-9,lf:TODAY-40,ex:true}
+  ];
+}
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify({lang:S.lang,city:S.city,cond:S.cond,condDay:S.condDay,plants:S.plants}))}catch(e){}}
+function save(){saveLocal();pushCloud()}
+/* account sync (db capability, private per signed-in viewer) */
+let cloud=null,pushT=null,lastPushed=0,syncState='off';
+function setSync(st){syncState=st;const el=document.getElementById('sync');if(!el)return;el.className='sync '+(st==='on'?'on':st==='err'?'err':'');el.textContent=t(st==='on'?'syncOn':st==='err'?'syncErr':'syncOff')}
+function pushCloud(){
+  if(!cloud)return;clearTimeout(pushT);
+  pushT=setTimeout(()=>{lastPushed=Date.now();
+    cloud.set({plants:S.plants,lang:S.lang,city:S.city,updated:lastPushed}).then(()=>setSync('on')).catch(()=>setSync('err'))},600);
+}
+function applyCloud(d){
+  if(!d)return;
+  if(Array.isArray(d.plants))S.plants=d.plants.filter(p=>p&&SPM[p.sp]);
+  if(CITIES[d.city])S.city=d.city;
+  if(d.lang==='ar'||d.lang==='en')S.lang=d.lang;
+  saveLocal();renderAll();
+}
+const t=k=>L[S.lang][k];
+const fmt=(s,o)=>s.replace(/\{(\w+)\}/g,(m,k)=>o[k]);
+
+function h(tag,props,...kids){
+  const e=document.createElement(tag);
+  for(const k in(props||{})){const v=props[k];if(v==null||v===false)continue;
+    if(k==='class')e.className=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else if(k==='html')e.innerHTML=v;else e.setAttribute(k,v===true?'':v)}
+  for(const c of kids.flat()){if(c==null||c===false)continue;e.append(c.nodeType?c:document.createTextNode(c))}
+  return e;
+}
+const svg=(inner,extra)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${extra||''}>${inner}</svg>`;
+const DROP=svg('<path d="M12 3C8 8.5 6 11.5 6 15a6 6 0 0012 0c0-3.5-2-6.5-6-12z"/>');
+const FEED=svg('<path d="M12 21V11M12 11c-4 0-6-2-6-6 4 0 6 2 6 6zM12 14c4 0 6-2 6-6-4 0-6 2-6 6z"/>');
+const CHECK=svg('<path d="M5 12.5l4.5 4.5L19 7.5"/>');
+const TRASH=svg('<path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/>');
+const sname=sp=>SPM[sp][S.lang];
+const cityName=()=>CITIES[S.city][S.lang];
+
+/* ---------- climate + schedule ---------- */
+function climate(){const c=CITIES[S.city],m=new Date().getMonth();return{temp:c.t[m],hum:c.h[m]}}
+function pace(outdoor,type){
+  const {temp,hum}=climate();let f=1;
+  if(temp>=32)f=.6;else if(temp>=27)f=.75;else if(temp>=22)f=.9;else if(temp>=15)f=1;else if(temp>=8)f=1.25;else f=1.5;
+  if(hum<30)f*=.9;else if(hum>75)f*=1.12;
+  if(S.cond==='hot')f*=.78;if(S.cond==='cold')f*=1.2;if(S.cond==='dry')f*=.85;if(S.cond==='rain')f*=outdoor?1.4:1.08;
+  if(!outdoor)f=1+(f-1)*.5;
+  return 1+(f-1)*(SENS[type]||1);
+}
+const pct=f=>Math.round((1/f-1)*100);
+function info(p){
+  const s=SPM[p.sp],out=p.where==='out',f=pace(out,s.type);
+  const wi=Math.max(1,Math.round(s.w*f));
+  let wDue=p.lw+wi-TODAY;
+  const rainSkip=S.cond==='rain'&&out&&wDue<=0;
+  if(rainSkip)wDue=1;
+  const resting=climate().temp<12;
+  const fDue=p.lf+s.f-TODAY;
+  return{s,wi,wDue,rainSkip,resting,fDue,fi:s.f};
+}
+
+/* ---------- render ---------- */
+function applyLang(){
+  const lang=S.lang;
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i18n]').forEach(n=>{n.textContent=t(n.dataset.i18n)});
+  $('#langBtn').textContent=lang==='ar'?'EN':'عربي';
+  const hero=$('#heroTitle');hero.textContent='';hero.append(t('heroA')+' ',h('em',null,t('heroB')));
+}
+function renderClimate(){
+  const sel=$('#citySel');sel.textContent='';
+  Object.keys(CITIES).forEach(k=>sel.append(h('option',{value:k,selected:k===S.city},CITIES[k][S.lang])));
+  const c=climate(),d=new Date();
+  $('#wTemp').innerHTML=c.temp+'<small>°C</small>';
+  $('#wHum').textContent=c.hum+'%';
+  $('#wMonthLbl').textContent=t('monthLbl');
+  $('#wMonth').textContent=d.toLocaleString(S.lang==='ar'?'ar-u-nu-latn':'en',{month:'long'});
+  $('#stTemp').textContent=c.temp+'°';
+  const seg=$('#condSeg');seg.textContent='';
+  CONDS.forEach(k=>seg.append(h('button',{type:'button','aria-pressed':String(S.cond===k),onclick:()=>{S.cond=k;S.condDay=TODAY;save();renderAll()}},t('c_'+k))));
+  const mk=(lbl,f)=>{const p=pct(f);return h('div',null,h('span',null,lbl),h('b',null,(p>0?'+':p<0?'−':'')+Math.abs(p)+'%'),h('span',null,p>1?t('paceMore')(Math.abs(p)):p<-1?t('paceLess')(Math.abs(p)):t('paceSame')))};
+  const pc=$('#pace');pc.textContent='';
+  pc.append(mk(t('paceOut'),pace(true,'tropical')),mk(t('paceIn'),pace(false,'tropical')));
+}
+function renderToday(){
+  const list=$('#tasks');list.textContent='';
+  let n=0,rain=false;
+  S.plants.forEach(p=>{
+    const i=info(p);
+    if(i.rainSkip)rain=true;
+    const nm=p.name||sname(p.sp);
+    if(i.wDue<=0&&!i.rainSkip){n++;list.append(taskRow('w',fmt(t('taskW'),{n:nm}),i.wDue<0?t('lateD')(-i.wDue):t('today'),()=>doWater(p.id)))}
+    if(i.fDue<=0&&!i.resting){n++;list.append(taskRow('f',fmt(t('taskF'),{n:nm}),i.fDue<0?t('lateD')(-i.fDue):t('today'),()=>doFeed(p.id)))}
+  });
+  if(!n)list.append(h('li',{class:'empty'},h('div',{class:'orb o-leaf',html:svg(ICONS.tropical,'style="width:60%;height:60%"')}),t('tNone')));
+  $('#dueBadge').textContent=n;$('#stDue').textContent=n;
+  const rn=$('#rainNote');rn.hidden=!rain;rn.textContent=t('rainNote');
+}
+function taskRow(kind,title,sub,fn){
+  return h('li',{class:'task'},
+    h('span',{class:'dot '+kind,html:kind==='w'?DROP:FEED}),
+    h('div',{class:'tx'},h('b',null,title),h('span',null,sub)),
+    h('button',{class:'btn btn-leaf btn-sm',type:'button',onclick:fn},t('done')));
+}
+function ring(days,interval,kind){
+  const R=22,C=2*Math.PI*R,prog=Math.max(0,Math.min(1,1-days/interval));
+  const cls=days<0?'late':days===0?'now':'';
+  const wrap=h('div',{class:'ring '+cls});
+  wrap.innerHTML=`<svg viewBox="0 0 52 52"><circle class="bg" cx="26" cy="26" r="${R}"/><circle class="fg" cx="26" cy="26" r="${R}" stroke-dasharray="${C}" stroke-dashoffset="${C}"/></svg>`;
+  const b=h('b',null);if(days<=0)b.innerHTML=kind==='w'?DROP:FEED;else b.textContent=days;
+  wrap.append(b);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{const fg=wrap.querySelector('.fg');if(fg)fg.style.strokeDashoffset=C*(1-prog)}));
+  return wrap;
+}
+let armed=null;
+function renderGarden(){
+  const g=$('#grid');g.textContent='';
+  $('#stPlants').textContent=S.plants.length;
+  if(!S.plants.length){
+    g.append(h('div',{class:'garden-empty card gloss'},h('div',{class:'orb o-leaf',style:'width:64px;height:64px',html:svg(ICONS.tropical)}),h('h3',null,t('gEmptyT')),h('p',{style:'color:var(--ink-dim)'},t('gEmptyP')),h('button',{class:'btn btn-leaf',type:'button',onclick:openModal},t('ctaAdd'))));
+    return;
+  }
+  S.plants.forEach((p,idx)=>{
+    const i=info(p),s=i.s;
+    const wText=i.rainSkip?t('c_rain'):i.wDue<0?t('lateD')(-i.wDue):i.wDue===0?t('today'):i.wDue===1?t('tomorrow'):t('inD')(i.wDue);
+    const fText=i.resting?t('resting'):i.fDue<0?t('lateD')(-i.fDue):i.fDue===0?t('today'):i.fDue===1?t('tomorrow'):t('inD')(i.fDue);
+    const card=h('article',{class:'plant-card card gloss tilt',style:`animation:rise .5s var(--ease) ${idx*60}ms both`},
+      h('div',{class:'pc-top'},
+        h('div',{class:'p3d big',html:plant3d(s)}),
+        h('div',{class:'pc-name'},h('h3',null,p.name||sname(p.sp)),h('span',null,p.name?sname(p.sp):''),alts(s).length?h('span',{class:'al'},alts(s).slice(0,4).join(' · ')):null,
+          h('div',{class:'tags'},h('span',{class:'tag'},p.where==='out'?t('outdoor'):t('indoor')),p.ex&&h('span',{class:'tag ex'},t('ex')))),
+        removeBtn(p)),
+      h('div',{class:'rows'},
+        h('div',{class:'row'},ring(i.wDue,i.wi,'w'),h('div',{class:'tx'},h('b',null,t('water')),h('span',null,wText),h('span',null,t('everyD')(i.wi)))),
+        h('div',{class:'row'},i.resting?h('div',{class:'ring'},h('b',{html:svg('<path d="M12 3v18M5 7l14 10M19 7L5 17"/>')})):ring(i.fDue,i.fi,'f'),h('div',{class:'tx'},h('b',null,t('feed')),h('span',null,fText),h('span',null,i.resting?t('resumes'):t('everyD')(i.fi))))),
+      h('div',{class:'pc-actions'},
+        h('button',{class:'btn btn-leaf btn-sm',type:'button',onclick:e=>{splash(card);doWater(p.id)}},h('span',{html:DROP}),t('watered')),
+        h('button',{class:'btn btn-ghost btn-sm',type:'button',onclick:()=>doFeed(p.id)},h('span',{html:FEED}),t('fed'))));
+    g.append(card);
+  });
+}
+function removeBtn(p){
+  const isArmed=armed===p.id;
+  const b=h('button',{class:'icon-btn'+(isArmed?' armed':''),type:'button','aria-label':t('remove'),onclick:()=>{
+    if(armed===p.id){S.plants=S.plants.filter(x=>x.id!==p.id);armed=null;save();renderAll();toast(t('tRemoved'))}
+    else{armed=p.id;renderGarden();setTimeout(()=>{if(armed===p.id){armed=null;renderGarden()}},2600)}}});
+  if(isArmed)b.textContent=t('confirmRm');else b.innerHTML=TRASH;
+  return b;
+}
+function splash(card){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  for(let k=0;k<9;k++){const d=h('span',{class:'drop',style:`left:${10+Math.random()*80}%;animation-delay:${Math.random()*.25}s`});card.append(d);setTimeout(()=>d.remove(),1400)}
+  card.classList.add('pulse');setTimeout(()=>card.classList.remove('pulse'),800);
+}
+function doWater(id){const p=S.plants.find(x=>x.id===id);if(!p)return;p.lw=TODAY;save();renderToday();renderGarden();toast(t('tWatered'))}
+function doFeed(id){const p=S.plants.find(x=>x.id===id);if(!p)return;p.lf=TODAY;save();renderToday();renderGarden();toast(t('tFed'))}
+
+let tt;function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),2400)}
+
+/* tilt + sheen */
+document.addEventListener('pointermove',e=>{
+  const c=e.target.closest&&e.target.closest('.gloss');
+  if(!c)return;
+  const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+  c.style.setProperty('--mx',(x*100)+'%');c.style.setProperty('--my',(y*100)+'%');
+  if(c.classList.contains('tilt')&&e.pointerType==='mouse'&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    c.style.transform=`perspective(900px) rotateX(${(.5-y)*5}deg) rotateY(${(x-.5)*5}deg) translateY(-3px)`}
+});
+document.addEventListener('pointerout',e=>{const c=e.target.closest&&e.target.closest('.tilt');if(c&&!c.contains(e.relatedTarget))c.style.transform=''});
+const art=$('#art');
+document.querySelector('.hero').addEventListener('pointermove',e=>{const r=art.getBoundingClientRect();art.style.setProperty('--px',((e.clientX-r.left)/r.width-.5)*2);art.style.setProperty('--py',((e.clientY-r.top)/r.height-.5)*2)});
+
+/* ---------- add plant modal ---------- */
+function openModal(){
+  const root=$('#modalRoot');if(root.firstChild)return;
+  let pick='pothos',where='in',last=0;
+  const veil=h('div',{class:'veil',onclick:e=>{if(e.target===veil)close()}});
+  let cat='all',q='';
+  const spGrid=h('div',{class:'sp-grid',role:'group','aria-label':t('mSpecies')});
+  const catSeg=h('div',{class:'seg'});
+  const search=h('input',{type:'text',id:'plSearch',placeholder:fmt(t('mSearch'),{n:SP.length-1}),autocomplete:'off','aria-label':t('mSearch').replace('{n}',SP.length-1)});
+  const drawSp=()=>{
+    const top=spGrid.scrollTop;spGrid.textContent='';const nq=norm(q);
+    const list=SP.filter(s=>s.id==='other'||((cat==='all'||s.type===cat)&&(!nq||hay(s).includes(nq))));
+    if(list.length===1)spGrid.append(h('p',{class:'note',style:'grid-column:1/-1;padding:6px 4px'},t('noMatch')));
+    list.forEach(s=>spGrid.append(h('button',{class:'sp',type:'button','aria-pressed':String(pick===s.id),onclick:()=>{pick=s.id;drawSp()}},
+      h('span',{class:'p3d',html:plant3d(s)}),h('b',null,s[S.lang]),alts(s).length?h('em',{class:'al'},alts(s).slice(0,3).join(' · ')):null,h('span',null,t('everyD')(s.w)))));
+    spGrid.scrollTop=top;
+  };
+  const drawCat=()=>{catSeg.textContent='';CATS.forEach(c=>catSeg.append(h('button',{type:'button','aria-pressed':String(cat===c),onclick:()=>{cat=c;drawCat();drawSp()}},h('span',{class:'ci',html:svg(ICONS[c]||ICONS.all)}),t('cat_'+c))))};
+  search.addEventListener('input',()=>{q=search.value;drawSp()});
+  drawCat();drawSp();
+  const nameIn=h('input',{type:'text',id:'plName',maxlength:'24',placeholder:t('mNamePh')});
+  const segW=h('div',{class:'seg'});const drawW=()=>{segW.textContent='';[['in',t('indoor')],['out',t('outdoor')]].forEach(([k,l])=>segW.append(h('button',{type:'button','aria-pressed':String(where===k),onclick:()=>{where=k;drawW()}},l)))};drawW();
+  const lastSel=h('select',{id:'plLast'},[[0,'l0'],[1,'l1'],[3,'l3'],[7,'l7']].map(([v,k])=>h('option',{value:v},t(k))));
+  lastSel.onchange=()=>{last=+lastSel.value};
+  const m=h('div',{class:'modal card gloss',role:'dialog','aria-modal':'true','aria-labelledby':'mT'},
+    h('h2',{id:'mT'},t('mTitle')),
+    h('div',{class:'field'},h('span',{class:'lbl',style:'color:var(--ink-dim)'},t('mSpecies')),search,catSeg,spGrid),
+    h('div',{class:'form-row'},
+      h('div',{class:'field'},h('label',{for:'plName',style:'color:var(--ink-dim)'},t('mName')),nameIn),
+      h('div',{class:'field'},h('label',{for:'plLast',style:'color:var(--ink-dim)'},t('mLast')),lastSel)),
+    h('div',{class:'field'},h('span',{class:'lbl',style:'color:var(--ink-dim)'},t('mWhere')),segW),
+    h('div',{class:'modal-actions'},
+      h('button',{class:'btn btn-ghost',type:'button',onclick:()=>close()},t('cancel')),
+      h('button',{class:'btn btn-leaf',type:'button',onclick:()=>{
+        S.plants.unshift({id:'p'+Date.now()+Math.floor(Math.random()*999),sp:pick,name:nameIn.value.trim(),where,lw:TODAY-last,lf:TODAY-7});
+        save();close();renderAll();toast(t('tAdded'));document.getElementById('garden').scrollIntoView({behavior:'smooth'})}},t('save'))));
+  veil.append(m);root.append(veil);
+  const onKey=e=>{if(e.key==='Escape')close()};document.addEventListener('keydown',onKey);
+  function close(){document.removeEventListener('keydown',onKey);veil.remove()}
+  setTimeout(()=>search.focus(),30);
+}
+
+/* ---------- leaf doctor ---------- */
+let photo=null,photoUrl=null,selSyms=new Set(),ctl=null,sampleFn=null,aiReady=false;
+const dz=$('#dz'),fileIn=$('#photo');
+function drawDz(){
+  dz.querySelectorAll('img,.clear,.scan').forEach(n=>n.remove());
+  const showIdle=!photo;
+  dz.querySelector('.orb').style.visibility=showIdle?'visible':'hidden';
+  dz.querySelectorAll('b,span').forEach(n=>{n.style.visibility=showIdle?'visible':'hidden'});
+  if(photo){
+    dz.prepend(h('img',{src:photoUrl,alt:''}));
+    dz.append(h('button',{class:'btn btn-cream btn-sm clear',type:'button',onclick:e=>{e.preventDefault();e.stopPropagation();setPhoto(null)}},t('rClear')));
+  }
+}
+function setPhoto(f){
+  if(photoUrl)URL.revokeObjectURL(photoUrl);
+  photo=f;photoUrl=f?URL.createObjectURL(f):null;fileIn.value='';drawDz();
+}
+fileIn.addEventListener('change',()=>{const f=fileIn.files&&fileIn.files[0];if(f&&f.type.startsWith('image/'))setPhoto(f)});
+['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over')}));
+['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over')}));
+dz.addEventListener('drop',e=>{const f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))setPhoto(f)});
+
+function renderDx(){
+  const sel=$('#dxPlant'),cur=sel.value;sel.textContent='';
+  sel.append(h('option',{value:''},t('dUnknown')));
+  S.plants.forEach(p=>sel.append(h('option',{value:p.id},(p.name?p.name+' · ':'')+sname(p.sp))));
+  sel.value=[...sel.options].some(o=>o.value===cur)?cur:'';
+  const ch=$('#symChips');ch.textContent='';
+  Object.keys(SYM).forEach(k=>ch.append(h('button',{class:'chip',type:'button','aria-pressed':String(selSyms.has(k)),onclick:()=>{selSyms.has(k)?selSyms.delete(k):selSyms.add(k);renderDx()}},SYM[k][S.lang])));
+  $('#dxGo').querySelector('span').textContent=t('dGo');
+}
+function placeholder(){
+  const o=$('#dxOut');o.textContent='';
+  o.append(h('div',{class:'placeholder'},h('div',{class:'orb o-forest',html:svg('<circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/>')}),h('h3',null,t('dHolder')),h('p',null,t('dHolderSub'))));
+}
+function showBusy(){
+  const o=$('#dxOut');o.textContent='';
+  o.append(h('h3',null,t('dBusy')),h('div',{class:'shimmer',style:'width:80%'}),h('div',{class:'shimmer',style:'width:94%'}),h('div',{class:'shimmer',style:'width:60%'}),h('div',{class:'shimmer',style:'width:88%'}),
+    h('button',{class:'btn btn-dark btn-sm',type:'button',style:'align-self:flex-start',onclick:()=>ctl&&ctl.abort()},t('dStop')));
+  if(photo)dz.append(h('div',{class:'scan'}));
+}
+function showMsg(m){const o=$('#dxOut');o.textContent='';o.append(h('div',{class:'placeholder'},h('div',{class:'orb o-forest',html:svg('<path d="M12 8v5M12 17h.01"/><circle cx="12" cy="12" r="9"/>')}),h('p',null,m)))}
+function localResult(){
+  const keys=[...selSyms],lg=S.lang;
+  const uniq=a=>[...new Set(a)];
+  const sev=Math.max(...keys.map(k=>SYM[k].sev));
+  return{title:keys.map(k=>SYM[k][lg]).join(' + '),severity:SEV[sev],causes:uniq(keys.flatMap(k=>SYM[k].cause[lg])).slice(0,4),steps:uniq(keys.flatMap(k=>SYM[k].steps[lg])).slice(0,6),prevention:SYM[keys[0]].prev[lg],src:'local'};
+}
+function renderResult(r,note){
+  const o=$('#dxOut');o.textContent='';
+  const si=SEV.indexOf(r.severity);
+  const meta=h('div',{class:'meta'},h('span',{class:'sev '+r.severity},t('sev'+(si<0?1:si))));
+  if(r.plant)meta.append(h('span',{class:'tag',style:'background:var(--leaf-200);color:var(--forest-800);border-color:rgba(31,90,60,.25)'},r.plant));
+  if(typeof r.confidence==='number')meta.append(h('span',{class:'conf'},t('rConf'),h('i',{style:`--c:${r.confidence}%`}),r.confidence+'%'));
+  o.append(h('div',null,meta,h('h3',{style:'margin-top:10px'},r.title)));
+  const list=(tag,items)=>h(tag,null,items.map(x=>h('li',null,String(x))));
+  if(r.causes.length)o.append(h('div',{class:'blk'},h('h4',null,t('rCause')),list('ul',r.causes)));
+  if(r.steps.length)o.append(h('div',{class:'blk'},h('h4',null,t('rSteps')),list('ol',r.steps)));
+  if(r.prevention)o.append(h('div',{class:'blk'},h('h4',null,t('rPrev')),h('p',null,String(r.prevention))));
+  if(note)o.append(h('p',{class:'note',style:'font-weight:600'},note));
+  o.append(h('p',{class:'foot'},r.src==='ai'?t('srcAI'):t('srcLocal')));
+  o.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:450,easing:'cubic-bezier(.2,.8,.2,1)'});
+}
+const strArr=(a,n)=>Array.isArray(a)?a.filter(x=>typeof x==='string'&&x.trim()).slice(0,n).map(x=>x.slice(0,260)):[];
+function normAI(d){
+  if(!d||typeof d!=='object')return null;
+  let sev=String(d.severity||'').toLowerCase();if(!SEV.includes(sev))sev='medium';
+  const c=Number(d.confidence);
+  return{notPlant:!!d.not_a_plant,title:String(d.diagnosis||'').slice(0,200),plant:d.plant?String(d.plant).slice(0,60):'',severity:sev,confidence:isFinite(c)?Math.max(0,Math.min(100,Math.round(c))):undefined,causes:strArr(d.causes,4),steps:strArr(d.steps,6),prevention:d.prevention?String(d.prevention).slice(0,260):'',src:'ai'};
+}
+async function runDx(){
+  const syms=[...selSyms];
+  if(!photo&&!syms.length){toast(t('dNeed'));return}
+  if(photo&&!aiReady&&!syms.length){showMsg(t('dNoAI'));return}
+  if(!photo||!aiReady){renderResult(localResult());return}
+  const btn=$('#dxGo');btn.disabled=true;showBusy();
+  ctl=new AbortController();
+  const pl=S.plants.find(p=>p.id===$('#dxPlant').value),c=climate();
+  const plantDesc=pl?`${SPM[pl.sp].en}, grown ${pl.where==='out'?'outdoors':'indoors'}`:'unknown';
+  const prompt=`You are an experienced plant pathologist helping a home gardener. Look at the attached photo of a plant leaf.
+Plant (as told by the user): ${plantDesc}.
+Climate: ${CITIES[S.city].en}, about ${c.temp}°C and ${c.hum}% humidity this month.
+Symptoms the user reports: ${syms.map(k=>SYM[k].en).join(', ')||'none given'}.
+Write every text value in ${S.lang==='ar'?'Arabic':'English'}.
+Reply with only one JSON object: {"not_a_plant":boolean,"plant":string,"diagnosis":string,"confidence":number from 0 to 100,"severity":"low" or "medium" or "high","causes":[string,string],"steps":[string,string,string,string],"prevention":string}
+Keep each string under 170 characters. Be practical and specific. If the photo is unclear, say so in the diagnosis and lower the confidence.`;
+  try{
+    const raw=await sampleFn.json(prompt,{images:photo,modelTier:'default',cache:false,signal:ctl.signal});
+    const r=normAI(raw);
+    if(!r||(!r.title&&!r.notPlant))throw{code:'invalid_json'};
+    if(r.notPlant)showMsg(t('dNotPlant'));else renderResult(r);
+  }catch(e){
+    const code=e&&e.code;
+    if(code==='cancelled')placeholder();
+    else if(syms.length)renderResult(localResult(),t('dAIFail')+(code?' ('+code+')':''));
+    else if(code==='rate_limited')showMsg(t('dRate'));
+    else if(code==='not_granted'||code==='images_unavailable'||code==='sampling_disabled'||code==='capability_disabled')showMsg(t('dNoAI'));
+    else showMsg(t('dErr')+(code?' ('+code+')':''));
+  }finally{btn.disabled=false;dz.querySelectorAll('.scan').forEach(n=>n.remove());ctl=null}
+}
+$('#dxGo').addEventListener('click',runDx);
+
+/* sample capability (optional) */
+(async()=>{
+  try{
+    if(!window.claude||!window.claude.use)return;
+    const fn=await Promise.race([window.claude.use('sample'),new Promise(r=>setTimeout(()=>r(null),10000))]);
+    if(!fn)return;
+    sampleFn=fn;
+    const lim=await fn.limits().catch(()=>null);
+    aiReady=!lim||!!lim.images;
+    if(lim&&lim.images&&lim.images.mediaTypes)fileIn.accept=lim.images.mediaTypes.join(',')
+  }catch(e){}
+})();
+
+/* cloud init */
+(async()=>{
+  try{
+    if(!window.claude||!window.claude.use)return;
+    const [db,user]=await Promise.all([window.claude.use('db'),window.claude.use('user')]);
+    if(!db||!user)return;
+    const id=await user.id();
+    const ref=db.doc('data/users/'+id+'/garden');
+    const snap=await ref.get();
+    cloud=ref;
+    if(snap.exists)applyCloud(snap.data());else pushCloud();
+    setSync('on');
+    ref.onSnapshot(sn=>{
+      if(!sn.exists||sn.metadata.hasPendingWrites)return;
+      const d=sn.data();
+      if(d&&d.updated&&d.updated===lastPushed)return;
+      applyCloud(d);
+    },()=>{});
+  }catch(e){}
+})();
+
+/* ---------- boot ---------- */
+function renderAll(){applyLang();setSync(syncState);renderClimate();renderToday();renderGarden();renderDx();if(!$('#dxOut').firstChild)placeholder();drawDz()}
+$('#langBtn').addEventListener('click',()=>{S.lang=S.lang==='ar'?'en':'ar';save();$('#dxOut').textContent='';renderAll()});
+$('#citySel').addEventListener('change',e=>{S.city=e.target.value;save();renderAll()});
+$('#addBtn').addEventListener('click',openModal);
+$('#heroAdd').addEventListener('click',openModal);
+renderAll();
+})();
+</script>
+</body>
+</html>
