@@ -445,7 +445,7 @@ footer .credit{display:block;margin-top:4px;font-size:.78rem;opacity:.85}
       <div class="dx">
         <div class="dx-form card gloss">
           <label class="drop-zone" id="dz" for="photo">
-            <input class="sr" type="file" id="photo" accept="image/jpeg,image/png,image/webp,image/gif">
+            <input class="sr" type="file" id="photo" accept="image/*">
             <div class="orb o-leaf" id="dzIcon"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4zM12 17a4 4 0 100-8 4 4 0 000 8z"/></svg></div>
             <b data-i18n="dDrop"></b>
             <span style="font-size:.84rem;color:var(--ink-dim)" data-i18n="dDropHint"></span>
@@ -1482,7 +1482,7 @@ function drawDz(){
   dz.querySelector('.orb').style.visibility=showIdle?'visible':'hidden';
   dz.querySelectorAll('b,span').forEach(n=>{n.style.visibility=showIdle?'visible':'hidden'});
   if(photo){
-    dz.prepend(h('img',{src:photoUrl,alt:''}));
+    dz.prepend(h('img',{src:photoUrl,alt:'',onerror:()=>{toast(t('photoBad'));setPhoto(null)}}));
     dz.append(h('button',{class:'btn btn-cream btn-sm clear',type:'button',onclick:e=>{e.preventDefault();e.stopPropagation();setPhoto(null)}},t('rClear')));
   }
 }
@@ -1490,10 +1490,22 @@ function setPhoto(f){
   if(photoUrl)URL.revokeObjectURL(photoUrl);
   photo=f;photoUrl=f?URL.createObjectURL(f):null;fileIn.value='';drawDz();
 }
-fileIn.addEventListener('change',()=>{const f=fileIn.files&&fileIn.files[0];if(f&&f.type.startsWith('image/'))setPhoto(f)});
+const isImg=f=>f&&(/^image\//.test(f.type)||/\.(jpe?g|jfif|png|webp|gif|bmp|avif|heic|heif)$/i.test(f.name||''));
+async function prepPhoto(f){
+  try{const bm=await createImageBitmap(f),sc=Math.min(1,1600/Math.max(bm.width,bm.height)),cv=document.createElement('canvas');
+    cv.width=Math.max(1,Math.round(bm.width*sc));cv.height=Math.max(1,Math.round(bm.height*sc));
+    const cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,cv.width,cv.height);cx.drawImage(bm,0,0,cv.width,cv.height);
+    const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',.88));
+    if(blob)return new File([blob],'leaf.jpg',{type:'image/jpeg'})}catch(e){}
+  return f;
+}
+const takePhoto=async f=>{if(!f)return;const g=await prepPhoto(f);if(g!==f||isImg(f))setPhoto(g);else toast(t('photoBad'))};
+Object.assign(L.en,{photoBad:'This photo format is not supported here. Try a JPG or PNG, or take a screenshot of it.'});
+Object.assign(L.ar,{photoBad:'صيغة الصورة غير مدعومة هنا. جرّب JPG أو PNG، أو خذ لقطة شاشة للصورة.'});
+fileIn.addEventListener('change',()=>{takePhoto(fileIn.files&&fileIn.files[0])});
 ['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over')}));
 ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over')}));
-dz.addEventListener('drop',e=>{const f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))setPhoto(f)});
+dz.addEventListener('drop',e=>{takePhoto(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0])});
 
 function renderDx(){
   const sel=$('#dxPlant'),cur=sel.value;sel.textContent='';
