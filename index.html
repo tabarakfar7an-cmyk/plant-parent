@@ -1329,7 +1329,8 @@ function applyLang(){
 }
 function renderClimate(){
   const sel=$('#citySel');sel.textContent='';
-  Object.keys(CITIES).forEach(k=>sel.append(h('option',{value:k,selected:k===S.city},CITIES[k][S.lang])));
+  if(S.loc)sel.append(h('option',{value:'loc',selected:true},'📍 '+(S.loc.name||t('wxHere'))));
+  Object.keys(CITIES).forEach(k=>sel.append(h('option',{value:k,selected:!S.loc&&k===S.city},CITIES[k][S.lang])));
   const c=climate(),d=new Date();
   $('#wTemp').innerHTML=c.temp+'<small>°C</small>';
   $('#wHum').textContent=c.hum+'%';
@@ -1648,7 +1649,7 @@ function useMyLocation(auto){
     const lat=+pos.coords.latitude.toFixed(3),lon=+pos.coords.longitude.toFixed(3);
     S.loc={lat,lon,name:''};saveLocal();W=null;loadWeather(true);
     fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lon+'&localityLanguage='+S.lang).then(r=>r.json()).then(g=>{
-      if(!S.loc)return;S.loc.name=[g.city||g.locality,g.countryName].filter(Boolean).join(S.lang==='ar'?'، ':', ');saveLocal();renderWx()}).catch(()=>{});
+      if(!S.loc)return;S.loc.name=[g.city||g.locality,g.countryName].filter(Boolean).join(S.lang==='ar'?'، ':', ');saveLocal();renderClimate()}).catch(()=>{});
   },()=>{if(auto!==true)toast(t('wxDenied'))},{timeout:10000,maximumAge:600000});
 }
 function wxTip(i){
@@ -1780,7 +1781,7 @@ function openDetail(id){
 
 function renderAll(){applyLang();setSync(syncState);renderClimate();renderRem();renderToday();renderGarden();renderDx();if(!$('#dxOut').firstChild)placeholder();drawDz()}
 $('#langBtn').addEventListener('click',()=>{S.lang=S.lang==='ar'?'en':'ar';save();$('#dxOut').textContent='';renderAll()});
-$('#citySel').addEventListener('change',e=>{S.city=e.target.value;S.loc=null;W=null;save();renderAll();loadWeather(true)});
+$('#citySel').addEventListener('change',e=>{if(e.target.value==='loc')return;S.city=e.target.value;S.loc=null;W=null;save();renderAll();loadWeather(true)});
 $('#addBtn').addEventListener('click',openModal);
 $('#heroAdd').addEventListener('click',openModal);
 renderAll();
