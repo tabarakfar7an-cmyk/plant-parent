@@ -1,19 +1,25 @@
-Plant Parent - deploy notes
-===========================
-Upload the whole folder (just index.html) to any static host:
-  - Netlify: drag the folder onto app.netlify.com/drop
-  - Cloudflare Pages / Vercel / GitHub Pages: point at this folder
-  - Any web host: put index.html in public_html
+Plant Parent - deploy notes (GitHub Pages)
+==========================================
+1. Put index.html at the root of your repo (or in /docs).
+2. Repo Settings > Pages > Deploy from a branch > pick the branch and folder > Save.
+3. Open https://<user>.github.io/<repo>/
 
-What works on your own host
-  - Arabic / English, 245 plants with common alternative names, 3D-style renders + real photos fetched from Wikipedia (needs internet), climate-based schedules, add / water / feed.
+What works
+  - Arabic / English, 245 plants with common alternative names, climate-based schedules, add / water / feed.
+  - Real plant photos: each species has an exact English Wikipedia article title (WT list in the script).
+    Photos are fetched in the visitor's browser in batches of up to 50 titles per request,
+    only for what is on screen, and cached in localStorage (key pp-img-v2).
+    If an article has no lead photo, the 3D-style render stays as the fallback.
   - Plants are saved in each visitor's browser (localStorage), on that device only.
 
-What needs Claude (works only on the claude.ai artifact link)
-  - Account sync across devices.
-  - Leaf photo analysis. On your own host the Leaf doctor still works from ticked symptoms.
+Photo credits
+  - Photos come from Wikipedia / Wikimedia Commons (CC BY-SA or public domain).
+    A credit line is in the footer; hovering a photo shows its source.
 
-To get sync and photo analysis on your own domain you need a backend:
-  - Sync: a database with sign-in (Firebase, Supabase) replacing saveLocal/pushCloud in the script.
-  - Photo analysis: a server route that calls the Claude API with the key kept on the server.
-Fonts load from Google Fonts, so the host needs internet access for visitors.
+Fixing a wrong or missing photo
+  - Open index.html, find const WT={...} and change the title for that plant id,
+    e.g. rose:'Rosa × damascena'. Use the exact title of the English Wikipedia article.
+
+Not available on a static host
+  - Account sync across devices and leaf photo analysis (these need Claude / a backend).
+    The Leaf doctor still works from ticked symptoms.
