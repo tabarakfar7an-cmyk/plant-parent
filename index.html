@@ -372,7 +372,9 @@ input[type=time],input[type=search]{width:100%;border-radius:16px;padding:.7em 1
 .chk input{width:18px;height:18px;accent-color:var(--forest-600)}
 .rem-note{font-size:.82rem;color:var(--ink-dim)}
 .rem-warn{color:#9a2a3f;font-weight:600}
-#remIcs{align-self:flex-start}
+#remIcs,#remGcal{align-self:flex-start}
+#calList{display:grid;gap:6px;width:100%}#calList[hidden]{display:none}
+#calList a{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.08);text-decoration:none;color:inherit;font-size:.9rem}#calList a b{color:var(--leaf,#2f7d46);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -463,7 +465,9 @@ input[type=time],input[type=search]{width:100%;border-radius:16px;padding:.7em 1
             <label class="chk"><input type="checkbox" id="remF"><span data-i18n="rFeed"></span></label>
             <button class="btn btn-leaf btn-sm" id="remTest" type="button" data-i18n="rTest"></button>
           </div>
+          <button class="btn btn-sm" id="remGcal" type="button" data-i18n="rGcal"></button>
           <button class="btn btn-ghost btn-sm" id="remIcs" type="button" data-i18n="rIcs"></button>
+          <div id="calList" hidden></div>
         </div>
       </div>
     </section>
@@ -999,7 +1003,7 @@ const L={
   wLiveAt:'Live · {n} · {t}',wTypical:'Typical climate (no live data)',wLoading:'Loading weather...',wDetected:'Detected today: {c}',
   wLocSet:'Location set. Loading weather...',wGeoNo:'This browser cannot share your location.',wGeoDenied:'Location is blocked. Search for your city instead.',wGeoFail:'Could not get your location. Search for your city instead.',wNoRes:'No matches',
   doneAll:'Mark all done',doneAllToast:'All care logged',
-  rTitle:'Care reminders',rTime:'Remind me at',rWater:'Watering',rFeed:'Feeding',rTest:'Send a test',rIcs:'Add to calendar (.ics)',
+  rTitle:'Care reminders',rTime:'Remind me at',rWater:'Watering',rFeed:'Feeding',rTest:'Send a test',rIcs:'Other calendars (.ics file)',rGcal:'Add to phone calendar',rCalHint:'Tap a reminder to add it to your calendar:',rCalHintA:'Tap a reminder: your phone calendar opens with it filled in, just press Save.',rCalHintI:'Tap a reminder: the Calendar sheet opens, press Add.',rCalAll:'Add all reminders',rCalNone:'Turn on watering or feeding first',
   rNoteOn:'You get one notification a day at this time when a plant needs care. Tap Done on it to log the care, or Later to be reminded in an hour.',
   rNoteOff:'Turn on to get a daily notification when a plant needs water or food.',
   rHow:'Notifications arrive while Plant Parent is open or installed on your phone. For a reminder that always fires, add it to your calendar.',
@@ -1056,7 +1060,7 @@ const L={
   wLiveAt:'مباشر · {n} · {t}',wTypical:'مناخ معتاد (لا توجد بيانات مباشرة)',wLoading:'جارٍ تحميل الطقس...',wDetected:'تم رصد اليوم: {c}',
   wLocSet:'تم تحديد الموقع. جارٍ تحميل الطقس...',wGeoNo:'هذا المتصفح لا يشارك الموقع.',wGeoDenied:'الموقع محظور. ابحث عن مدينتك بدلًا من ذلك.',wGeoFail:'تعذّر تحديد موقعك. ابحث عن مدينتك بدلًا من ذلك.',wNoRes:'لا نتائج',
   doneAll:'تم الكل',doneAllToast:'تم تسجيل كل العناية',
-  rTitle:'تذكيرات العناية',rTime:'ذكّرني الساعة',rWater:'الري',rFeed:'التسميد',rTest:'إرسال تجربة',rIcs:'إضافة للتقويم (.ics)',
+  rTitle:'تذكيرات العناية',rTime:'ذكّرني الساعة',rWater:'الري',rFeed:'التسميد',rTest:'إرسال تجربة',rIcs:'تقاويم ثانية (ملف .ics)',rGcal:'إضافة لتقويم الهاتف',rCalHint:'اضغط على تذكير لإضافته للتقويم:',rCalHintA:'اضغط على تذكير: يفتح تقويم هاتفك وفيه كل التفاصيل، اضغط حفظ فقط.',rCalHintI:'اضغط على تذكير: تظهر شاشة التقويم، اضغط إضافة.',rCalAll:'إضافة كل التذكيرات',rCalNone:'فعّل الري أو التسميد أولًا',
   rNoteOn:'يصلك إشعار واحد يوميًا بهذا الوقت عندما يحتاج نبات عناية. اضغط "تم" لتسجيل العناية، أو "بعد ساعة" لتذكيرك لاحقًا.',
   rNoteOff:'فعّل التذكيرات لتصلك إشعارات عندما يحتاج نبات ريًّا أو تسميدًا.',
   rHow:'تصل الإشعارات عندما يكون Plant Parent مفتوحًا أو مثبّتًا على جوالك. لتذكير مضمون دائمًا أضفه إلى التقويم.',
@@ -1561,23 +1565,57 @@ function renderRem(){
   else if(ios&&!on)msg+=' '+t('rIos');
   n.textContent=msg;
 }
-function exportIcs(){
-  const pad=n=>String(n).padStart(2,'0'),[hh,mm]=(S.rem.time||'08:00').split(':').map(Number);
-  const dayDate=d=>new Date(d*864e5+new Date().getTimezoneOffset()*60000);
-  const stamp=d=>{const x=dayDate(d);return''+x.getFullYear()+pad(x.getMonth()+1)+pad(x.getDate())+'T'+pad(hh)+pad(mm)+'00'};
+function calItems(){
+  const out=[];
+  S.plants.forEach(p=>{const i=info(p),nm=p.name||sname(p.sp);
+    if(S.rem.water)out.push({id:p.id+'-w',day:Math.max(TODAY,TODAY+i.wDue),every:i.wi,title:t('nWater')+' '+nm});
+    if(S.rem.feed&&!i.resting)out.push({id:p.id+'-f',day:Math.max(TODAY,TODAY+i.fDue),every:i.fi,title:t('nFeed')+' '+nm})});
+  return out;
+}
+function calTime(d){const[hh,mm]=(S.rem.time||'08:00').split(':').map(Number);const x=new Date(d*864e5+new Date().getTimezoneOffset()*60000);x.setHours(hh,mm,0,0);return x}
+function icsText(items){
+  const pad=n=>String(n).padStart(2,'0');
+  const fm=x=>''+x.getFullYear()+pad(x.getMonth()+1)+pad(x.getDate())+'T'+pad(x.getHours())+pad(x.getMinutes())+'00';
   const esc=x=>String(x).replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
   const L1=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Plant Parent//EN','CALSCALE:GREGORIAN'];
-  const ev=(uid,day,every,title)=>{L1.push('BEGIN:VEVENT','UID:'+uid+'@plantparent','DTSTAMP:'+new Date().toISOString().replace(/[-:]|\.\d{3}/g,''),'DTSTART:'+stamp(Math.max(TODAY,day)),'RRULE:FREQ=DAILY;INTERVAL='+every,'SUMMARY:'+esc(title),'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc(title),'TRIGGER:PT0M','END:VALARM','END:VEVENT')};
-  S.plants.forEach(p=>{
-    const i=info(p),nm=p.name||sname(p.sp);
-    if(S.rem.water)ev(p.id+'-w',TODAY+i.wDue,i.wi,t('nWater')+' '+nm);
-    if(S.rem.feed&&!i.resting)ev(p.id+'-f',TODAY+i.fDue,i.fi,t('nFeed')+' '+nm);
-  });
-  L1.push('END:VCALENDAR');
-  const url=URL.createObjectURL(new Blob([L1.join('\r\n')+'\r\n'],{type:'text/calendar;charset=utf-8'}));
-  const a=h('a',{href:url,download:'plant-parent.ics'});document.body.append(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),5000);toast(t('rIcsToast'));
+  const st=new Date().toISOString().replace(/[-:]|\.\d{3}/g,'');
+  items.forEach(it=>{const x=calTime(it.day);
+    L1.push('BEGIN:VEVENT','UID:'+it.id+'@plantparent','DTSTAMP:'+st,'DTSTART:'+fm(x),'DTEND:'+fm(new Date(x.getTime()+9e5)),'RRULE:FREQ=DAILY;INTERVAL='+it.every,'SUMMARY:'+esc(it.title),'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc(it.title),'TRIGGER:PT0M','END:VALARM','END:VEVENT')});
+  L1.push('END:VCALENDAR');return L1.join('\r\n')+'\r\n';
 }
+const isAnd=()=>/android/i.test(navigator.userAgent),isIos=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function gcalUrl(it){const x=calTime(it.day),pad=n=>String(n).padStart(2,'0');
+  const f=d=>''+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+'00';
+  return'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('🪴 '+it.title)+'&dates='+f(x)+'/'+f(new Date(x.getTime()+9e5))+'&recur='+encodeURIComponent('RRULE:FREQ=DAILY;INTERVAL='+it.every)}
+/* Android: opens the phone's own calendar "new event" screen with everything filled in */
+function androidUrl(it){const x=calTime(it.day),e=encodeURIComponent;
+  return'intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/event;S.title='+e('🪴 '+it.title)+';l.beginTime='+x.getTime()+';l.endTime='+(x.getTime()+9e5)+';S.rrule='+e('FREQ=DAILY;INTERVAL='+it.every)+';S.browser_fallback_url='+e(gcalUrl(it))+';end'}
+function openIcsNow(items){
+  const txt=icsText(items);
+  if(isIos()){location.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(txt);return}
+  const url=URL.createObjectURL(new Blob([txt],{type:'text/calendar;charset=utf-8'}));
+  const a=h('a',{href:url,download:'plant-parent.ics'});document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+function openCal(){
+  const box=$('#calList');
+  if(!box.hidden){box.hidden=true;return}
+  const items=calItems();
+  box.textContent='';
+  if(!items.length){box.append(h('div',{},t('rCalNone')));box.hidden=false;return}
+  box.append(h('div',{},t(isAnd()?'rCalHintA':isIos()?'rCalHintI':'rCalHint')));
+  const label=it=>[h('span',{},it.title),h('b',{},'+ '+(S.lang==='ar'?'كل '+it.every+' يوم':'every '+it.every+'d'))];
+  if(isIos()){
+    box.append(h('a',{href:'#',onclick:e=>{e.preventDefault();openIcsNow(items)}},h('span',{},t('rCalAll')),h('b',{},'+')));
+  }
+  items.forEach(it=>{
+    if(isAnd())box.append(h('a',{href:androidUrl(it)},...label(it)));
+    else if(isIos())box.append(h('a',{href:'#',onclick:e=>{e.preventDefault();openIcsNow([it])}},...label(it)));
+    else box.append(h('a',{href:gcalUrl(it),target:'_blank',rel:'noopener'},...label(it)));
+  });
+  box.hidden=false;
+}
+function exportIcs(){openIcsNow(calItems());toast(t('rIcsToast'))}
 function refreshDay(){
   const n=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);
   if(n===TODAY)return;
@@ -1603,6 +1641,7 @@ $('#remW').addEventListener('change',e=>{S.rem.water=e.target.checked;saveLocal(
 $('#remF').addEventListener('change',e=>{S.rem.feed=e.target.checked;saveLocal();writeSnap()});
 $('#remTest').addEventListener('click',async()=>{await writeSnap();swPost({type:'test'})});
 $('#remIcs').addEventListener('click',exportIcs);
+$('#remGcal').addEventListener('click',openCal);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){refreshDay();loadWeather();applyQueue();if(S.rem.on)swPost({type:'check'})}});
 setInterval(()=>{refreshDay();loadWeather();if(S.rem.on)swPost({type:'check'})},30000);
 renderAll();
