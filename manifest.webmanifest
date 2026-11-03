@@ -1,0 +1,24 @@
+{
+  "name": "Plant Parent",
+  "short_name": "Plant Parent",
+  "description": "Houseplant care that follows your weather. عناية بنباتاتك المنزلية على قدّ طقسك.",
+  "start_url": "./#care",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f8ec",
+  "theme_color": "#4fb06f",
+  "lang": "ar",
+  "dir": "auto",
+  "categories": ["lifestyle", "utilities"],
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Today's care", "short_name": "Care", "url": "./#care", "icons": [{"src": "icon-192.png", "sizes": "192x192"}]},
+    {"name": "Leaf doctor", "short_name": "Doctor", "url": "./#doctor", "icons": [{"src": "icon-192.png", "sizes": "192x192"}]}
+  ]
+}
