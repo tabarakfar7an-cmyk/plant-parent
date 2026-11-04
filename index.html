@@ -4,30 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Plant Parent: houseplant care that follows your weather. عناية بنباتاتك المنزلية على قدّ طقسك.">
-<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#1f5a3c"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2715%27 fill=%27%234fb06f%27/%3E%3Cpath d=%27M9 23C9 14 14 9 23 9c0 9-5 14-12 14M9 23c3-5 6-8 9-10%27 fill=%27none%27 stroke=%27%230f2f20%27 stroke-width=%272.4%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2715%27 fill=%27%234fb06f%27/%3E%3Cpath d=%27M9 23C9 14 14 9 23 9c0 9-5 14-12 14M9 23c3-5 6-8 9-10%27 fill=%27none%27 stroke=%27%230f2f20%27 stroke-width=%272.4%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#4fb06f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Plant Parent">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>[hidden]{display:none!important}img{max-width:100%}
-
-/* weather live + reminders + details */
-.wxlive{display:flex;flex-direction:column;gap:12px}
-.wx-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.wx-place{font-weight:700;margin-inline-end:auto}
-.wx-now{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.wx-now>div{display:flex;flex-direction:column;font-size:.9rem;min-width:0}.wx-now b{font-size:1.1rem}
-.wx-ico{font-size:2.4rem;line-height:1}.wx-upd{margin-inline-start:auto;font-size:.75rem;opacity:.65}
-.wx-days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-.wx-day{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;border-radius:14px;border:1px solid rgba(31,90,60,.25);background:rgba(255,255,255,.6);color:var(--forest-900);cursor:pointer;font:inherit;transition:.2s}
-.wx-day:hover{background:#fff;transform:translateY(-2px)}.wx-day small{font-size:.72rem;font-weight:700;opacity:.75}.wx-day i{font-style:normal;font-size:1.4rem}.wx-day b{font-size:.95rem}.wx-day span{font-size:.78rem;opacity:.6}
-.wx-day[aria-pressed="true"]{background:linear-gradient(180deg,var(--forest-500),var(--forest-700));color:var(--cream);border-color:transparent;box-shadow:0 6px 14px rgba(15,47,32,.25)}
-.wx-tip{font-size:.9rem;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.55);border:1px dashed rgba(31,90,60,.3)}
-.t-actions{display:flex;gap:6px;flex:none}
-.rem{margin-top:6px;padding-top:14px;border-top:1px dashed rgba(31,90,60,.3);display:flex;flex-direction:column;gap:10px}
-.rem-head,.rem-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.rem-head b{margin-inline-end:auto}
-.rem-row label{font-size:.85rem;font-weight:600;margin-inline-end:auto}
-.rem input[type=time]{font:inherit;padding:.4em .7em;border-radius:12px;border:1px solid rgba(31,90,60,.35);background:rgba(255,255,255,.8)}
-.switch{width:46px;height:26px;border-radius:999px;border:1px solid var(--line);background:rgba(31,90,60,.22);position:relative;cursor:pointer;transition:.2s;padding:0}
-.switch i{position:absolute;top:2px;inset-inline-start:2px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:.2s}
-.switch[aria-checked="true"]{background:var(--forest-600)}.switch[aria-checked="true"] i{inset-inline-start:22px}
-.dt-top{display:flex;gap:16px;align-items:center}.dt-top h2{margin:0}.al2{font-size:.85rem;color:var(--forest-600);margin:2px 0 6px}
-.dt-row{display:flex;flex-direction:column;gap:6px}.dt-chips{display:flex;flex-wrap:wrap;gap:6px}
-@media(max-width:560px){.wx-day{padding:6px 0}.t-actions{flex-direction:column}}
 </style>
 <title>Plant Parent</title>
 
@@ -354,6 +338,43 @@ footer{padding-block:30px 10px;color:var(--ink-faint);font-size:.85rem;text-alig
 .p3d.big{width:96px;height:96px}
 .p3d.has-photo{filter:none}
 footer .credit{display:block;margin-top:4px;font-size:.78rem;opacity:.85}
+
+/* live weather + reminders */
+input[type=time],input[type=search]{width:100%;border-radius:16px;padding:.7em 1em;border:1px solid rgba(31,90,60,.28);background:rgba(255,255,255,.85);color:var(--forest-900);font-weight:600;box-shadow:inset 0 2px 4px rgba(31,90,60,.1)}
+.w-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:.5em;font-size:.78rem;font-weight:700;padding:.25em .85em;border-radius:999px;background:rgba(255,255,255,.75);color:var(--forest-800);max-width:100%}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink-faint);flex:none}
+.live.on::before{background:#2fbf6a;animation:blink 2s infinite}
+.live.load::before{background:var(--bloom)}
+@keyframes blink{50%{opacity:.35}}
+.loc-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start}
+.loc-search{position:relative;flex:1 1 180px;min-width:0}
+.loc-res{position:absolute;inset-inline:0;top:calc(100% + 6px);z-index:30;margin:0;padding:6px;list-style:none;background:#fff;border-radius:16px;box-shadow:0 14px 30px rgba(15,47,32,.25);border:1px solid var(--line);max-height:220px;overflow:auto}
+.loc-res button{width:100%;text-align:start;background:none;border:0;padding:.55em .7em;border-radius:10px;cursor:pointer;color:var(--forest-900);font-weight:600}
+.loc-res button:hover,.loc-res button:focus-visible{background:var(--leaf-100)}
+.loc-res .none{padding:.55em .7em;color:var(--ink-dim);font-size:.9rem}
+.climate .icon-btn{margin-inline-start:auto;background:rgba(255,255,255,.7)}
+.det{font-size:.85rem;font-weight:700;color:var(--forest-800);min-height:1.3em}
+.head-r{display:inline-flex;align-items:center;gap:8px}
+.remind{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.rem-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rem-head b{font-family:var(--f-display);font-size:1.25rem}
+.switch{position:relative;width:52px;height:30px;flex:none;display:block}
+.switch input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0;z-index:2;width:100%;height:100%}
+.switch span{position:absolute;inset:0;border-radius:999px;background:linear-gradient(180deg,#cfd8c4,#e4ecd9);box-shadow:inset 0 2px 4px rgba(31,90,60,.25);transition:.25s}
+.switch span::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,var(--cream-2));box-shadow:0 3px 6px rgba(15,47,32,.35);transition:inset-inline-start .25s var(--ease)}
+.switch input:checked+span{background:linear-gradient(180deg,var(--leaf-300),var(--leaf-500))}
+.switch input:checked+span::after{inset-inline-start:25px}
+.switch input:focus-visible+span{outline:3px solid var(--forest-600);outline-offset:3px}
+.rem-opts{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:end}
+.rem-opts .field{flex:1 1 130px}
+.chk{display:inline-flex;align-items:center;gap:.5em;font-weight:600;font-size:.9rem;padding-bottom:.55em}
+.chk input{width:18px;height:18px;accent-color:var(--forest-600)}
+.rem-note{font-size:.82rem;color:var(--ink-dim)}
+.rem-warn{color:#9a2a3f;font-weight:600}
+#remIcs,#remGcal{align-self:flex-start}
+#calList{display:grid;gap:6px;width:100%}#calList[hidden]{display:none}
+#calList a{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.08);text-decoration:none;color:inherit;font-size:.9rem}#calList a b{color:var(--leaf,#2f7d46);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -366,6 +387,7 @@ footer .credit{display:block;margin-top:4px;font-size:.78rem;opacity:.85}
       <a href="#garden" data-i18n="navGarden"></a>
       <a href="#doctor" data-i18n="navDoctor"></a>
     </nav>
+    <button class="btn btn-leaf btn-sm" id="installBtn" type="button" hidden></button>
     <button class="lang btn-cream btn" id="langBtn" type="button" aria-label="Language / اللغة">EN</button>
   </header>
 
@@ -414,21 +436,40 @@ footer .credit{display:block;margin-top:4px;font-size:.78rem;opacity:.85}
 
     <section id="care" class="duo" aria-label="Care">
       <div class="weather leaf-card gloss" id="weatherCard">
-        <h2 data-i18n="wTitle"></h2>
+        <div class="w-head"><h2 data-i18n="wTitle"></h2><span class="live" id="wLive"></span></div>
+        <div class="loc-row">
+          <button class="btn btn-cream btn-sm" id="locBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="wUseLoc"></span></button>
+          <div class="loc-search"><label class="sr" for="locQ" data-i18n="wSearch"></label><input type="text" id="locQ" autocomplete="off" enterkeyhint="search" data-i18n-ph="wSearchPh"><ul class="loc-res" id="locRes" hidden></ul></div>
+        </div>
         <div class="field"><label for="citySel" data-i18n="wCity"></label><select id="citySel"></select></div>
         <div class="climate">
           <div class="temp" id="wTemp"></div>
           <div class="kv"><span data-i18n="wHum"></span><b id="wHum"></b></div>
-          <div class="kv"><span id="wMonthLbl"></span><b id="wMonth"></b></div>
+          <div class="kv"><span data-i18n="wHiLo"></span><b id="wHiLo"></b></div>
+          <div class="kv"><span data-i18n="wRain"></span><b id="wRain"></b></div>
+          <button class="icon-btn" id="wRefresh" type="button" data-i18n-aria="wRefresh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 00-14-4M4 4v3.5h3.5M4 13a8 8 0 0014 4M20 20v-3.5h-3.5"/></svg></button>
         </div>
-        <div class="field"><span class="lbl" data-i18n="wCond"></span><div class="seg" id="condSeg" role="group"></div></div>
+        <div class="field"><span class="lbl" data-i18n="wCond"></span><div class="seg" id="condSeg" role="group"></div><div class="det" id="wDetected"></div></div>
         <div class="pace" id="pace"></div>
         <p class="note" data-i18n="wNote"></p>
       </div>
       <div class="today card gloss" id="todayCard">
-        <div class="today-head"><h2 data-i18n="tTitle"></h2><span class="badge" id="dueBadge">0</span></div>
+        <div class="today-head"><h2 data-i18n="tTitle"></h2><span class="head-r"><button class="btn btn-leaf btn-sm" id="doneAll" type="button" hidden data-i18n="doneAll"></button><span class="badge" id="dueBadge">0</span></span></div>
         <div class="rain-note" id="rainNote" hidden></div>
         <ul class="tasks" id="tasks"></ul>
+        <div class="remind" id="remind">
+          <div class="rem-head"><b data-i18n="rTitle"></b><label class="switch"><input type="checkbox" id="remOn" data-i18n-aria="rTitle"><span></span></label></div>
+          <p class="rem-note" id="remNote"></p>
+          <div class="rem-opts" id="remOpts" hidden>
+            <div class="field"><label for="remTime" data-i18n="rTime"></label><input type="time" id="remTime"></div>
+            <label class="chk"><input type="checkbox" id="remW"><span data-i18n="rWater"></span></label>
+            <label class="chk"><input type="checkbox" id="remF"><span data-i18n="rFeed"></span></label>
+            <button class="btn btn-leaf btn-sm" id="remTest" type="button" data-i18n="rTest"></button>
+          </div>
+          <button class="btn btn-sm" id="remGcal" type="button" data-i18n="rGcal"></button>
+          <button class="btn btn-ghost btn-sm" id="remIcs" type="button" data-i18n="rIcs"></button>
+          <div id="calList" hidden></div>
+        </div>
       </div>
     </section>
 
@@ -445,7 +486,7 @@ footer .credit{display:block;margin-top:4px;font-size:.78rem;opacity:.85}
       <div class="dx">
         <div class="dx-form card gloss">
           <label class="drop-zone" id="dz" for="photo">
-            <input class="sr" type="file" id="photo" accept="image/*">
+            <input class="sr" type="file" id="photo" accept="image/jpeg,image/png,image/webp,image/gif">
             <div class="orb o-leaf" id="dzIcon"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4zM12 17a4 4 0 100-8 4 4 0 000 8z"/></svg></div>
             <b data-i18n="dDrop"></b>
             <span style="font-size:.84rem;color:var(--ink-dim)" data-i18n="dDropHint"></span>
@@ -545,108 +586,6 @@ const SP=[
  ['leek','Leek','الكراث',5,21,'veg'],['broccoli','Broccoli','البروكلي',4,21,'veg'],['kohlrabi','Kohlrabi','كرنب (لِفت الكرنب)',4,21,'veg'],['broadbeans','Fava beans','الفول',4,21,'veg'],
  ['chickpea','Chickpea','الحمّص',6,21,'veg'],['lentil','Lentil','العدس',6,21,'veg'],['sweetpotato','Sweet potato','البطاطا الحلوة',4,21,'veg'],['bitterMelon','Armenian cucumber','القثاء (الفقّوس)',3,14,'veg'],
  ['rocketWild','Wild chicory','الهندباء (العلت)',3,21,'veg'],['blueberry','Blueberry','التوت الأزرق',3,21,'veg'],['raspberry','Raspberry','العليق',3,21,'veg'],['blackberry','Blackberry','التوت الأسود (العُلَّيق)',4,21,'veg'],
- ["pilea","Chinese money plant","نبتة النقود الصينية (بيليا)",7,30,"tropical"],
- ["stromanthe","Stromanthe triostar","ستروماتي",5,30,"tropical"],
- ["polyscias","Ming aralia","بوليسياس",7,30,"tropical"],
- ["fatsia","Japanese aralia","فاتسيا اليابانية",7,30,"tropical"],
- ["miniMonstera","Mini monstera","مونستيرا ميني",7,30,"tropical"],
- ["cissus","Grape ivy","لبلاب العنب",7,30,"tropical"],
- ["fittonia","Nerve plant","فيتونيا",4,30,"tropical"],
- ["bromeliad","Bromeliad","بروميليا",7,45,"tropical"],
- ["tillandsia","Air plant","نبات الهواء",7,60,"tropical"],
- ["nepenthes","Pitcher plant","نبات الإبريق",3,60,"tropical"],
- ["flytrap","Venus flytrap","مصيدة فينوس",3,60,"tropical"],
- ["cordyline","Ti plant","كورديلين",7,30,"tropical"],
- ["pachira","Money tree","شجرة المال (باخيرا)",10,30,"tropical"],
- ["coffeeplant","Coffee plant","شجرة البن",7,30,"tropical"],
- ["kentia","Kentia palm","نخلة كنتيا",7,45,"tree"],
- ["lipstickplant","Lipstick plant","نبتة أحمر الشفاه",5,30,"tropical"],
- ["zebraplant","Zebra plant","نبتة الحمار الوحشي",5,30,"tropical"],
- ["ghostplant","Ghost plant","غرافوبتالوم",12,60,"succulent"],
- ["pandaplant","Panda plant","نبتة الباندا",12,60,"succulent"],
- ["bunnyears","Bunny ears cactus","صبار آذان الأرنب",21,90,"succulent"],
- ["echinopsis","Easter lily cactus","إيكينوبسيس",21,90,"succulent"],
- ["blueagave","Blue agave","الأغاف الأزرق",21,90,"succulent"],
- ["stapelia","Starfish flower","زهرة نجم البحر",14,60,"succulent"],
- ["euphorbiatri","African milk tree","يوفوربيا ثلاثية",14,60,"succulent"],
- ["senecio","String of dolphins","عقد الدلافين",12,60,"succulent"],
- ["lampranthus","Ice plant","نبتة الجليد",10,60,"succulent"],
- ["pachypodium","Madagascar palm","نخلة مدغشقر",14,60,"succulent"],
- ["perilla","Perilla","بيريلا",3,21,"herb"],
- ["borage","Borage","لسان الثور",4,21,"herb"],
- ["lovage","Lovage","اللوفاج (كرفس الجبل)",4,21,"herb"],
- ["chervil","Chervil","الكرفيل",3,21,"herb"],
- ["thaibasil","Thai basil","الحبق التايلندي",2,14,"herb"],
- ["curryleaf","Curry tree","ورق الكاري",5,30,"herb"],
- ["ginger","Ginger","الزنجبيل",5,30,"herb"],
- ["turmeric","Turmeric","الكركم",5,30,"herb"],
- ["saffron","Saffron crocus","الزعفران",7,30,"herb"],
- ["vietcoriander","Vietnamese coriander","الكزبرة الفيتنامية",3,14,"herb"],
- ["licorice","Liquorice","عرق السوس",6,30,"herb"],
- ["roselle","Roselle","الكركديه",4,21,"herb"],
- ["cardamom","Cardamom","الهيل",5,30,"herb"],
- ["lemonthyme","Lemon thyme","زعتر الليمون",5,21,"herb"],
- ["pennyroyal","Pennyroyal","الفليو",3,14,"herb"],
- ["peony","Peony","الفاوانيا",5,21,"flower"],
- ["aster","Aster","الأستر",4,21,"flower"],
- ["alyssum","Sweet alyssum","الأليسوم",4,21,"flower"],
- ["stock","Stock flower","المنثور",4,21,"flower"],
- ["primrose","Primrose","زهرة الربيع",4,21,"flower"],
- ["crocus","Crocus","الكروكس",5,21,"flower"],
- ["hyacinth","Hyacinth","الهيسنت (الياقوتية)",5,21,"flower"],
- ["amaryllis","Amaryllis","الأمارلس",7,21,"flower"],
- ["clivia","Clivia","كليفيا",10,30,"flower"],
- ["agapanthus","Lily of the Nile","زنبق النيل",7,30,"flower"],
- ["canna","Canna lily","الكانا",4,21,"flower"],
- ["verbenaflower","Garden verbena","الفيربينا",4,21,"flower"],
- ["morningglory","Morning glory","المجد الصباحي",4,21,"flower"],
- ["nasturtium","Nasturtium","أبو خنجر",4,21,"flower"],
- ["violet","Sweet violet","البنفسج",4,21,"flower"],
- ["nightjasmine","Night-blooming jasmine","كاشف الليل",5,30,"flower"],
- ["crapemyrtle","Crape myrtle","اللاجرستروميا",7,30,"flower"],
- ["plumbago","Cape leadwort","البلمباجو",5,30,"flower"],
- ["gazania","Gazania","الغازانيا",5,21,"flower"],
- ["poppy","Poppy","الخشخاش",4,21,"flower"],
- ["cornflower","Cornflower","عنبر",5,21,"flower"],
- ["lupin","Lupin","الترمس",6,21,"flower"],
- ["delphinium","Larkspur","لسان الحمل",5,21,"flower"],
- ["lychee","Lychee","الليتشي",7,30,"tree"],
- ["custardapple","Custard apple","القشطة",7,30,"tree"],
- ["soursop","Soursop","القشطة الشوكية",7,30,"tree"],
- ["kiwi","Kiwi","الكيوي",7,30,"tree"],
- ["passionfruit","Passion fruit","فاكهة العاطفة",5,21,"tree"],
- ["pineapple","Pineapple","الأناناس",10,45,"tree"],
- ["oleaster","Russian olive","الزيزفون الفضي",10,45,"tree"],
- ["hawthorn","Hawthorn","الزعرور",10,45,"tree"],
- ["maple","Maple","القيقب",7,30,"tree"],
- ["bottlebrush","Bottlebrush","فرشاة الزجاجة",7,30,"tree"],
- ["poinciana","Royal poinciana","البونسيانا الملكية",7,30,"tree"],
- ["baobab","Baobab","الباوباب",14,60,"tree"],
- ["pecan","Pecan","البيكان",10,45,"tree"],
- ["terebinth","Terebinth","البطم",10,60,"tree"],
- ["mastic","Mastic tree","المستكة",10,60,"tree"],
- ["kale","Kale","الكيل",3,14,"veg"],
- ["asparagus","Asparagus","الهليون",5,21,"veg"],
- ["rhubarb","Rhubarb","الراوند",4,21,"veg"],
- ["bokchoy","Bok choy","البوك تشوي",3,14,"veg"],
- ["brusselssprouts","Brussels sprouts","كرنب بروكسل",4,21,"veg"],
- ["peanut","Peanut","الفول السوداني",6,21,"veg"],
- ["sesame","Sesame","السمسم",6,21,"veg"],
- ["wheat","Wheat","القمح",6,21,"veg"],
- ["barley","Barley","الشعير",6,21,"veg"],
- ["jerusalemartichoke","Jerusalem artichoke","الطرطوفة",5,21,"veg"],
- ["taro","Taro","القلقاس",3,14,"veg"],
- ["gooseberry","Gooseberry","عنب الثعلب",5,21,"veg"],
- ["cherrytomato","Cherry tomato","البندورة الكرزية",3,14,"veg"],
- ["butternut","Butternut squash","قرع الجوز",4,21,"veg"],
- ["luffa","Luffa","اللوف",4,21,"veg"],
- ["bottlegourd","Bottle gourd","القرع الطويل",4,21,"veg"],
- ["shallot","Shallot","الشالوت",5,21,"veg"],
- ["endive","Endive","الهندباء المجعدة",3,14,"veg"],
- ["radicchio","Radicchio","الراديكيو",3,14,"veg"],
- ["mustardgreens","Mustard greens","الخردل الأخضر",3,14,"veg"],
- ["cassava","Cassava","الكسافا",5,21,"veg"],
- ["cowpea","Cowpea","اللوبيا",5,21,"veg"],
  ['other','Other plant','نبات آخر',7,30,'tropical']
 ].map(([id,en,ar,w,f,type])=>({id,en,ar,w,f,type}));
 const SPM=Object.fromEntries(SP.map(s=>[s.id,s]));
@@ -855,109 +794,7 @@ const AL={
  rocketWild:{ar:['هندباء','علت','عليق','شيكوريا','الهندباء البرية','هندبا'],en:['Chicory','Endive','Dandelion greens']},
  blueberry:{ar:['توت أزرق','بلوبري','عنب الدب'],en:['Vaccinium']},
  raspberry:{ar:['توت العليق','توت أحمر','عليق','فرامبوز'],en:['Rubus idaeus']},
- blackberry:{ar:['توت أسود','عليق أسود','علّيق','العُلَّيق'],en:['Rubus fruticosus','Bramble']},
- pilea:{ar:["بيليا", "نبتة الفطيرة"],en:["Pancake plant"]},
- stromanthe:{ar:["ستروماتي ثلاثية الألوان"],en:["Triostar"]},
- polyscias:{ar:["أرالي مينغ", "شجرة الأرالي"],en:["Ming tree"]},
- fatsia:{ar:["فاتسيا", "أرالية يابانية"],en:["Fatsia"]},
- miniMonstera:{ar:["مونستيرا صغيرة", "رافيدوفورا"],en:["Rhaphidophora"]},
- cissus:{ar:["سيسس", "كرمة الزينة"],en:["Oakleaf ivy"]},
- fittonia:{ar:["نبات الأعصاب", "فيتونيا حمراء"],en:["Mosaic plant"]},
- bromeliad:{ar:["برومليا", "الأناناسية"],en:["Urn plant"]},
- tillandsia:{ar:["تيلاندسيا", "نبتة الهواء"],en:["Air fern"]},
- nepenthes:{ar:["الإبريق", "نبات آكل اللحوم"],en:["Monkey cup"]},
- flytrap:{ar:["مصيدة الذباب", "نبات آكل الحشرات"],en:["Dionaea"]},
- cordyline:{ar:["كورديلاين", "نبتة الحظ الهاوايية"],en:["Good luck plant"]},
- pachira:{ar:["باخيرا", "شجرة الحظ المجدولة"],en:["Guiana chestnut"]},
- coffeeplant:{ar:["بن", "قهوة", "شجرة القهوة"],en:["Arabica coffee"]},
- kentia:{ar:["كنتيا", "نخلة الجنة"],en:["Paradise palm"]},
- lipstickplant:{ar:["إيشنانتس", "نبات أحمر الشفاه"],en:["Aeschynanthus"]},
- zebraplant:{ar:["أفيلاندرا", "نبتة الزيبرا"],en:["Saffron spike"]},
- ghostplant:{ar:["نبتة الشبح", "غرافتوبتالوم"],en:["Mother of pearl plant"]},
- pandaplant:{ar:["كالانشو الباندا", "آذان القطة"],en:["Pussy ears"]},
- bunnyears:{ar:["آذان الأرنب", "صبار الأرنب"],en:["Angel's wings"]},
- echinopsis:{ar:["صبار زنبق الفصح", "صبار القنفذ"],en:["Sea urchin cactus"]},
- blueagave:{ar:["أغاف تكيلا", "صبار الأغاف"],en:["Tequila agave"]},
- stapelia:{ar:["ستابيليا", "زهرة الجيفة"],en:["Carrion flower"]},
- euphorbiatri:{ar:["اللبينة", "أبو لبن"],en:["Cathedral cactus"]},
- senecio:{ar:["سينيسيو", "خيط الدلافين"],en:["Dolphin plant"]},
- lampranthus:{ar:["زهرة الجليد", "لامبرانثوس"],en:["Pigface"]},
- pachypodium:{ar:["باكيبوديوم", "نخلة الصحراء"],en:["Pachypodium"]},
- perilla:{ar:["ريحان الصين", "شيسو"],en:["Shiso"]},
- borage:{ar:["بوراج", "حشيشة اللسان"],en:["Starflower"]},
- lovage:{ar:["كرفس بري", "لوفاج"],en:["Love parsley"]},
- chervil:{ar:["شيرفيل", "بقدونس فرنسي"],en:["French parsley"]},
- thaibasil:{ar:["ريحان تايلندي", "حبق آسيوي"],en:["Asian basil"]},
- curryleaf:{ar:["شجرة الكاري", "كاري ليف"],en:["Curry leaf"]},
- ginger:{ar:["زنجبيل", "جنزبيل", "الجنزبيل"],en:["Zingiber officinale"]},
- turmeric:{ar:["كركم", "العقدة الصفراء", "زردة"],en:["Curcuma longa"]},
- saffron:{ar:["زعفران", "زعفران أصلي"],en:["Saffron"]},
- vietcoriander:{ar:["كزبرة فيتنام"],en:["Rau ram"]},
- licorice:{ar:["سوس", "عرقسوس"],en:["Glycyrrhiza glabra"]},
- roselle:{ar:["كركدية", "كركديه", "الكجرات"],en:["Hibiscus sabdariffa"]},
- cardamom:{ar:["هيل", "حبهان", "الهال"],en:["Elettaria cardamomum"]},
- lemonthyme:{ar:["زعتر ليموني"],en:["Citrus thyme"]},
- pennyroyal:{ar:["فليو", "فوتنج", "نعناع بري"],en:["Mentha pulegium"]},
- peony:{ar:["فاوانيا", "بيوني"],en:["Paeonia"]},
- aster:{ar:["أستر", "نجمة الخريف"],en:["Michaelmas daisy"]},
- alyssum:{ar:["أليسوم", "حشيشة الغيم"],en:["Alyssum"]},
- stock:{ar:["منثور", "الخيري الأبيض"],en:["Gillyflower"]},
- primrose:{ar:["برمولا", "بريمروز"],en:["Primula"]},
- crocus:{ar:["كروكوس", "زعفران الربيع"],en:["Spring crocus"]},
- hyacinth:{ar:["زنبق الياقوت", "سنبل"],en:["Common hyacinth"]},
- amaryllis:{ar:["زنبق الأمارلس", "هيبياسترم"],en:["Hippeastrum"]},
- clivia:{ar:["زنبق السوس", "كليفيا البرتقالية"],en:["Bush lily"]},
- agapanthus:{ar:["أغابانثوس", "زنبق أفريقيا"],en:["Agapanthus"]},
- canna:{ar:["كانا", "قصب الهند"],en:["Indian shot"]},
- verbenaflower:{ar:["فربينا", "فيربينا الزينة"],en:["Verbena"]},
- morningglory:{ar:["عشق الصباح", "لبلاب مزهر", "فجرية"],en:["Ipomoea"]},
- nasturtium:{ar:["الكبوسين", "زهرة الجرجير"],en:["Indian cress"]},
- violet:{ar:["بنفسج", "بنفسجة"],en:["Viola"]},
- nightjasmine:{ar:["فل الليل", "ياسمين الليل", "جميلة الليل"],en:["Lady of the night"]},
- crapemyrtle:{ar:["آس الهند", "ريحان الهند"],en:["Crepe myrtle"]},
- plumbago:{ar:["بلومباجو", "زهرة السماء"],en:["Sky flower"]},
- gazania:{ar:["جازانيا", "شمس الكنز"],en:["Treasure flower"]},
- poppy:{ar:["شقائق النعمان الحمراء", "أبو النوم"],en:["Corn poppy"]},
- cornflower:{ar:["قنطريون", "زهرة الذرة"],en:["Bachelor's button"]},
- lupin:{ar:["ترمس", "الترمس الزهري"],en:["Lupine"]},
- delphinium:{ar:["ديلفينيوم", "زهرة الفارس"],en:["Delphinium"]},
- lychee:{ar:["ليتشي", "ليتشيه"],en:["Litchi"]},
- custardapple:{ar:["قشطة", "شريفة", "الأناونا"],en:["Sugar apple"]},
- soursop:{ar:["جرافيولا", "غرافيولا"],en:["Graviola"]},
- kiwi:{ar:["كيوي", "فاكهة الكيوي"],en:["Chinese gooseberry"]},
- passionfruit:{ar:["باشن فروت", "ثمرة الآلام"],en:["Maracuja"]},
- pineapple:{ar:["أناناس", "أناناسة"],en:["Ananas comosus"]},
- oleaster:{ar:["زيزفون", "زيتون بوهيميا"],en:["Oleaster"]},
- hawthorn:{ar:["زعرور", "الزعرور الأحمر"],en:["Mayflower"]},
- maple:{ar:["قيقب", "شجرة القيقب"],en:["Acer"]},
- bottlebrush:{ar:["كالستيمون", "شجرة الفرشاة"],en:["Callistemon"]},
- poinciana:{ar:["غاردينيا ملكية", "شجرة اللهب"],en:["Flame tree"]},
- baobab:{ar:["تبلدي", "شجرة الباوباب"],en:["Adansonia digitata"]},
- pecan:{ar:["بيكان", "جوز البيكان"],en:["Carya illinoinensis"]},
- terebinth:{ar:["بطم", "البطم الفلسطيني"],en:["Turpentine tree"]},
- mastic:{ar:["مستكا", "شجرة المصطكى", "ضرو"],en:["Lentisk"]},
- kale:{ar:["كرنب أجعد", "ملفوف أجعد"],en:["Curly kale"]},
- asparagus:{ar:["هليون", "الاسبرجس"],en:["Garden asparagus"]},
- rhubarb:{ar:["راوند", "الريباس"],en:["Rheum rhabarbarum"]},
- bokchoy:{ar:["كرنب صيني"],en:["Pak choi"]},
- brusselssprouts:{ar:["ملفوف صغير"],en:["Brussels sprout"]},
- peanut:{ar:["فستق عبيد", "فول سوداني", "كاكاوية"],en:["Groundnut"]},
- sesame:{ar:["سمسم", "جلجلان"],en:["Sesamum indicum"]},
- wheat:{ar:["قمح", "حنطة", "بر"],en:["Triticum"]},
- barley:{ar:["شعير"],en:["Hordeum vulgare"]},
- jerusalemartichoke:{ar:["أرضي شوكي", "تفاح الأرض"],en:["Sunchoke"]},
- taro:{ar:["قلقاس", "قلقاس مصري"],en:["Colocasia esculenta"]},
- gooseberry:{ar:["كشمش", "عنب الدب"],en:["Ribes uva-crispa"]},
- cherrytomato:{ar:["طماطم كرزية", "بندورة كرز"],en:["Cocktail tomato"]},
- butternut:{ar:["قرع عسلي", "كابوتشا"],en:["Butternut pumpkin"]},
- luffa:{ar:["ليف", "كوسا الليف", "ليفة"],en:["Sponge gourd"]},
- bottlegourd:{ar:["دباء", "قرع أخضر", "شعيبي"],en:["Calabash gourd"]},
- shallot:{ar:["بصل فرنسي", "بصل أخضر صغير"],en:["Eschalot"]},
- endive:{ar:["هندباء", "شيكوريا"],en:["Frisée"]},
- radicchio:{ar:["هندباء حمراء", "رديكيو"],en:["Italian chicory"]},
- mustardgreens:{ar:["خردل", "ورق الخردل"],en:["Brown mustard"]},
- cassava:{ar:["مانيوك", "يوكا الأكل"],en:["Manioc"]},
- cowpea:{ar:["لوبيا", "لوبية"],en:["Black-eyed pea"]}
+ blackberry:{ar:['توت أسود','عليق أسود','علّيق','العُلَّيق'],en:['Rubus fruticosus','Bramble']}
 };
 SP.forEach(s=>{const a=AL[s.id]||{};s.aa=[...new Set(a.ar||[])].filter(x=>x!==s.ar);s.ae=(a.en||[]).filter(x=>x!==s.en)});
 const alts=s=>(S.lang==='ar'?s.aa:s.ae);
@@ -977,7 +814,7 @@ const SENS={tropical:1,succulent:.6,herb:1.1,flower:1,tree:.85,veg:1.15};
 const CATS=['all','tropical','succulent','herb','flower','tree','veg'];
 
 /* ---------- procedural 3D plant renders ---------- */
-const SHAPE={kentia:'palm',pachypodium:'palm',tillandsia:'rosette',bromeliad:'rosette',ghostplant:'rosette',pandaplant:'rosette',blueagave:'rosette',bunnyears:'pad',echinopsis:'barrel',euphorbiatri:'cactus',peony:'flower',aster:'flower',alyssum:'flower',primrose:'flower',crocus:'flower',hyacinth:'flower',amaryllis:'flower',clivia:'flower',agapanthus:'flower',canna:'flower',nasturtium:'flower',violet:'flower',gazania:'flower',poppy:'flower',cornflower:'flower',lupin:'spike',delphinium:'spike',wheat:'spike',barley:'spike',asparagus:'spike',cherrytomato:'fruit',kiwi:'fruit',pineapple:'fruit',passionfruit:'fruit',lychee:'fruit',butternut:'fruit',bottlegourd:'fruit',luffa:'fruit',gooseberry:'fruit',taro:'root',shallot:'root',ginger:'root',turmeric:'root',cassava:'root',snake:'spike',sansevieriacyl:'spike',yucca:'spike',agave:'rosette',aloe:'rosette',haworthia:'rosette',echeveria:'rosette',aeonium:'rosette',lithops:'rosette',hensandchicks:'rosette',gasteria:'rosette',
+const SHAPE={snake:'spike',sansevieriacyl:'spike',yucca:'spike',agave:'rosette',aloe:'rosette',haworthia:'rosette',echeveria:'rosette',aeonium:'rosette',lithops:'rosette',hensandchicks:'rosette',gasteria:'rosette',
  cactus:'cactus',barrelcactus:'barrel',moonCactus:'cactus',mammillaria:'barrel',pricklypear:'pad',xmascactus:'pad',datepalm:'palm',areca:'palm',parlor:'palm',washingtonia:'palm',sago:'palm',ponytail:'palm',palmcoconut:'palm',
  stringpearls:'trail',burrotail:'trail',ivy:'trail',tradescantia:'trail',pothos:'trail',hoya:'trail',
  tomato:'fruit',pepper:'fruit',chili:'fruit',eggplant:'fruit',strawberry:'fruit',pumpkin:'fruit',watermelon:'fruit',melon:'fruit',cucumber:'fruit',zucchini:'fruit',blueberry:'fruit',raspberry:'fruit',blackberry:'fruit',dragonfruit:'fruit',
@@ -986,9 +823,9 @@ const SHAPE={kentia:'palm',pachypodium:'palm',tillandsia:'rosette',bromeliad:'ro
  sunflower:'flower',tulip:'flower',lily:'flower',narcissus:'flower',gerbera:'flower',rose:'flower',damask:'flower',orchid:'flower',jasmine:'flower',arabjasmine:'flower',hibiscus:'flower',lotus:'flower',iris:'flower',dahlia:'flower',cosmos:'flower',calendula:'flower',chrysanth:'flower',marigold:'flower',zinnia:'flower',
  corn:'spike',lemongrass:'spike',chives:'spike',leek:'spike'};
 const PAL={tropical:['#6fd08a','#1f7a45'],succulent:['#a6e0b8','#3f9a7a'],herb:['#9be07a','#3c9a3a'],flower:['#ff9aa5','#d9485f'],tree:['#7fcf6a','#2a7a3a'],veg:['#ff8a6a','#c8402f']};
-const PETAL={peony:'#ff9ab5',hyacinth:'#8a7cff',amaryllis:'#e63946',poppy:'#e63946',cornflower:'#4f6df5',violet:'#7e57c2',nasturtium:'#ff8a00',primrose:'#ffd54f',aster:'#b388ff',sunflower:'#ffd23f',tulip:'#ff6b81',lily:'#fff1f0',narcissus:'#ffe66d',gerbera:'#ff8c42',orchid:'#e8a7ff',jasmine:'#ffffff',arabjasmine:'#fffdf5',hibiscus:'#ff4d6d',lotus:'#ffc2d9',iris:'#8a7cff',dahlia:'#ff5d8f',cosmos:'#ff9ecb',calendula:'#ffa500',chrysanth:'#ffd166',marigold:'#ff9f1c',zinnia:'#ff4f5e',rose:'#e63950',damask:'#ff7a93',lavender:'#a98bff',wisteria:'#b79cff',lilac:'#c8a2ff',hydrangea:'#8fb4ff'};
-const FRUIT={cherrytomato:'#e63946',kiwi:'#8d6b3a',pineapple:'#f4b400',passionfruit:'#7b2d8e',lychee:'#d6406a',butternut:'#e9a95b',bottlegourd:'#9ccc65',luffa:'#6aa84f',gooseberry:'#c2e06a',tomato:'#e63946',pepper:'#ffb703',chili:'#d00000',eggplant:'#5b2a86',strawberry:'#e5383b',pumpkin:'#f77f00',watermelon:'#2d9a4a',melon:'#f4c95d',cucumber:'#3a9a3a',zucchini:'#4a9a2a',blueberry:'#3f5bd6',raspberry:'#d62860',blackberry:'#2a1a40',dragonfruit:'#ff3d8b'};
-const ROOT={ginger:'#d9b27c',turmeric:'#e8a317',taro:'#a98a6a',shallot:'#c9a0dc',cassava:'#b08a5a',carrot:'#ff8a1f',radish:'#e5383b',beet:'#9b1d5a',turnip:'#f2e6ff',onion:'#e8b46a',garlic:'#f6efe0',potato:'#c9a06a',sweetpotato:'#c8603a'};
+const PETAL={sunflower:'#ffd23f',tulip:'#ff6b81',lily:'#fff1f0',narcissus:'#ffe66d',gerbera:'#ff8c42',orchid:'#e8a7ff',jasmine:'#ffffff',arabjasmine:'#fffdf5',hibiscus:'#ff4d6d',lotus:'#ffc2d9',iris:'#8a7cff',dahlia:'#ff5d8f',cosmos:'#ff9ecb',calendula:'#ffa500',chrysanth:'#ffd166',marigold:'#ff9f1c',zinnia:'#ff4f5e',rose:'#e63950',damask:'#ff7a93',lavender:'#a98bff',wisteria:'#b79cff',lilac:'#c8a2ff',hydrangea:'#8fb4ff'};
+const FRUIT={tomato:'#e63946',pepper:'#ffb703',chili:'#d00000',eggplant:'#5b2a86',strawberry:'#e5383b',pumpkin:'#f77f00',watermelon:'#2d9a4a',melon:'#f4c95d',cucumber:'#3a9a3a',zucchini:'#4a9a2a',blueberry:'#3f5bd6',raspberry:'#d62860',blackberry:'#2a1a40',dragonfruit:'#ff3d8b'};
+const ROOT={carrot:'#ff8a1f',radish:'#e5383b',beet:'#9b1d5a',turnip:'#f2e6ff',onion:'#e8b46a',garlic:'#f6efe0',potato:'#c9a06a',sweetpotato:'#c8603a'};
 let G3=0;
 function hue(id){let n=0;for(const c of id)n=(n*31+c.charCodeAt(0))%360;return n}
 function sh(c,a){const n=parseInt(c.slice(1),16);let r=n>>16,g=n>>8&255,b=n&255;const f=v=>Math.max(0,Math.min(255,Math.round(v+a)));return'#'+[f(r),f(g),f(b)].map(v=>v.toString(16).padStart(2,'0')).join('')}
@@ -1018,7 +855,7 @@ function plant3d(s){
 }
 
 /* ---------- real photos (Wikipedia lead images, batched, cached) ---------- */
-const WT={pilea:"Pilea peperomioides",stromanthe:"Stromanthe sanguinea",polyscias:"Polyscias fruticosa",fatsia:"Fatsia japonica",miniMonstera:"Rhaphidophora tetrasperma",cissus:"Cissus rhombifolia",fittonia:"Fittonia",bromeliad:"Bromeliaceae",tillandsia:"Tillandsia",nepenthes:"Nepenthes",flytrap:"Venus flytrap",cordyline:"Cordyline fruticosa",pachira:"Pachira aquatica",coffeeplant:"Coffea arabica",kentia:"Howea forsteriana",lipstickplant:"Aeschynanthus",zebraplant:"Aphelandra squarrosa",ghostplant:"Graptopetalum paraguayense",pandaplant:"Kalanchoe tomentosa",bunnyears:"Opuntia microdasys",echinopsis:"Echinopsis",blueagave:"Agave tequilana",stapelia:"Stapelia",euphorbiatri:"Euphorbia trigona",senecio:"Curio × peregrinus",lampranthus:"Lampranthus",pachypodium:"Pachypodium lamerei",perilla:"Perilla frutescens",borage:"Borago officinalis",lovage:"Lovage",chervil:"Chervil",thaibasil:"Thai basil",curryleaf:"Murraya koenigii",ginger:"Ginger",turmeric:"Turmeric",saffron:"Crocus sativus",vietcoriander:"Persicaria odorata",licorice:"Liquorice",roselle:"Roselle (plant)",cardamom:"Cardamom",lemonthyme:"Thymus × citriodorus",pennyroyal:"Mentha pulegium",peony:"Peony",aster:"Aster (genus)",alyssum:"Lobularia maritima",stock:"Matthiola incana",primrose:"Primula vulgaris",crocus:"Crocus",hyacinth:"Hyacinthus orientalis",amaryllis:"Hippeastrum",clivia:"Clivia miniata",agapanthus:"Agapanthus",canna:"Canna (plant)",verbenaflower:"Verbena",morningglory:"Ipomoea",nasturtium:"Tropaeolum majus",violet:"Viola odorata",nightjasmine:"Cestrum nocturnum",crapemyrtle:"Lagerstroemia",plumbago:"Plumbago auriculata",gazania:"Gazania",poppy:"Papaver",cornflower:"Centaurea cyanus",lupin:"Lupinus",delphinium:"Delphinium",lychee:"Lychee",custardapple:"Annona squamosa",soursop:"Annona muricata",kiwi:"Kiwifruit",passionfruit:"Passiflora edulis",pineapple:"Pineapple",oleaster:"Elaeagnus angustifolia",hawthorn:"Crataegus",maple:"Maple",bottlebrush:"Callistemon",poinciana:"Delonix regia",baobab:"Adansonia",pecan:"Pecan",terebinth:"Pistacia terebinthus",mastic:"Pistacia lentiscus",kale:"Kale",asparagus:"Asparagus",rhubarb:"Rhubarb",bokchoy:"Bok choy",brusselssprouts:"Brussels sprout",peanut:"Peanut",sesame:"Sesame",wheat:"Wheat",barley:"Barley",jerusalemartichoke:"Jerusalem artichoke",taro:"Taro",gooseberry:"Gooseberry",cherrytomato:"Cherry tomato",butternut:"Butternut squash",luffa:"Luffa",bottlegourd:"Calabash",shallot:"Shallot",endive:"Endive",radicchio:"Radicchio",mustardgreens:"Mustard plant",cassava:"Cassava",cowpea:"Cowpea",pothos:'Epipremnum aureum',monstera:'Monstera deliciosa',peace:'Spathiphyllum',fiddle:'Ficus lyrata',spider:'Chlorophytum comosum',philodendron:'Philodendron',rubber:'Ficus elastica',benjamina:'Ficus benjamina',dracaena:'Dracaena fragrans',dieffen:'Dieffenbachia',aglaonema:'Aglaonema',calathea:'Goeppertia',fern:'Nephrolepis exaltata',areca:'Dypsis lutescens',parlor:'Chamaedorea elegans',ivy:'Hedera helix',croton:'Codiaeum variegatum',schefflera:'Schefflera',yucca:'Yucca',luckybamboo:'Dracaena sanderiana',alocasia:'Alocasia',peperomia:'Peperomia',birdofparadise:'Strelitzia reginae',hoya:'Hoya carnosa',tradescantia:'Tradescantia zebrina',aspidistra:'Aspidistra elatior',syngonium:'Syngonium podophyllum',snake:'Dracaena trifasciata',zz:'Zamioculcas',aloe:'Aloe vera',cactus:'Cactus',jade:'Crassula ovata',echeveria:'Echeveria',haworthia:'Haworthia',agave:'Agave',pricklypear:'Opuntia ficus-indica',sedum:'Sedum',aeonium:'Aeonium',stringpearls:'Curio rowleyanus',xmascactus:'Schlumbergera',lithops:'Lithops',ponytail:'Beaucarnea recurvata',euphorbia:'Euphorbia',kalanchoe:'Kalanchoe blossfeldiana',desertrose:'Adenium obesum',basil:'Basil',mint:'Mentha',parsley:'Parsley',coriander:'Coriander',thyme:'Thymus vulgaris',wildthyme:'Origanum syriacum',sage:'Salvia officinalis',rosemary:'Rosemary',oregano:'Oregano',marjoram:'Marjoram',dill:'Dill',chives:'Chives',arugula:'Eruca vesicaria',lemongrass:'Cymbopogon',lemonbalm:'Melissa officinalis',verbena:'Aloysia citrodora',fenugreek:'Fenugreek',nigella:'Nigella sativa',anise:'Anise',chamomile:'Matricaria chamomilla',stevia:'Stevia rebaudiana',laurel:'Laurus nobilis',lavender:'Lavandula',jasmine:'Jasminum officinale',arabjasmine:'Jasminum sambac',rose:'Rose',damask:'Rosa × damascena',orchid:'Phalaenopsis',bougainvillea:'Bougainvillea',geranium:'Pelargonium',petunia:'Petunia',marigold:'Tagetes',chrysanth:'Chrysanthemum',hibiscus:'Hibiscus rosa-sinensis',gardenia:'Gardenia jasminoides',oleander:'Nerium',lantana:'Lantana camara',zinnia:'Zinnia',pansy:'Pansy',carnation:'Dianthus caryophyllus',gerbera:'Gerbera',lily:'Lilium',tulip:'Tulip',narcissus:'Narcissus (plant)',cyclamen:'Cyclamen persicum',anemone:'Anemone coronaria',iris:'Iris (plant)',snapdragon:'Antirrhinum',sunflower:'Common sunflower',vinca:'Catharanthus roseus',portulaca:'Portulaca grandiflora',plumeria:'Plumeria',africanviolet:'Saintpaulia',anthurium:'Anthurium andraeanum',begonia:'Begonia',impatiens:'Impatiens walleriana',dahlia:'Dahlia',hollyhock:'Alcea rosea',poinsettia:'Poinsettia',olive:'Olive',lemon:'Lemon',lime:'Lime (fruit)',orange:'Orange (fruit)',mandarin:'Mandarin orange',kumquat:'Kumquat',grapefruit:'Grapefruit',fig:'Ficus carica',pomegranate:'Pomegranate',datepalm:'Phoenix dactylifera',grape:'Vitis vinifera',almond:'Almond',apricot:'Apricot',peach:'Peach',plum:'Plum',cherry:'Cherry',apple:'Apple',pear:'Pear',quince:'Quince',walnut:'Juglans regia',mulberry:'Morus (plant)',loquat:'Loquat',guava:'Guava',banana:'Banana',persimmon:'Persimmon',mango:'Mango',papaya:'Papaya',avocado:'Avocado',carob:'Ceratonia siliqua',jujube:'Ziziphus jujuba',moringa:'Moringa oleifera',neem:'Azadirachta indica',cypress:'Cupressus sempervirens',pine:'Pinus halepensis',oak:'Quercus',acacia:'Acacia',ghaf:'Prosopis cineraria',tamarisk:'Tamarix',eucalyptus:'Eucalyptus',jacaranda:'Jacaranda mimosifolia',myrtle:'Myrtus communis',boxwood:'Buxus sempervirens',washingtonia:'Washingtonia robusta',sago:'Cycas revoluta',tomato:'Tomato',cucumber:'Cucumber',pepper:'Bell pepper',chili:'Chili pepper',eggplant:'Eggplant',zucchini:'Zucchini',lettuce:'Lettuce',spinach:'Spinach',carrot:'Carrot',radish:'Radish',onion:'Onion',garlic:'Garlic',potato:'Potato',okra:'Okra',molokhia:'Corchorus olitorius',purslane:'Portulaca oleracea',strawberry:'Strawberry',watermelon:'Watermelon',melon:'Cantaloupe',beans:'Green bean',peas:'Pea',chard:'Chard',cabbage:'Cabbage',cauliflower:'Cauliflower',pumpkin:'Pumpkin',corn:'Maize',mallow:'Malva',artichoke:'Artichoke',ficuselastica:'Ficus elastica',maranta:'Maranta leuconeura',chlorophytum:'Chlorophytum comosum',zamioculcas2:'Zamioculcas zamiifolia',sansevieriacyl:'Dracaena angolensis',burrotail:'Sedum morganianum',gasteria:'Gasteria',crassula:'Crassula ovata',hensandchicks:'Sempervivum tectorum',barrelcactus:'Echinocactus grusonii',moonCactus:'Gymnocalycium mihanovichii',mammillaria:'Mammillaria',rue:'Ruta graveolens',catmint:'Catnip',peppermint:'Peppermint',savory:'Satureja',sorrel:'Common sorrel',watercress:'Watercress',cress:'Lepidium sativum',sumac:'Rhus coriaria',hyssop:'Hyssopus officinalis',tarragon:'Tarragon',purpleBasil:'Ocimum tenuiflorum',cumin:'Cumin',fennel:'Fennel',caraway:'Caraway',calendula:'Calendula officinalis',cosmos:'Cosmos bipinnatus',sweetpea:'Lathyrus odoratus',lilac:'Syringa vulgaris',wisteria:'Wisteria',magnolia:'Magnolia',camellia:'Camellia japonica',hydrangea:'Hydrangea',freesia:'Freesia',gladiolus:'Gladiolus',ranunculus:'Ranunculus asiaticus',lotus:'Nelumbo nucifera',mimosa:'Mimosa pudica',bellflower:'Campanula',honeysuckle:'Lonicera',pomelo:'Pomelo',bitterorange:'Bitter orange',citron:'Citron',pistachio:'Pistachio',hazelnut:'Hazelnut',chestnut:'Castanea sativa',cedar:'Cedrus libani',palmcoconut:'Coconut',dragonfruit:'Pitaya',tamarind:'Tamarind',pepperTree:'Schinus molle',ficusCarica:'Ficus sycomorus',zucchiniLeb:'Zucchini',turnip:'Turnip',beet:'Beetroot',celery:'Celery',leek:'Leek',broccoli:'Broccoli',kohlrabi:'Kohlrabi',broadbeans:'Vicia faba',chickpea:'Chickpea',lentil:'Lentil',sweetpotato:'Sweet potato',bitterMelon:'Armenian cucumber',rocketWild:'Cichorium intybus',blueberry:'Blueberry',raspberry:'Raspberry',blackberry:'Blackberry',other:null};
+const WT={pothos:'Epipremnum aureum',monstera:'Monstera deliciosa',peace:'Spathiphyllum',fiddle:'Ficus lyrata',spider:'Chlorophytum comosum',philodendron:'Philodendron',rubber:'Ficus elastica',benjamina:'Ficus benjamina',dracaena:'Dracaena fragrans',dieffen:'Dieffenbachia',aglaonema:'Aglaonema',calathea:'Goeppertia',fern:'Nephrolepis exaltata',areca:'Dypsis lutescens',parlor:'Chamaedorea elegans',ivy:'Hedera helix',croton:'Codiaeum variegatum',schefflera:'Schefflera',yucca:'Yucca',luckybamboo:'Dracaena sanderiana',alocasia:'Alocasia',peperomia:'Peperomia',birdofparadise:'Strelitzia reginae',hoya:'Hoya carnosa',tradescantia:'Tradescantia zebrina',aspidistra:'Aspidistra elatior',syngonium:'Syngonium podophyllum',snake:'Dracaena trifasciata',zz:'Zamioculcas',aloe:'Aloe vera',cactus:'Cactus',jade:'Crassula ovata',echeveria:'Echeveria',haworthia:'Haworthia',agave:'Agave',pricklypear:'Opuntia ficus-indica',sedum:'Sedum',aeonium:'Aeonium',stringpearls:'Curio rowleyanus',xmascactus:'Schlumbergera',lithops:'Lithops',ponytail:'Beaucarnea recurvata',euphorbia:'Euphorbia',kalanchoe:'Kalanchoe blossfeldiana',desertrose:'Adenium obesum',basil:'Basil',mint:'Mentha',parsley:'Parsley',coriander:'Coriander',thyme:'Thymus vulgaris',wildthyme:'Origanum syriacum',sage:'Salvia officinalis',rosemary:'Rosemary',oregano:'Oregano',marjoram:'Marjoram',dill:'Dill',chives:'Chives',arugula:'Eruca vesicaria',lemongrass:'Cymbopogon',lemonbalm:'Melissa officinalis',verbena:'Aloysia citrodora',fenugreek:'Fenugreek',nigella:'Nigella sativa',anise:'Anise',chamomile:'Matricaria chamomilla',stevia:'Stevia rebaudiana',laurel:'Laurus nobilis',lavender:'Lavandula',jasmine:'Jasminum officinale',arabjasmine:'Jasminum sambac',rose:'Rose',damask:'Rosa × damascena',orchid:'Phalaenopsis',bougainvillea:'Bougainvillea',geranium:'Pelargonium',petunia:'Petunia',marigold:'Tagetes',chrysanth:'Chrysanthemum',hibiscus:'Hibiscus rosa-sinensis',gardenia:'Gardenia jasminoides',oleander:'Nerium',lantana:'Lantana camara',zinnia:'Zinnia',pansy:'Pansy',carnation:'Dianthus caryophyllus',gerbera:'Gerbera',lily:'Lilium',tulip:'Tulip',narcissus:'Narcissus (plant)',cyclamen:'Cyclamen persicum',anemone:'Anemone coronaria',iris:'Iris (plant)',snapdragon:'Antirrhinum',sunflower:'Common sunflower',vinca:'Catharanthus roseus',portulaca:'Portulaca grandiflora',plumeria:'Plumeria',africanviolet:'Saintpaulia',anthurium:'Anthurium andraeanum',begonia:'Begonia',impatiens:'Impatiens walleriana',dahlia:'Dahlia',hollyhock:'Alcea rosea',poinsettia:'Poinsettia',olive:'Olive',lemon:'Lemon',lime:'Lime (fruit)',orange:'Orange (fruit)',mandarin:'Mandarin orange',kumquat:'Kumquat',grapefruit:'Grapefruit',fig:'Ficus carica',pomegranate:'Pomegranate',datepalm:'Phoenix dactylifera',grape:'Vitis vinifera',almond:'Almond',apricot:'Apricot',peach:'Peach',plum:'Plum',cherry:'Cherry',apple:'Apple',pear:'Pear',quince:'Quince',walnut:'Juglans regia',mulberry:'Morus (plant)',loquat:'Loquat',guava:'Guava',banana:'Banana',persimmon:'Persimmon',mango:'Mango',papaya:'Papaya',avocado:'Avocado',carob:'Ceratonia siliqua',jujube:'Ziziphus jujuba',moringa:'Moringa oleifera',neem:'Azadirachta indica',cypress:'Cupressus sempervirens',pine:'Pinus halepensis',oak:'Quercus',acacia:'Acacia',ghaf:'Prosopis cineraria',tamarisk:'Tamarix',eucalyptus:'Eucalyptus',jacaranda:'Jacaranda mimosifolia',myrtle:'Myrtus communis',boxwood:'Buxus sempervirens',washingtonia:'Washingtonia robusta',sago:'Cycas revoluta',tomato:'Tomato',cucumber:'Cucumber',pepper:'Bell pepper',chili:'Chili pepper',eggplant:'Eggplant',zucchini:'Zucchini',lettuce:'Lettuce',spinach:'Spinach',carrot:'Carrot',radish:'Radish',onion:'Onion',garlic:'Garlic',potato:'Potato',okra:'Okra',molokhia:'Corchorus olitorius',purslane:'Portulaca oleracea',strawberry:'Strawberry',watermelon:'Watermelon',melon:'Cantaloupe',beans:'Green bean',peas:'Pea',chard:'Chard',cabbage:'Cabbage',cauliflower:'Cauliflower',pumpkin:'Pumpkin',corn:'Maize',mallow:'Malva',artichoke:'Artichoke',ficuselastica:'Ficus elastica',maranta:'Maranta leuconeura',chlorophytum:'Chlorophytum comosum',zamioculcas2:'Zamioculcas zamiifolia',sansevieriacyl:'Dracaena angolensis',burrotail:'Sedum morganianum',gasteria:'Gasteria',crassula:'Crassula ovata',hensandchicks:'Sempervivum tectorum',barrelcactus:'Echinocactus grusonii',moonCactus:'Gymnocalycium mihanovichii',mammillaria:'Mammillaria',rue:'Ruta graveolens',catmint:'Catnip',peppermint:'Peppermint',savory:'Satureja',sorrel:'Common sorrel',watercress:'Watercress',cress:'Lepidium sativum',sumac:'Rhus coriaria',hyssop:'Hyssopus officinalis',tarragon:'Tarragon',purpleBasil:'Ocimum tenuiflorum',cumin:'Cumin',fennel:'Fennel',caraway:'Caraway',calendula:'Calendula officinalis',cosmos:'Cosmos bipinnatus',sweetpea:'Lathyrus odoratus',lilac:'Syringa vulgaris',wisteria:'Wisteria',magnolia:'Magnolia',camellia:'Camellia japonica',hydrangea:'Hydrangea',freesia:'Freesia',gladiolus:'Gladiolus',ranunculus:'Ranunculus asiaticus',lotus:'Nelumbo nucifera',mimosa:'Mimosa pudica',bellflower:'Campanula',honeysuckle:'Lonicera',pomelo:'Pomelo',bitterorange:'Bitter orange',citron:'Citron',pistachio:'Pistachio',hazelnut:'Hazelnut',chestnut:'Castanea sativa',cedar:'Cedrus libani',palmcoconut:'Coconut',dragonfruit:'Pitaya',tamarind:'Tamarind',pepperTree:'Schinus molle',ficusCarica:'Ficus sycomorus',zucchiniLeb:'Zucchini',turnip:'Turnip',beet:'Beetroot',celery:'Celery',leek:'Leek',broccoli:'Broccoli',kohlrabi:'Kohlrabi',broadbeans:'Vicia faba',chickpea:'Chickpea',lentil:'Lentil',sweetpotato:'Sweet potato',bitterMelon:'Armenian cucumber',rocketWild:'Cichorium intybus',blueberry:'Blueberry',raspberry:'Raspberry',blackberry:'Blackberry',other:null};
 const PCK='pp-img-v2';
 const PC=(()=>{try{return JSON.parse(localStorage.getItem(PCK)||'{}')}catch(e){return{}}})();
 const savePC=()=>{try{localStorage.setItem(PCK,JSON.stringify(PC))}catch(e){}};
@@ -1129,8 +966,8 @@ const L={
   ctaAdd:'Add a plant',ctaDx:'Diagnose a leaf',
   stPlants:'Plants',stDue:'Due today',stTemp:'Climate now',
   wTitle:'Your climate',wCity:'City',wHum:'Humidity',wCond:"Today's conditions",
-  wNote:'Based on typical monthly climate for your city. Pick today\'s conditions to adjust every schedule.',
-  c_auto:'As usual',c_hot:'Heatwave',c_rain:'Rainy',c_cold:'Cold snap',c_dry:'Dry wind',
+  wNote:"Live weather for your location, refreshed daily. Pick today's conditions to override it.",
+  c_auto:'Auto (live weather)',c_hot:'Heatwave',c_rain:'Rainy',c_cold:'Cold snap',c_dry:'Dry wind',
   paceOut:'Outdoor plants',paceIn:'Indoor plants',
   tTitle:"Today's care",tNone:'Everything is watered and fed. Check back tomorrow.',
   rainNote:'Rain today, so outdoor plants skip watering.',
@@ -1149,7 +986,7 @@ const L={
   dPlant:'Which plant?',dUnknown:'Not sure',dSym:'What do you see?',dGo:'Diagnose',dStop:'Stop',
   dHolder:'Your diagnosis appears here.',dHolderSub:'Add a photo, tick symptoms, or both.',
   dBusy:'Examining the leaf...',dNeed:'Add a photo or tick at least one symptom.',
-  dNoAI:'Photo analysis is not available in this view. Tick symptoms to get a result.',
+  dNoAI:'Photo analysis is not available in this view. Tick symptoms to get a result.',dColorNote:'Estimated from the leaf colours on your phone (not a lab test). Tick any symptoms you also see for a better answer.',dStats:'green / yellow / brown',dHealthy:'The leaf looks mostly healthy. If something still worries you, tick the symptoms you see.',
   dAIFail:'Photo analysis did not work this time, so this result comes from the symptoms you ticked.',
   dRate:'Too many requests right now. Try again in a minute.',dErr:'Could not analyse the photo. Try a clearer close-up.',
   dNotPlant:'This does not look like a plant leaf. Try a close-up of the affected leaf.',
@@ -1163,6 +1000,18 @@ const L={
   monthLbl:'Month',
   cat_all:'All',cat_tropical:'Foliage',cat_succulent:'Succulents',cat_herb:'Herbs',cat_flower:'Flowers',cat_tree:'Trees & palms',cat_veg:'Vegetables & fruit',
   syncOn:'Synced to your account, on every device',syncOff:'Saved on this device only',syncErr:'Could not sync. Saved on this device.',
+  wUseLoc:'Use my location',wSearch:'Search a city',wSearchPh:'Search a city...',wHiLo:'High / low',wRain:'Rain chance',wRefresh:'Refresh weather',
+  wLiveAt:'Live · {n} · {t}',wTypical:'Typical climate (no live data)',wLoading:'Loading weather...',wDetected:'Detected today: {c}',
+  wLocSet:'Location set. Loading weather...',wGeoNo:'This browser cannot share your location.',wGeoDenied:'Location is blocked. Search for your city instead.',wGeoFail:'Could not get your location. Search for your city instead.',wNoRes:'No matches',
+  doneAll:'Mark all done',doneAllToast:'All care logged',
+  rTitle:'Care reminders',rTime:'Remind me at',rWater:'Watering',rFeed:'Feeding',rTest:'Send a test',inst:'Install app',instT:'Install Plant Parent',instA:'Chrome menu (⋮) then "Install app" or "Add to Home screen".',instI:'In Safari tap Share, then "Add to Home Screen".',instW:'Open the link in Chrome (Android) or Safari (iPhone) itself. Links opened inside WhatsApp, Instagram or Telegram cannot install apps.',instC:'Close',rIcs:'Other calendars (.ics file)',rGcal:'Add to phone calendar',rCalHint:'Tap a reminder to add it to your calendar:',rCalHintA:'Tap a reminder: your phone calendar opens with it filled in, just press Save.',rCalHintI:'Tap a reminder: the Calendar sheet opens, press Add.',rCalAll:'Add all reminders',rCalNone:'Turn on watering or feeding first',
+  rNoteOn:'You get one notification a day at this time when a plant needs care. Tap Done on it to log the care, or Later to be reminded in an hour.',
+  rNoteOff:'Turn on to get a daily notification when a plant needs water or food.',
+  rHow:'Notifications arrive while Plant Parent is open or installed on your phone. For a reminder that always fires, add it to your calendar.',
+  rDenied:'Notifications are blocked for this site. Allow them in your browser settings.',rUnsup:'Notifications need a browser with service worker support and an https link.',
+  rIos:'On iPhone: tap Share, then Add to Home Screen, and open Plant Parent from there to enable reminders.',
+  rOnToast:'Reminders are on',rOffToast:'Reminders are off',rApplied:'Care from your notification was logged',rIcsToast:'Calendar file ready',
+  nTitle1:'A plant needs care',nTitle2:'{n} plants need care',nTitleN:'{n} plants need care',nWater:'Water',nFeed:'Feed',nLater:'In 1 hour',nHot:'Hot day: water early.',nRain:'Rain today: outdoor plants can skip watering.',nTest:'Test reminder. This is how your reminders will look.',
   mSearch:'Search {n} plants',noMatch:'No match. Pick "Other plant" below and name it yourself.'
  },
  ar:{
@@ -1172,8 +1021,8 @@ const L={
   ctaAdd:'أضف نباتًا',ctaDx:'شخّص ورقة',
   stPlants:'نباتات',stDue:'مستحق اليوم',stTemp:'مناخك الآن',
   wTitle:'مناخ منطقتك',wCity:'المدينة',wHum:'الرطوبة',wCond:'طقس اليوم',
-  wNote:'مبني على معدلات المناخ الشهرية لمدينتك. اختر طقس اليوم لتعديل كل الجداول.',
-  c_auto:'كالمعتاد',c_hot:'موجة حر',c_rain:'ماطر',c_cold:'برد شديد',c_dry:'رياح جافة',
+  wNote:'طقس مباشر لموقعك يتحدّث يوميًا. اختر طقس اليوم لتعديله يدويًا.',
+  c_auto:'تلقائي (طقس مباشر)',c_hot:'موجة حر',c_rain:'ماطر',c_cold:'برد شديد',c_dry:'رياح جافة',
   paceOut:'النباتات الخارجية',paceIn:'النباتات الداخلية',
   tTitle:'عناية اليوم',tNone:'كل شيء مسقيّ ومسمَّد. تفقّد غدًا.',
   rainNote:'مطر اليوم، فالنباتات الخارجية لا تحتاج ريًّا.',
@@ -1192,7 +1041,7 @@ const L={
   dPlant:'أي نبات؟',dUnknown:'لا أعرف',dSym:'ماذا تلاحظ؟',dGo:'شخّص',dStop:'إيقاف',
   dHolder:'يظهر تشخيصك هنا.',dHolderSub:'أضف صورة، أو حدّد أعراضًا، أو الاثنين معًا.',
   dBusy:'جارٍ فحص الورقة...',dNeed:'أضف صورة أو حدّد عرضًا واحدًا على الأقل.',
-  dNoAI:'تحليل الصور غير متاح في هذا العرض. حدّد الأعراض لتحصل على نتيجة.',
+  dNoAI:'تحليل الصور غير متاح في هذا العرض. حدّد الأعراض لتحصل على نتيجة.',dColorNote:'تقدير من ألوان الورقة على جهازك (مش فحص مخبري). حدّد الأعراض اللي بتشوفها كمان لنتيجة أدق.',dStats:'أخضر / أصفر / بني',dHealthy:'الورقة تبدو سليمة في الغالب. إذا لسه قلقان، حدّد الأعراض اللي بتشوفها.',
   dAIFail:'لم ينجح تحليل الصورة هذه المرة، فهذه النتيجة مبنية على الأعراض التي حدّدتها.',
   dRate:'طلبات كثيرة الآن. حاول بعد دقيقة.',dErr:'تعذّر تحليل الصورة. جرّب صورة أوضح وأقرب.',
   dNotPlant:'لا تبدو الصورة ورقة نبات. جرّب صورة قريبة للورقة المصابة.',
@@ -1208,49 +1057,31 @@ const L={
   monthLbl:'الشهر',
   cat_all:'الكل',cat_tropical:'ورقية داخلية',cat_succulent:'عصاريات وصبّار',cat_herb:'أعشاب',cat_flower:'زهور',cat_tree:'أشجار ونخيل',cat_veg:'خضار وفواكه',
   syncOn:'متزامنة مع حسابك على كل أجهزتك',syncOff:'محفوظة على هذا الجهاز فقط',syncErr:'تعذّرت المزامنة. محفوظة على هذا الجهاز.',
+  wUseLoc:'استخدم موقعي',wSearch:'ابحث عن مدينة',wSearchPh:'ابحث عن مدينة...',wHiLo:'العظمى / الصغرى',wRain:'احتمال المطر',wRefresh:'تحديث الطقس',
+  wLiveAt:'مباشر · {n} · {t}',wTypical:'مناخ معتاد (لا توجد بيانات مباشرة)',wLoading:'جارٍ تحميل الطقس...',wDetected:'تم رصد اليوم: {c}',
+  wLocSet:'تم تحديد الموقع. جارٍ تحميل الطقس...',wGeoNo:'هذا المتصفح لا يشارك الموقع.',wGeoDenied:'الموقع محظور. ابحث عن مدينتك بدلًا من ذلك.',wGeoFail:'تعذّر تحديد موقعك. ابحث عن مدينتك بدلًا من ذلك.',wNoRes:'لا نتائج',
+  doneAll:'تم الكل',doneAllToast:'تم تسجيل كل العناية',
+  rTitle:'تذكيرات العناية',rTime:'ذكّرني الساعة',rWater:'الري',rFeed:'التسميد',rTest:'إرسال تجربة',inst:'تثبيت التطبيق',instT:'تثبيت Plant Parent',instA:'من قائمة كروم (⋮) اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية".',instI:'من سفاري اضغط مشاركة ثم "إضافة إلى الشاشة الرئيسية".',instW:'افتح الرابط من كروم (أندرويد) أو سفاري (آيفون) نفسه. الروابط المفتوحة داخل واتساب أو انستغرام أو تلغرام ما بتقدر تثبّت تطبيقات.',instC:'إغلاق',rIcs:'تقاويم ثانية (ملف .ics)',rGcal:'إضافة لتقويم الهاتف',rCalHint:'اضغط على تذكير لإضافته للتقويم:',rCalHintA:'اضغط على تذكير: يفتح تقويم هاتفك وفيه كل التفاصيل، اضغط حفظ فقط.',rCalHintI:'اضغط على تذكير: تظهر شاشة التقويم، اضغط إضافة.',rCalAll:'إضافة كل التذكيرات',rCalNone:'فعّل الري أو التسميد أولًا',
+  rNoteOn:'يصلك إشعار واحد يوميًا بهذا الوقت عندما يحتاج نبات عناية. اضغط "تم" لتسجيل العناية، أو "بعد ساعة" لتذكيرك لاحقًا.',
+  rNoteOff:'فعّل التذكيرات لتصلك إشعارات عندما يحتاج نبات ريًّا أو تسميدًا.',
+  rHow:'تصل الإشعارات عندما يكون Plant Parent مفتوحًا أو مثبّتًا على جوالك. لتذكير مضمون دائمًا أضفه إلى التقويم.',
+  rDenied:'الإشعارات محظورة لهذا الموقع. اسمح بها من إعدادات المتصفح.',rUnsup:'الإشعارات تحتاج متصفحًا يدعم service worker ورابط https.',
+  rIos:'على الآيفون: اضغط مشاركة ثم إضافة إلى الشاشة الرئيسية، وافتح Plant Parent منها لتفعيل التذكيرات.',
+  rOnToast:'تم تفعيل التذكيرات',rOffToast:'تم إيقاف التذكيرات',rApplied:'تم تسجيل العناية من الإشعار',rIcsToast:'ملف التقويم جاهز',
+  nTitle1:'نبات يحتاج عناية',nTitle2:'نباتان يحتاجان عناية',nTitleN:'{n} نباتات تحتاج عناية',nWater:'اسقِ',nFeed:'سمّد',nLater:'بعد ساعة',nHot:'يوم حار: اسقِ مبكرًا.',nRain:'مطر اليوم: النباتات الخارجية لا تحتاج ري.',nTest:'تذكير تجريبي. هكذا ستبدو تذكيراتك.',
   mSearch:'ابحث بين {n} نباتًا',noMatch:'لا توجد نتيجة. اختر "نبات آخر" بالأسفل وسمّه كما تريد.'
  }
 };
-
-Object.assign(L.en,{c_auto:'Auto (by weather)',
- wNote:'Live weather for your location, refreshed daily. Tap a day for tips, or pick a condition to override.',
- wx_clear:'Clear',wx_part:'Partly cloudy',wx_cloud:'Cloudy',wx_fog:'Fog',wx_driz:'Drizzle',wx_rain:'Rain',wx_snow:'Snow',wx_shower:'Showers',wx_storm:'Thunderstorm',
- wxHere:'Your location',wxUseLoc:'Use my location',wxRefresh:'Refresh weather',wxRefreshed:'Refreshing weather',wxLoading:'Fetching today\'s weather…',
- wxOffline:'Live weather is unavailable, so schedules use this month\'s average.',wxLine:'High {hi}° · Low {lo}° · Wind {w} km/h · Rain {r} mm',wxUpd:'Updated',
- wxNoGeo:'Your browser cannot share a location',wxDenied:'Location was not allowed. Pick your city from the list.',
- tipRain:'Rain expected: outdoor plants can skip watering.',tipHot:'Very hot: water early morning or evening and shade delicate plants.',tipCold:'Cold: bring tender plants in and water less.',tipMild:'Mild weather: keep your usual schedule.',tipDue:'Need water:',
- remTitle:'Care reminders',remAt:'Remind me at',remTest:'Send a test',remIcs:'Add to calendar',remIcsDone:'Calendar file downloaded',
- remOnBody:'Reminders are on. We will nudge you to water and feed.',
- remOnNote:'You get one notification a day at this time when watering or feeding is due. It works while the site is open or installed as an app. For alerts that always fire, use Add to calendar.',
- remOffNote:'Turn on reminders to get watering and feeding notifications.',
- remUnsupported:'This browser has no notifications. On iPhone, add the site to your Home Screen first.',remDenied:'Notifications are blocked. Allow them in your browser settings for this site.',
- remEnableFirst:'Turn reminders on first.',remNothing:'Nothing to water or feed right now 🌿',
- snooze:'Tomorrow',snoozed:'Pushed to tomorrow',details:'Details',alsoCalled:'Also called',close:'Close',dtNote:'Water every {w} days and feed every {f} days in your current weather.'});
-Object.assign(L.ar,{c_auto:'تلقائي حسب الطقس',
- wNote:'طقس مباشر لموقعك يتحدّث يوميًا. اضغط على يوم لتعرف النصيحة، أو اختر حالة لتجاوز التلقائي.',
- wx_clear:'صافٍ',wx_part:'غائم جزئيًا',wx_cloud:'غائم',wx_fog:'ضباب',wx_driz:'رذاذ',wx_rain:'مطر',wx_snow:'ثلج',wx_shower:'زخّات مطر',wx_storm:'عاصفة رعدية',
- wxHere:'موقعك الحالي',wxUseLoc:'استخدم موقعي',wxRefresh:'تحديث الطقس',wxRefreshed:'جارٍ تحديث الطقس',wxLoading:'جارٍ جلب طقس اليوم…',
- wxOffline:'تعذّر جلب الطقس المباشر، فالجداول مبنية على معدّل هذا الشهر.',wxLine:'العظمى {hi}° · الصغرى {lo}° · الرياح {w} كم/س · أمطار {r} مم',wxUpd:'آخر تحديث',
- wxNoGeo:'متصفحك لا يدعم تحديد الموقع',wxDenied:'لم يُسمح بالموقع. اختر مدينتك من القائمة.',
- tipRain:'مطر متوقع: النباتات الخارجية تستغني عن الريّ.',tipHot:'حرّ شديد: اسقِ صباحًا أو مساءً وظلّل النباتات الحساسة.',tipCold:'برد: أدخل النباتات الحساسة وخفّف الريّ.',tipMild:'طقس معتدل، التزم بجدولك المعتاد.',tipDue:'تحتاج ماءً:',
- remTitle:'تذكيرات العناية',remAt:'ذكّرني الساعة',remTest:'جرّب إشعارًا',remIcs:'أضف للتقويم',remIcsDone:'تم تنزيل ملف التقويم',
- remOnBody:'تم تفعيل التذكيرات. سنذكّرك بالريّ والتسميد.',
- remOnNote:'يصلك إشعار واحد يوميًا بهذا الوقت إذا كان عندك ريّ أو تسميد مستحق. يعمل والموقع مفتوح أو مثبّت كتطبيق. وللتنبيه المضمون دائمًا استخدم «أضف للتقويم».',
- remOffNote:'فعّل التذكيرات لتصلك إشعارات الريّ والتسميد.',
- remUnsupported:'متصفحك لا يدعم الإشعارات. على الآيفون أضف الموقع للشاشة الرئيسية أولًا.',remDenied:'الإشعارات محظورة. اسمح بها من إعدادات المتصفح لهذا الموقع.',
- remEnableFirst:'فعّل التذكيرات أولًا.',remNothing:'لا يوجد ريّ أو تسميد مستحق الآن 🌿',
- snooze:'غدًا',snoozed:'تم التأجيل ليوم غد',details:'التفاصيل',alsoCalled:'يُعرف أيضًا بـ',close:'إغلاق',dtNote:'الريّ كل {w} يومًا والتسميد كل {f} يومًا حسب طقسك الحالي.'});
-L.en.credit+=' Weather: Open-Meteo.com.';L.ar.credit+=' بيانات الطقس: Open-Meteo.com.';
 
 /* ---------- state ---------- */
 const $=s=>document.querySelector(s);
 let TODAY=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);
 const KEY='plant-parent-v1';
-let S={lang:(navigator.language||'').toLowerCase().startsWith('en')?'en':'ar',city:'amman',cond:'auto',condDay:TODAY,plants:null};
+let S={lang:(navigator.language||'').toLowerCase().startsWith('en')?'en':'ar',city:'amman',cond:'auto',condDay:TODAY,plants:null,loc:null,wx:null,rem:{on:false,time:'08:00',water:true,feed:true}};
 try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);Object.assign(S,o)}}catch(e){}
 if(S.condDay!==TODAY){S.cond='auto';S.condDay=TODAY}
+S.rem=Object.assign({on:false,time:'08:00',water:true,feed:true},S.rem||{});
 if(!CITIES[S.city])S.city='amman';
-S.loc=S.loc||null;S.rem=Object.assign({on:false,time:'08:00',last:-1},S.rem||{});
 if(!Array.isArray(S.plants)){
   const ar=S.lang==='ar';
   S.plants=[
@@ -1260,7 +1091,7 @@ if(!Array.isArray(S.plants)){
     {id:'e4',sp:'aloe',name:ar?'ألوفيرا':'Aloe',where:'in',lw:TODAY-9,lf:TODAY-40,ex:true}
   ];
 }
-function saveLocal(){setTimeout(syncSWsoon,0);try{localStorage.setItem(KEY,JSON.stringify({lang:S.lang,city:S.city,cond:S.cond,condDay:S.condDay,plants:S.plants,loc:S.loc,rem:S.rem}))}catch(e){}}
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify({lang:S.lang,city:S.city,cond:S.cond,condDay:S.condDay,plants:S.plants,loc:S.loc,wx:S.wx,rem:S.rem}))}catch(e){}}
 function save(){saveLocal();pushCloud()}
 /* account sync (db capability, private per signed-in viewer) */
 let cloud=null,pushT=null,lastPushed=0,syncState='off';
@@ -1293,17 +1124,83 @@ const FEED=svg('<path d="M12 21V11M12 11c-4 0-6-2-6-6 4 0 6 2 6 6zM12 14c4 0 6-2
 const CHECK=svg('<path d="M5 12.5l4.5 4.5L19 7.5"/>');
 const TRASH=svg('<path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/>');
 const sname=sp=>SPM[sp][S.lang];
-const cityName=()=>CITIES[S.city][S.lang];
+const cityName=()=>locName();
 
 /* ---------- climate + schedule ---------- */
-function climate(){const c=CITIES[S.city],m=new Date().getMonth();
-  if(W&&W.day===TODAY)return{temp:W.temp,avg:W.mean,hum:W.hum,live:true};
-  return{temp:c.t[m],hum:c.h[m]}}
+const GEO={amman:[31.95,35.93],riyadh:[24.71,46.68],dubai:[25.2,55.27],doha:[25.29,51.53],cairo:[30.04,31.24],beirut:[33.89,35.5],baghdad:[33.31,44.36],casablanca:[33.57,-7.59],istanbul:[41.01,28.98],london:[51.51,-0.13],newyork:[40.71,-74.01]};
+const HOUR=3600e3;let wxState='idle',wxBusy=false;
+function curLoc(){
+  if(S.loc&&isFinite(S.loc.lat)&&isFinite(S.loc.lon))return{lat:S.loc.lat,lon:S.loc.lon,name:S.loc.name||{en:'Your location',ar:'موقعك'},custom:true};
+  const g=GEO[S.city]||GEO.amman,c=CITIES[S.city]||CITIES.amman;return{lat:g[0],lon:g[1],name:{en:c.en,ar:c.ar},custom:false};
+}
+const locKey=()=>{const l=curLoc();return l.lat.toFixed(2)+','+l.lon.toFixed(2)};
+const wxOk=()=>!!(S.wx&&S.wx.key===locKey()&&S.wx.day===TODAY);
+const locName=()=>{const n=curLoc().name;return n[S.lang]||n.en||''};
+const locNameEn=()=>curLoc().name.en||'unknown';
+function climate(){
+  const c=CITIES[S.city]||CITIES.amman,m=new Date().getMonth();
+  if(wxOk()){const w=S.wx;return{temp:Math.round((w.tmax+w.tmin)/2),hum:Math.round(w.hum),live:true,now:Math.round(w.temp),tmax:Math.round(w.tmax),tmin:Math.round(w.tmin),rain:w.rain,pop:w.pop,wind:Math.round(w.wind)}}
+  return{temp:c.t[m],hum:c.h[m],live:false,now:c.t[m]};
+}
+function autoCond(){
+  if(!wxOk())return'auto';const w=S.wx;
+  if(w.rain>=2||(w.pop>=70&&w.rain>=1))return'rain';
+  if(w.tmax>=37)return'hot';
+  if(w.tmax<=6)return'cold';
+  if(w.hum<25&&w.wind>=25)return'dry';
+  return'auto';
+}
+const effCond=()=>S.cond!=='auto'?S.cond:autoCond();
+async function loadWeather(force){
+  if(wxBusy)return;
+  if(!force&&wxOk()&&Date.now()-S.wx.at<3*HOUR)return;
+  wxBusy=true;wxState='loading';renderClimate();
+  const l=curLoc(),key=locKey();
+  try{
+    const u='https://api.open-meteo.com/v1/forecast?latitude='+l.lat+'&longitude='+l.lon+'&current=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&forecast_days=3&timezone=auto';
+    const r=await fetch(u);if(!r.ok)throw new Error('http');
+    const d=await r.json(),c=d.current,dl=d.daily;if(!c||!dl)throw new Error('shape');
+    S.wx={key,day:TODAY,at:Date.now(),temp:c.temperature_2m,hum:c.relative_humidity_2m,wind:c.wind_speed_10m,code:c.weather_code,
+      tmax:dl.temperature_2m_max[0],tmin:dl.temperature_2m_min[0],rain:dl.precipitation_sum[0]||0,pop:dl.precipitation_probability_max[0]||0,
+      rain1:dl.precipitation_sum[1]||0,pop1:dl.precipitation_probability_max[1]||0};
+    wxState='ok';saveLocal();
+  }catch(e){wxState=wxOk()?'ok':'err'}
+  wxBusy=false;renderAll();
+}
+function useMyLocation(){
+  if(!navigator.geolocation){toast(t('wGeoNo'));return}
+  const btn=$('#locBtn');btn.disabled=true;
+  navigator.geolocation.getCurrentPosition(async pos=>{
+    const lat=+pos.coords.latitude.toFixed(2),lon=+pos.coords.longitude.toFixed(2);
+    let name={en:'Your location',ar:'موقعك'};
+    try{
+      const rs=await Promise.all(['en','ar'].map(lg=>fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lon+'&localityLanguage='+lg).then(r=>r.json())));
+      const nm=o=>o.city||o.locality||o.principalSubdivision||'',en=nm(rs[0]),ar=nm(rs[1]);
+      if(en||ar)name={en:en||ar,ar:ar||en};
+    }catch(e){}
+    S.loc={lat,lon,name};saveLocal();btn.disabled=false;toast(t('wLocSet'));loadWeather(true);
+  },err=>{btn.disabled=false;toast(err&&err.code===1?t('wGeoDenied'):t('wGeoFail'))},{timeout:12000,maximumAge:600000});
+}
+async function searchPlace(v){
+  const ul=$('#locRes');
+  try{
+    const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(v)+'&count=6&format=json&language='+S.lang);
+    const d=await r.json(),res=d.results||[];ul.textContent='';
+    res.forEach(x=>{
+      const label=[x.name,x.admin1,x.country].filter(Boolean).join(', ');
+      ul.append(h('li',null,h('button',{type:'button',onclick:()=>{
+        S.loc={lat:+(+x.latitude).toFixed(2),lon:+(+x.longitude).toFixed(2),name:{en:x.name,ar:x.name}};
+        saveLocal();ul.hidden=true;$('#locQ').value='';loadWeather(true)}},label)));
+    });
+    if(!res.length)ul.append(h('li',{class:'none'},t('wNoRes')));
+    ul.hidden=false;
+  }catch(e){ul.hidden=true}
+}
 function pace(outdoor,type){
-  const cl=climate(),temp=cl.avg!=null?cl.avg:cl.temp,hum=cl.hum;let f=1;
+  const {temp,hum}=climate(),cd=effCond();let f=1;
   if(temp>=32)f=.6;else if(temp>=27)f=.75;else if(temp>=22)f=.9;else if(temp>=15)f=1;else if(temp>=8)f=1.25;else f=1.5;
   if(hum<30)f*=.9;else if(hum>75)f*=1.12;
-  const cd=effCond();if(cd==='hot')f*=.78;if(cd==='cold')f*=1.2;if(cd==='dry')f*=.85;if(cd==='rain')f*=outdoor?1.4:1.08;
+  if(cd==='hot')f*=.78;if(cd==='cold')f*=1.2;if(cd==='dry')f*=.85;if(cd==='rain')f*=outdoor?1.4:1.08;
   if(!outdoor)f=1+(f-1)*.5;
   return 1+(f-1)*(SENS[type]||1);
 }
@@ -1311,11 +1208,11 @@ const pct=f=>Math.round((1/f-1)*100);
 function info(p){
   const s=SPM[p.sp],out=p.where==='out',f=pace(out,s.type);
   const wi=Math.max(1,Math.round(s.w*f));
-  let wDue=p.lw+wi-TODAY;if(p.zw>TODAY)wDue=Math.max(wDue,p.zw-TODAY);
+  let wDue=p.lw+wi-TODAY;
   const rainSkip=effCond()==='rain'&&out&&wDue<=0;
   if(rainSkip)wDue=1;
-  const resting=(climate().avg!=null?climate().avg:climate().temp)<12;
-  let fDue=p.lf+s.f-TODAY;if(p.zf>TODAY)fDue=Math.max(fDue,p.zf-TODAY);
+  const resting=climate().temp<12;
+  const fDue=p.lf+s.f-TODAY;
   return{s,wi,wDue,rainSkip,resting,fDue,fi:s.f};
 }
 
@@ -1324,24 +1221,31 @@ function applyLang(){
   const lang=S.lang;
   document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
   document.querySelectorAll('[data-i18n]').forEach(n=>{n.textContent=t(n.dataset.i18n)});
+  document.querySelectorAll('[data-i18n-ph]').forEach(n=>{n.placeholder=t(n.dataset.i18nPh)});
+  document.querySelectorAll('[data-i18n-aria]').forEach(n=>{n.setAttribute('aria-label',t(n.dataset.i18nAria))});
   $('#langBtn').textContent=lang==='ar'?'EN':'عربي';
   const hero=$('#heroTitle');hero.textContent='';hero.append(t('heroA')+' ',h('em',null,t('heroB')));
 }
 function renderClimate(){
   const sel=$('#citySel');sel.textContent='';
-  if(S.loc)sel.append(h('option',{value:'loc',selected:true},'📍 '+(S.loc.name||t('wxHere'))));
-  Object.keys(CITIES).forEach(k=>sel.append(h('option',{value:k,selected:!S.loc&&k===S.city},CITIES[k][S.lang])));
-  const c=climate(),d=new Date();
-  $('#wTemp').innerHTML=c.temp+'<small>°C</small>';
+  const l=curLoc();
+  if(l.custom)sel.append(h('option',{value:'custom',selected:true},locName()));
+  Object.keys(CITIES).forEach(k=>sel.append(h('option',{value:k,selected:!l.custom&&k===S.city},CITIES[k][S.lang])));
+  const c=climate(),loc=S.lang==='ar'?'ar-u-nu-latn':'en';
+  $('#wTemp').innerHTML=c.now+'<small>°C</small>';
   $('#wHum').textContent=c.hum+'%';
-  $('#wMonthLbl').textContent=t('monthLbl');
-  $('#wMonth').textContent=d.toLocaleString(S.lang==='ar'?'ar-u-nu-latn':'en',{month:'long'});
-  $('#stTemp').textContent=c.temp+'°';
+  $('#wHiLo').textContent=c.live?c.tmax+'° / '+c.tmin+'°':'—';
+  $('#wRain').textContent=c.live?c.pop+'%'+(c.rain>=.5?' · '+(Math.round(c.rain*10)/10)+' mm':''):'—';
+  $('#stTemp').textContent=c.now+'°';
+  const lv=$('#wLive');lv.className='live '+(c.live?'on':wxState==='loading'?'load':'off');
+  lv.textContent=c.live?fmt(t('wLiveAt'),{n:locName(),t:new Date(S.wx.at).toLocaleTimeString(loc,{hour:'2-digit',minute:'2-digit'})}):wxState==='loading'?t('wLoading'):t('wTypical');
   const seg=$('#condSeg');seg.textContent='';
   CONDS.forEach(k=>seg.append(h('button',{type:'button','aria-pressed':String(S.cond===k),onclick:()=>{S.cond=k;S.condDay=TODAY;save();renderAll()}},t('c_'+k))));
+  const det=autoCond();
+  $('#wDetected').textContent=S.cond==='auto'&&det!=='auto'?fmt(t('wDetected'),{c:t('c_'+det)}):'';
   const mk=(lbl,f)=>{const p=pct(f);return h('div',null,h('span',null,lbl),h('b',null,(p>0?'+':p<0?'−':'')+Math.abs(p)+'%'),h('span',null,p>1?t('paceMore')(Math.abs(p)):p<-1?t('paceLess')(Math.abs(p)):t('paceSame')))};
   const pc=$('#pace');pc.textContent='';
-  pc.append(mk(t('paceOut'),pace(true,'tropical')),mk(t('paceIn'),pace(false,'tropical')));renderWx();
+  pc.append(mk(t('paceOut'),pace(true,'tropical')),mk(t('paceIn'),pace(false,'tropical')));
 }
 function renderToday(){
   const list=$('#tasks');list.textContent='';
@@ -1350,18 +1254,18 @@ function renderToday(){
     const i=info(p);
     if(i.rainSkip)rain=true;
     const nm=p.name||sname(p.sp);
-    if(i.wDue<=0&&!i.rainSkip){n++;list.append(taskRow('w',fmt(t('taskW'),{n:nm}),i.wDue<0?t('lateD')(-i.wDue):t('today'),()=>doWater(p.id),()=>snooze(p.id,'w')))}
-    if(i.fDue<=0&&!i.resting){n++;list.append(taskRow('f',fmt(t('taskF'),{n:nm}),i.fDue<0?t('lateD')(-i.fDue):t('today'),()=>doFeed(p.id),()=>snooze(p.id,'f')))}
+    if(i.wDue<=0&&!i.rainSkip){n++;list.append(taskRow('w',fmt(t('taskW'),{n:nm}),i.wDue<0?t('lateD')(-i.wDue):t('today'),()=>doWater(p.id)))}
+    if(i.fDue<=0&&!i.resting){n++;list.append(taskRow('f',fmt(t('taskF'),{n:nm}),i.fDue<0?t('lateD')(-i.fDue):t('today'),()=>doFeed(p.id)))}
   });
   if(!n)list.append(h('li',{class:'empty'},h('div',{class:'orb o-leaf',html:svg(ICONS.tropical,'style="width:60%;height:60%"')}),t('tNone')));
-  $('#dueBadge').textContent=n;$('#stDue').textContent=n;
+  $('#dueBadge').textContent=n;$('#stDue').textContent=n;$('#doneAll').hidden=n<2;
   const rn=$('#rainNote');rn.hidden=!rain;rn.textContent=t('rainNote');
 }
-function taskRow(kind,title,sub,fn,snz){
+function taskRow(kind,title,sub,fn){
   return h('li',{class:'task'},
     h('span',{class:'dot '+kind,html:kind==='w'?DROP:FEED}),
     h('div',{class:'tx'},h('b',null,title),h('span',null,sub)),
-    h('div',{class:'t-actions'},h('button',{class:'btn btn-ghost btn-sm',type:'button',onclick:snz},t('snooze')),h('button',{class:'btn btn-leaf btn-sm',type:'button',onclick:fn},t('done'))));
+    h('button',{class:'btn btn-leaf btn-sm',type:'button',onclick:fn},t('done')));
 }
 function ring(days,interval,kind){
   const R=22,C=2*Math.PI*R,prog=Math.max(0,Math.min(1,1-days/interval));
@@ -1386,7 +1290,7 @@ function renderGarden(){
     const wText=i.rainSkip?t('c_rain'):i.wDue<0?t('lateD')(-i.wDue):i.wDue===0?t('today'):i.wDue===1?t('tomorrow'):t('inD')(i.wDue);
     const fText=i.resting?t('resting'):i.fDue<0?t('lateD')(-i.fDue):i.fDue===0?t('today'):i.fDue===1?t('tomorrow'):t('inD')(i.fDue);
     const card=h('article',{class:'plant-card card gloss tilt',style:`animation:rise .5s var(--ease) ${idx*60}ms both`},
-      h('div',{class:'pc-top',style:'cursor:pointer',title:t('details'),onclick:e=>{if(!e.target.closest('.icon-btn'))openDetail(p.id)}},
+      h('div',{class:'pc-top'},
         h('div',{class:'p3d big',html:plant3d(s)}),
         h('div',{class:'pc-name'},h('h3',null,p.name||sname(p.sp)),h('span',null,p.name?sname(p.sp):''),alts(s).length?h('span',{class:'al'},alts(s).slice(0,4).join(' · ')):null,
           h('div',{class:'tags'},h('span',{class:'tag'},p.where==='out'?t('outdoor'):t('indoor')),p.ex&&h('span',{class:'tag ex'},t('ex')))),
@@ -1413,8 +1317,8 @@ function splash(card){
   for(let k=0;k<9;k++){const d=h('span',{class:'drop',style:`left:${10+Math.random()*80}%;animation-delay:${Math.random()*.25}s`});card.append(d);setTimeout(()=>d.remove(),1400)}
   card.classList.add('pulse');setTimeout(()=>card.classList.remove('pulse'),800);
 }
-function doWater(id){const p=S.plants.find(x=>x.id===id);if(!p)return;p.lw=TODAY;p.zw=0;save();renderToday();renderGarden();toast(t('tWatered'))}
-function doFeed(id){const p=S.plants.find(x=>x.id===id);if(!p)return;p.lf=TODAY;p.zf=0;save();renderToday();renderGarden();toast(t('tFed'))}
+function doWater(id){const p=S.plants.find(x=>x.id===id);if(!p)return;p.lw=TODAY;save();renderToday();renderGarden();toast(t('tWatered'))}
+function doFeed(id){const p=S.plants.find(x=>x.id===id);if(!p)return;p.lf=TODAY;save();renderToday();renderGarden();toast(t('tFed'))}
 
 let tt;function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),2400)}
 
@@ -1482,7 +1386,7 @@ function drawDz(){
   dz.querySelector('.orb').style.visibility=showIdle?'visible':'hidden';
   dz.querySelectorAll('b,span').forEach(n=>{n.style.visibility=showIdle?'visible':'hidden'});
   if(photo){
-    dz.prepend(h('img',{src:photoUrl,alt:'',onerror:()=>{toast(t('photoBad'));setPhoto(null)}}));
+    dz.prepend(h('img',{src:photoUrl,alt:''}));
     dz.append(h('button',{class:'btn btn-cream btn-sm clear',type:'button',onclick:e=>{e.preventDefault();e.stopPropagation();setPhoto(null)}},t('rClear')));
   }
 }
@@ -1490,22 +1394,10 @@ function setPhoto(f){
   if(photoUrl)URL.revokeObjectURL(photoUrl);
   photo=f;photoUrl=f?URL.createObjectURL(f):null;fileIn.value='';drawDz();
 }
-const isImg=f=>f&&(/^image\//.test(f.type)||/\.(jpe?g|jfif|png|webp|gif|bmp|avif|heic|heif)$/i.test(f.name||''));
-async function prepPhoto(f){
-  try{const bm=await createImageBitmap(f),sc=Math.min(1,1600/Math.max(bm.width,bm.height)),cv=document.createElement('canvas');
-    cv.width=Math.max(1,Math.round(bm.width*sc));cv.height=Math.max(1,Math.round(bm.height*sc));
-    const cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,cv.width,cv.height);cx.drawImage(bm,0,0,cv.width,cv.height);
-    const blob=await new Promise(r=>cv.toBlob(r,'image/jpeg',.88));
-    if(blob)return new File([blob],'leaf.jpg',{type:'image/jpeg'})}catch(e){}
-  return f;
-}
-const takePhoto=async f=>{if(!f)return;const g=await prepPhoto(f);if(g!==f||isImg(f))setPhoto(g);else toast(t('photoBad'))};
-Object.assign(L.en,{photoBad:'This photo format is not supported here. Try a JPG or PNG, or take a screenshot of it.'});
-Object.assign(L.ar,{photoBad:'صيغة الصورة غير مدعومة هنا. جرّب JPG أو PNG، أو خذ لقطة شاشة للصورة.'});
-fileIn.addEventListener('change',()=>{takePhoto(fileIn.files&&fileIn.files[0])});
+fileIn.addEventListener('change',()=>{const f=fileIn.files&&fileIn.files[0];if(f&&f.type.startsWith('image/'))setPhoto(f)});
 ['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over')}));
 ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over')}));
-dz.addEventListener('drop',e=>{takePhoto(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0])});
+dz.addEventListener('drop',e=>{const f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))setPhoto(f)});
 
 function renderDx(){
   const sel=$('#dxPlant'),cur=sel.value;sel.textContent='';
@@ -1527,6 +1419,25 @@ function showBusy(){
   if(photo)dz.append(h('div',{class:'scan'}));
 }
 function showMsg(m){const o=$('#dxOut');o.textContent='';o.append(h('div',{class:'placeholder'},h('div',{class:'orb o-forest',html:svg('<path d="M12 8v5M12 17h.01"/><circle cx="12" cy="12" r="9"/>')}),h('p',null,m)))}
+/* on-device colour analysis (no server, no AI): works anywhere */
+async function analyzePhoto(file){
+  const bmp=await new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=photoUrl||URL.createObjectURL(file)});
+  const W=160,sc=W/Math.max(bmp.naturalWidth,bmp.naturalHeight),w=Math.max(8,Math.round(bmp.naturalWidth*sc)),hh=Math.max(8,Math.round(bmp.naturalHeight*sc));
+  const c=document.createElement('canvas');c.width=w;c.height=hh;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(bmp,0,0,w,hh);
+  const d=g.getImageData(0,0,w,hh).data;let n=0,gr=0,ye=0,br=0,dk=0,wh=0;
+  for(let i=0;i<d.length;i+=4){
+    const r=d[i]/255,gg=d[i+1]/255,b=d[i+2]/255,mx=Math.max(r,gg,b),mn=Math.min(r,gg,b),v=mx,sat=mx?(mx-mn)/mx:0;
+    let hu=0;if(mx!==mn){const dl=mx-mn;hu=mx===r?((gg-b)/dl)%6:mx===gg?(b-r)/dl+2:(r-gg)/dl+4;hu*=60;if(hu<0)hu+=360}
+    n++;
+    if(sat>0.22&&v>0.2&&hu>=68&&hu<=170)gr++;
+    else if(sat>0.35&&v>0.5&&hu>=40&&hu<68)ye++;
+    else if(sat>0.3&&v>0.18&&v<0.72&&hu>=8&&hu<40)br++;
+    else if(v<0.2)dk++;
+    else if(sat<0.1&&v>0.88)wh++;
+  }
+  const plant=gr+ye+br,den=Math.max(1,plant);
+  return{plantShare:plant/n,green:gr/den,yellow:ye/den,brown:br/den,dark:dk/Math.max(1,plant+dk),white:wh/n};
+}
 function localResult(){
   const keys=[...selSyms],lg=S.lang;
   const uniq=a=>[...new Set(a)];
@@ -1558,7 +1469,23 @@ function normAI(d){
 async function runDx(){
   const syms=[...selSyms];
   if(!photo&&!syms.length){toast(t('dNeed'));return}
-  if(photo&&!aiReady&&!syms.length){showMsg(t('dNoAI'));return}
+  if(photo&&!aiReady){
+    const btn0=$('#dxGo');btn0.disabled=true;showBusy();
+    try{
+      const st=await analyzePhoto(photo);
+      if(!st||st.plantShare<0.04){showMsg(t('dNotPlant'));return}
+      const found=[];
+      if(st.yellow>0.12)found.push('yellow');
+      if(st.brown>0.10)found.push('browntips');
+      if(st.dark>0.08)found.push('spots');
+      found.forEach(k=>selSyms.add(k));renderDx();
+      const all=[...selSyms];
+      if(!all.length){showMsg(t('dHealthy'));return}
+      const pc=v=>Math.round(v*100)+'%';
+      renderResult(localResult(),t('dColorNote')+' ('+t('dStats')+': '+pc(st.green)+' / '+pc(st.yellow)+' / '+pc(st.brown)+')');
+    }catch(e){showMsg(t('dErr'))}finally{btn0.disabled=false;dz.querySelectorAll('.scan').forEach(n=>n.remove())}
+    return;
+  }
   if(!photo||!aiReady){renderResult(localResult());return}
   const btn=$('#dxGo');btn.disabled=true;showBusy();
   ctl=new AbortController();
@@ -1566,7 +1493,7 @@ async function runDx(){
   const plantDesc=pl?`${SPM[pl.sp].en}, grown ${pl.where==='out'?'outdoors':'indoors'}`:'unknown';
   const prompt=`You are an experienced plant pathologist helping a home gardener. Look at the attached photo of a plant leaf.
 Plant (as told by the user): ${plantDesc}.
-Climate: ${CITIES[S.city].en}, about ${c.temp}°C and ${c.hum}% humidity this month.
+Climate: ${locNameEn()}, about ${c.temp}°C and ${c.hum}% humidity this month.
 Symptoms the user reports: ${syms.map(k=>SYM[k].en).join(', ')||'none given'}.
 Write every text value in ${S.lang==='ar'?'Arabic':'English'}.
 Reply with only one JSON object: {"not_a_plant":boolean,"plant":string,"diagnosis":string,"confidence":number from 0 to 100,"severity":"low" or "medium" or "high","causes":[string,string],"steps":[string,string,string,string],"prevention":string}
@@ -1621,188 +1548,162 @@ $('#dxGo').addEventListener('click',runDx);
   }catch(e){}
 })();
 
-/* ---------- boot ---------- */
-
-/* ---------- live weather (Open-Meteo) ---------- */
-var CC={amman:[31.95,35.93],riyadh:[24.71,46.68],dubai:[25.2,55.27],doha:[25.29,51.53],cairo:[30.04,31.24],beirut:[33.89,35.5],baghdad:[33.31,44.37],casablanca:[33.57,-7.59],istanbul:[41.01,28.98],london:[51.51,-0.13],newyork:[40.71,-74.01]};
-var W=null,wxSel=0,wxBusy=false;const WX_KEY='pp-wx-v1';
-const RAINY=c=>(c>=51&&c<=67)||(c>=80&&c<=82)||c>=95;
-const wxIcon=c=>c===0?'☀️':c<=2?'🌤️':c===3?'☁️':c<=48?'🌫️':c<=57?'🌦️':c<=67?'🌧️':c<=77?'🌨️':c<=82?'🌧️':c<=86?'🌨️':'⛈️';
-const wxText=c=>t('wx_'+(c===0?'clear':c<=2?'part':c===3?'cloud':c<=48?'fog':c<=57?'driz':c<=67?'rain':c<=77?'snow':c<=82?'shower':c<=86?'snow':'storm'));
-const wxCoords=()=>S.loc?[S.loc.lat,S.loc.lon]:CC[S.city];
-const wxPlace=()=>S.loc?(S.loc.name||t('wxHere')):cityName();
-const renderWxAll=()=>{renderClimate();renderToday();renderGarden()};
-function effCond(){
-  if(S.cond!=='auto')return S.cond;
-  if(!W||W.day!==TODAY)return'auto';
-  const d=W.days[0];
-  if(RAINY(d.code)||d.rain>=1)return'rain';
-  if(d.hi>=38)return'hot';if(d.hi<=4)return'cold';
-  if(W.hum<20&&W.wind>=25)return'dry';
-  return'auto';
+/* ---------- reminders (service worker, IndexedDB, calendar) ---------- */
+const idb=()=>new Promise((res,rej)=>{try{const q=indexedDB.open('pp',1);q.onupgradeneeded=()=>q.result.createObjectStore('kv');q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)}catch(e){rej(e)}});
+const idbGet=async k=>{try{const d=await idb();return await new Promise(r=>{const q=d.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>r(undefined)})}catch(e){return undefined}};
+const idbSet=async(k,v)=>{try{const d=await idb();await new Promise(r=>{const x=d.transaction('kv','readwrite');x.objectStore('kv').put(v,k);x.oncomplete=()=>r();x.onerror=()=>r()})}catch(e){}};
+const remSupported=()=>'Notification' in window&&'serviceWorker' in navigator&&/^https?:$/.test(location.protocol);
+let swReg=null;
+function writeSnap(){
+  if(!remSupported())return Promise.resolve();
+  const cd=effCond();
+  const plants=S.plants.map(p=>{const i=info(p);return{id:p.id,name:p.name||sname(p.sp),wi:i.wi,fi:i.fi,wDue:TODAY+i.wDue,fDue:TODAY+i.fDue,rainSkip:i.rainSkip,resting:i.resting}});
+  return idbSet('snap',{rem:S.rem,lang:S.lang,day:TODAY,plants,tx:{t1:t('nTitle1'),t2:t('nTitle2'),tn:t('nTitleN'),water:t('nWater'),feed:t('nFeed'),done:t('done'),later:t('nLater'),test:t('nTest'),note:cd==='hot'?t('nHot'):cd==='rain'?t('nRain'):''}});
 }
-function loadWeather(force){
-  const [lat,lon]=wxCoords(),key=lat.toFixed(2)+','+lon.toFixed(2);
-  try{const c=JSON.parse(localStorage.getItem(WX_KEY)||'null');
-    if(!force&&c&&c.key===key&&c.day===TODAY&&Date.now()-c.ts<45*60000){W=c;renderWxAll();return}}catch(e){}
-  if(wxBusy)return;wxBusy=true;renderWx();
-  const u='https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto&forecast_days=5';
-  fetch(u).then(r=>r.json()).then(d=>{
-    const c=d.current,q=d.daily;
-    W={key,day:TODAY,ts:Date.now(),temp:Math.round(c.temperature_2m),hum:Math.round(c.relative_humidity_2m),code:c.weather_code,wind:Math.round(c.wind_speed_10m),
-      days:q.time.map((x,i)=>({date:x,code:q.weather_code[i],hi:Math.round(q.temperature_2m_max[i]),lo:Math.round(q.temperature_2m_min[i]),rain:+(q.precipitation_sum[i]||0)}))};
-    W.mean=(W.days[0].hi+W.days[0].lo)/2;
-    try{localStorage.setItem(WX_KEY,JSON.stringify(W))}catch(e){}
-  }).catch(()=>{}).finally(()=>{wxBusy=false;renderWxAll()});
+async function swPost(msg){
+  try{const r=await navigator.serviceWorker.ready;if(r.active)r.active.postMessage(msg)}catch(e){}
 }
-function useMyLocation(auto){
-  if(!navigator.geolocation){if(auto!==true)toast(t('wxNoGeo'));return}
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const lat=+pos.coords.latitude.toFixed(3),lon=+pos.coords.longitude.toFixed(3);
-    S.loc={lat,lon,name:''};saveLocal();W=null;loadWeather(true);
-    fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lon+'&localityLanguage='+S.lang).then(r=>r.json()).then(g=>{
-      if(!S.loc)return;S.loc.name=[g.city||g.locality,g.countryName].filter(Boolean).join(S.lang==='ar'?'، ':', ');saveLocal();renderClimate()}).catch(()=>{});
-  },()=>{if(auto!==true)toast(t('wxDenied'))},{timeout:10000,maximumAge:600000});
+async function setupPeriodic(){
+  try{
+    const r=await navigator.serviceWorker.ready;
+    if('periodicSync' in r){const st=await navigator.permissions.query({name:'periodic-background-sync'});if(st.state==='granted')await r.periodicSync.register('pp-check',{minInterval:6*HOUR})}
+  }catch(e){}
 }
-function wxTip(i){
-  const d=W.days[i],out=[];
-  out.push(RAINY(d.code)||d.rain>=1?t('tipRain'):d.hi>=36?t('tipHot'):d.lo<=3?t('tipCold'):t('tipMild'));
-  const nm=[];S.plants.forEach(p=>{const x=info(p);if(i===0?(x.wDue<=0&&!x.rainSkip):x.wDue===i)nm.push(p.name||sname(p.sp))});
-  if(nm.length)out.push(t('tipDue')+' '+nm.slice(0,5).join(S.lang==='ar'?'، ':', ')+(nm.length>5?' +'+(nm.length-5):''));
-  return out.join(' ');
+async function applyQueue(){
+  const q=await idbGet('queue');if(!q||!q.length)return;
+  await idbSet('queue',[]);let n=0;
+  q.forEach(a=>{const p=S.plants.find(x=>x.id===a.id);if(!p)return;if(a.k==='w'&&a.day>p.lw){p.lw=a.day;n++}if(a.k==='f'&&a.day>p.lf){p.lf=a.day;n++}});
+  if(n){save();renderAll();toast(t('rApplied'))}
 }
-function renderWx(){
-  const card=$('#weatherCard');if(!card)return;
-  let box=$('#wxLive');if(!box){box=h('div',{id:'wxLive',class:'wxlive'});card.insertBefore(box,$('#pace'))}
-  box.textContent='';
-  box.append(h('div',{class:'wx-head'},h('span',{class:'wx-place'},'📍 '+wxPlace()),
-    h('button',{class:'btn btn-ghost btn-sm',type:'button',onclick:()=>useMyLocation()},t('wxUseLoc')),
-    h('button',{class:'icon-btn',type:'button','aria-label':t('wxRefresh'),title:t('wxRefresh'),onclick:()=>{loadWeather(true);toast(t('wxRefreshed'))},html:svg('<path d="M20 11a8 8 0 10-2.3 5.7M20 5v6h-6"/>')})));
-  if(!(W&&W.day===TODAY)){box.append(h('p',{class:'note'},wxBusy?t('wxLoading'):t('wxOffline')));return}
-  const d0=W.days[0],loc=S.lang==='ar'?'ar-u-nu-latn':'en';
-  box.append(h('div',{class:'wx-now'},h('span',{class:'wx-ico'},wxIcon(W.code)),
-    h('div',null,h('b',null,wxText(W.code)),h('span',null,fmt(t('wxLine'),{hi:d0.hi,lo:d0.lo,w:W.wind,r:d0.rain.toFixed(1)}))),
-    h('span',{class:'wx-upd'},t('wxUpd')+' '+new Date(W.ts).toLocaleTimeString(loc,{hour:'2-digit',minute:'2-digit'}))));
-  const strip=h('div',{class:'wx-days'});
-  W.days.forEach((d,i)=>strip.append(h('button',{type:'button',class:'wx-day','aria-pressed':String(wxSel===i),onclick:()=>{wxSel=i;renderWx()}},
-    h('small',null,i===0?t('today'):new Date(d.date+'T12:00:00').toLocaleDateString(S.lang==='ar'?'ar':'en',{weekday:'short'})),
-    h('i',null,wxIcon(d.code)),h('b',null,d.hi+'°'),h('span',null,d.lo+'°'))));
-  box.append(strip,h('p',{class:'wx-tip'},wxTip(Math.min(wxSel,W.days.length-1))));
-}
-function dayTick(){
-  const n=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);
-  if(n!==TODAY){TODAY=n;S.cond='auto';S.condDay=TODAY;W=null;wxSel=0;saveLocal();loadWeather(true);renderAll()}
-  else if(W&&Date.now()-W.ts>60*60000)loadWeather(true);
-  remCheck();
-}
-
-/* ---------- care reminders ---------- */
-var swReg=null,planT=null;const canNotify='Notification' in window;
-const remOK=()=>S.rem.on&&canNotify&&Notification.permission==='granted';
-function planOf(){
-  return{on:remOK(),time:S.rem.time,lang:S.lang,url:location.href.split('#')[0],last:S.rem.last,
-    items:S.plants.flatMap(p=>{const i=info(p),n=p.name||sname(p.sp);return[{n,k:'w',d:TODAY+i.wDue}].concat(i.resting?[]:[{n,k:'f',d:TODAY+i.fDue}])})};
-}
-function postPlan(){if(swReg&&swReg.active)swReg.active.postMessage({type:'plan',plan:planOf()})}
-function syncSWsoon(){clearTimeout(planT);planT=setTimeout(postPlan,500)}
-async function regSW(){
-  if(swReg)return swReg;
-  try{if(!('serviceWorker' in navigator)||!/^https?:/.test(location.protocol))return null;
-    await navigator.serviceWorker.register('sw.js');swReg=await navigator.serviceWorker.ready;return swReg}catch(e){return null}
-}
-function remBody(w,f,ar){
-  const j=a=>a.slice(0,6).join(ar?'، ':', ')+(a.length>6?' +'+(a.length-6):'');
-  return[w.length?(ar?'💧 اسقِ: ':'💧 Water: ')+j(w):'',f.length?(ar?'🌱 سمّد: ':'🌱 Feed: ')+j(f):''].filter(Boolean).join('\n');
-}
-function dueNames(){const w=[],f=[];S.plants.forEach(p=>{const i=info(p),n=p.name||sname(p.sp);if(i.wDue<=0&&!i.rainSkip)w.push(n);if(i.fDue<=0&&!i.resting)f.push(n)});return{w,f}}
-async function showNote(title,body,tag){
-  try{const reg=swReg||(navigator.serviceWorker&&await navigator.serviceWorker.getRegistration());
-    if(reg&&reg.showNotification){await reg.showNotification(title,{body,tag,icon:'icon.svg',badge:'icon.svg',lang:S.lang,dir:S.lang==='ar'?'rtl':'ltr',data:{url:location.href.split('#')[0]}});return true}}catch(e){}
-  try{if(canNotify&&Notification.permission==='granted'){new Notification(title,{body,tag,icon:'icon.svg'});return true}}catch(e){}
-  return false;
-}
-function remCheck(){
-  if(!remOK()||S.rem.last===TODAY)return;
-  const [hh,mm]=S.rem.time.split(':').map(Number),n=new Date();
-  if(n.getHours()*60+n.getMinutes()<hh*60+mm)return;
-  const d=dueNames();S.rem.last=TODAY;saveLocal();
-  if(d.w.length||d.f.length)showNote(t('remTitle'),remBody(d.w,d.f,S.lang==='ar'),'care-'+TODAY);
-}
-function setRemMsg(m){const el=$('#remMsg');if(el)el.textContent=m}
-async function toggleRem(){
-  if(S.rem.on){S.rem.on=false;saveLocal();postPlan();renderRem();return}
-  if(!canNotify){setRemMsg(t('remUnsupported'));return}
-  let perm=Notification.permission;if(perm==='default')perm=await Notification.requestPermission();
-  if(perm!=='granted'){renderRem();setRemMsg(t('remDenied'));return}
-  S.rem.on=true;S.rem.last=-1;saveLocal();await regSW();
-  showNote(t('remTitle'),t('remOnBody'),'care-test');
-  try{if(swReg&&'periodicSync' in swReg){const st=await navigator.permissions.query({name:'periodic-background-sync'});if(st.state==='granted')await swReg.periodicSync.register('plant-care',{minInterval:6*3600*1000})}}catch(e){}
-  postPlan();renderRem();remCheck();
-}
-function testNote(){
-  if(!(canNotify&&Notification.permission==='granted')){setRemMsg(t('remEnableFirst'));return}
-  const d=dueNames();showNote(t('remTitle'),(d.w.length||d.f.length)?remBody(d.w,d.f,S.lang==='ar'):t('remNothing'),'care-test');
-}
-function downloadICS(){
-  const [hh,mm]=S.rem.time.split(':'),pad=n=>String(n).padStart(2,'0'),ar=S.lang==='ar';
-  const ymd=day=>{const d=new Date(day*86400000);return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())};
-  const esc=x=>String(x).replace(/[\\;,]/g,m=>'\\'+m).replace(/\n/g,'\\n');
-  const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
-  const out=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Plant Parent//EN','CALSCALE:GREGORIAN'];
-  S.plants.forEach(p=>{const i=info(p),n=p.name||sname(p.sp);
-    [['w',i.wi,i.wDue,(ar?'💧 اسقِ ':'💧 Water ')+n],['f',i.fi,i.fDue,(ar?'🌱 سمّد ':'🌱 Feed ')+n]].forEach(([k,iv,due,sum])=>
-      out.push('BEGIN:VEVENT','UID:'+p.id+'-'+k+'@plantparent','DTSTAMP:'+stamp,'DTSTART:'+ymd(TODAY+Math.max(0,due))+'T'+pad(hh)+pad(mm)+'00','DURATION:PT15M','RRULE:FREQ=DAILY;INTERVAL='+iv,'SUMMARY:'+esc(sum),'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc(sum),'TRIGGER:PT0M','END:VALARM','END:VEVENT'))});
-  out.push('END:VCALENDAR');
-  const a=h('a',{href:URL.createObjectURL(new Blob([out.join('\r\n')],{type:'text/calendar'})),download:'plant-care.ics'});
-  document.body.append(a);a.click();a.remove();toast(t('remIcsDone'));
+let remPending=false;
+async function setReminders(on){
+  if(!remSupported()){toast(t('rUnsup'));renderRem();return}
+  if(on){
+    remPending=true;renderRem();
+    let perm=Notification.permission;
+    try{if(perm==='default')perm=await Notification.requestPermission()}catch(e){perm='denied'}
+    remPending=false;
+    if(perm!=='granted'){S.rem.on=false;saveLocal();renderRem();toast(t('rDenied'));return}
+    S.rem.on=true;
+  }else S.rem.on=false;
+  saveLocal();await writeSnap();renderRem();
+  if(S.rem.on){setupPeriodic();swPost({type:'check'});toast(t('rOnToast'))}else toast(t('rOffToast'));
 }
 function renderRem(){
-  const card=$('#todayCard');if(!card)return;
-  let box=$('#remBox');if(!box){box=h('div',{id:'remBox',class:'rem'});card.append(box)}
-  box.textContent='';const on=remOK();
-  box.append(
-    h('div',{class:'rem-head'},h('b',null,'🔔 '+t('remTitle')),h('button',{type:'button',class:'switch',role:'switch','aria-checked':String(on),'aria-label':t('remTitle'),onclick:toggleRem},h('i'))),
-    h('div',{class:'rem-row'},h('label',{for:'remTime'},t('remAt')),h('input',{type:'time',id:'remTime',value:S.rem.time,onchange:e=>{S.rem.time=e.target.value||'08:00';S.rem.last=-1;saveLocal();postPlan();remCheck()}})),
-    h('div',{class:'rem-row'},h('button',{class:'btn btn-ghost btn-sm',type:'button',onclick:testNote},t('remTest')),h('button',{class:'btn btn-ghost btn-sm',type:'button',onclick:downloadICS},t('remIcs'))),
-    h('p',{class:'note',id:'remMsg'},on?t('remOnNote'):t('remOffNote')));
+  const ok=remSupported(),perm=ok?Notification.permission:'unsupported',on=!!((S.rem.on&&perm==='granted')||remPending);
+  $('#remOn').checked=on;$('#remOpts').hidden=!on;
+  $('#remTime').value=S.rem.time||'08:00';$('#remW').checked=!!S.rem.water;$('#remF').checked=!!S.rem.feed;
+  const n=$('#remNote');n.className='rem-note';
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!navigator.standalone;
+  let msg=t(on?'rNoteOn':'rNoteOff')+' '+t('rHow');
+  if(!ok)msg=ios?t('rIos'):t('rUnsup');
+  else if(perm==='denied'){msg=t('rDenied');n.classList.add('rem-warn')}
+  else if(ios&&!on)msg+=' '+t('rIos');
+  n.textContent=msg;
+}
+function calItems(){
+  const out=[];
+  S.plants.forEach(p=>{const i=info(p),nm=p.name||sname(p.sp);
+    if(S.rem.water)out.push({id:p.id+'-w',day:Math.max(TODAY,TODAY+i.wDue),every:i.wi,title:t('nWater')+' '+nm});
+    if(S.rem.feed&&!i.resting)out.push({id:p.id+'-f',day:Math.max(TODAY,TODAY+i.fDue),every:i.fi,title:t('nFeed')+' '+nm})});
+  return out;
+}
+function calTime(d){const[hh,mm]=(S.rem.time||'08:00').split(':').map(Number);const x=new Date(d*864e5+new Date().getTimezoneOffset()*60000);x.setHours(hh,mm,0,0);return x}
+function icsText(items){
+  const pad=n=>String(n).padStart(2,'0');
+  const fm=x=>''+x.getFullYear()+pad(x.getMonth()+1)+pad(x.getDate())+'T'+pad(x.getHours())+pad(x.getMinutes())+'00';
+  const esc=x=>String(x).replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+  const L1=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Plant Parent//EN','CALSCALE:GREGORIAN'];
+  const st=new Date().toISOString().replace(/[-:]|\.\d{3}/g,'');
+  items.forEach(it=>{const x=calTime(it.day);
+    L1.push('BEGIN:VEVENT','UID:'+it.id+'@plantparent','DTSTAMP:'+st,'DTSTART:'+fm(x),'DTEND:'+fm(new Date(x.getTime()+9e5)),'RRULE:FREQ=DAILY;INTERVAL='+it.every,'SUMMARY:'+esc(it.title),'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc(it.title),'TRIGGER:PT0M','END:VALARM','END:VEVENT')});
+  L1.push('END:VCALENDAR');return L1.join('\r\n')+'\r\n';
+}
+const isAnd=()=>/android/i.test(navigator.userAgent),isIos=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function gcalUrl(it){const x=calTime(it.day),pad=n=>String(n).padStart(2,'0');
+  const f=d=>''+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+'00';
+  return'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('🪴 '+it.title)+'&dates='+f(x)+'/'+f(new Date(x.getTime()+9e5))+'&recur='+encodeURIComponent('RRULE:FREQ=DAILY;INTERVAL='+it.every)}
+/* Android: opens the phone's own calendar "new event" screen with everything filled in */
+function androidUrl(it){const x=calTime(it.day),e=encodeURIComponent;
+  return'intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/event;S.title='+e('🪴 '+it.title)+';l.beginTime='+x.getTime()+';l.endTime='+(x.getTime()+9e5)+';S.rrule='+e('FREQ=DAILY;INTERVAL='+it.every)+';S.browser_fallback_url='+e(gcalUrl(it))+';end'}
+function openIcsNow(items){
+  const txt=icsText(items);
+  if(isIos()){location.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(txt);return}
+  const url=URL.createObjectURL(new Blob([txt],{type:'text/calendar;charset=utf-8'}));
+  const a=h('a',{href:url,download:'plant-parent.ics'});document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+function openCal(){
+  const box=$('#calList');
+  if(!box.hidden){box.hidden=true;return}
+  const items=calItems();
+  box.textContent='';
+  if(!items.length){box.append(h('div',{},t('rCalNone')));box.hidden=false;return}
+  box.append(h('div',{},t(isAnd()?'rCalHintA':isIos()?'rCalHintI':'rCalHint')));
+  const label=it=>[h('span',{},it.title),h('b',{},'+ '+(S.lang==='ar'?'كل '+it.every+' يوم':'every '+it.every+'d'))];
+  if(isIos()){
+    box.append(h('a',{href:'#',onclick:e=>{e.preventDefault();openIcsNow(items)}},h('span',{},t('rCalAll')),h('b',{},'+')));
+  }
+  items.forEach(it=>{
+    if(isAnd())box.append(h('a',{href:androidUrl(it)},...label(it)));
+    else if(isIos())box.append(h('a',{href:'#',onclick:e=>{e.preventDefault();openIcsNow([it])}},...label(it)));
+    else box.append(h('a',{href:gcalUrl(it),target:'_blank',rel:'noopener'},...label(it)));
+  });
+  box.hidden=false;
+}
+function exportIcs(){openIcsNow(calItems());toast(t('rIcsToast'))}
+function refreshDay(){
+  const n=Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);
+  if(n===TODAY)return;
+  TODAY=n;if(S.condDay!==TODAY){S.cond='auto';S.condDay=TODAY}
+  saveLocal();renderAll();loadWeather(true);
 }
 
-/* ---------- snooze + plant details ---------- */
-function snooze(id,k){const p=S.plants.find(x=>x.id===id);if(!p)return;p[k==='w'?'zw':'zf']=TODAY+1;save();renderToday();renderGarden();renderWx();toast(t('snoozed'))}
-function openDetail(id){
-  const p=S.plants.find(x=>x.id===id),root=$('#modalRoot');if(!p||root.firstChild)return;
-  const i=info(p),s=i.s,nm=p.name||sname(p.sp),loc=S.lang==='ar'?'ar-u-nu-latn':'en';
-  const veil=h('div',{class:'veil',onclick:e=>{if(e.target===veil)close()}});
-  const nxt=(due,iv,n)=>Array.from({length:n},(_,k)=>new Date((TODAY+Math.max(0,due)+k*iv)*86400000).toLocaleDateString(loc,{timeZone:'UTC',weekday:'short',day:'numeric',month:'short'}));
-  const row=(lbl,arr)=>h('div',{class:'dt-row'},h('b',null,lbl),h('div',{class:'dt-chips'},arr.map(x=>h('span',{class:'tag'},x))));
-  const m=h('div',{class:'modal card gloss',role:'dialog','aria-modal':'true'},
-    h('div',{class:'dt-top'},h('div',{class:'p3d big',html:plant3d(s)}),
-      h('div',null,h('h2',null,nm),h('p',{class:'note'},sname(p.sp)),alts(s).length?h('p',{class:'al2'},t('alsoCalled')+' '+alts(s).join(' · ')):null,
-        h('div',{class:'tags'},h('span',{class:'tag'},p.where==='out'?t('outdoor'):t('indoor')),h('span',{class:'tag'},t('cat_'+s.type))))),
-    row('💧 '+t('water'),nxt(i.wDue,i.wi,4)),
-    i.resting?h('p',{class:'note'},t('resumes')):row('🌱 '+t('feed'),nxt(i.fDue,i.fi,3)),
-    h('p',{class:'note'},fmt(t('dtNote'),{w:i.wi,f:i.fi})),
-    h('div',{class:'modal-actions'},
-      h('button',{class:'btn btn-ghost',type:'button',onclick:()=>close()},t('close')),
-      h('button',{class:'btn btn-ghost',type:'button',onclick:()=>{doFeed(id);close()}},t('fed')),
-      h('button',{class:'btn btn-leaf',type:'button',onclick:()=>{doWater(id);close()}},t('watered'))));
-  veil.append(m);root.append(veil);
-  const onKey=e=>{if(e.key==='Escape')close()};document.addEventListener('keydown',onKey);
-  function close(){document.removeEventListener('keydown',onKey);veil.remove()}
-}
-
-function renderAll(){applyLang();setSync(syncState);renderClimate();renderRem();renderToday();renderGarden();renderDx();if(!$('#dxOut').firstChild)placeholder();drawDz()}
+/* ---------- install ---------- */
+let deferredInstall=null;
+const isStandalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+function paintInstall(){const b=$('#installBtn');b.textContent=t('inst');b.hidden=isStandalone()||!/^https?:$/.test(location.protocol)}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;paintInstall()});
+window.addEventListener('appinstalled',()=>{deferredInstall=null;paintInstall()});
+$('#installBtn').addEventListener('click',async()=>{
+  if(deferredInstall){deferredInstall.prompt();try{await deferredInstall.userChoice}catch(e){}deferredInstall=null;return}
+  const ov=h('div',{style:'position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:20px'},
+    h('div',{style:'background:#fffdf6;border-radius:20px;padding:20px;max-width:380px;display:grid;gap:10px;line-height:1.6'},
+      h('b',{},t('instT')),h('div',{},isIos()?t('instI'):t('instA')),h('div',{style:'font-size:.85rem;opacity:.75'},t('instW')),
+      h('button',{class:'btn btn-leaf btn-sm',type:'button',onclick:()=>ov.remove()},t('instC'))));
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove()});document.body.append(ov);
+});
+/* ---------- boot ---------- */
+function renderAll(){applyLang();paintInstall();setSync(syncState);renderClimate();renderToday();renderGarden();renderDx();renderRem();if(!$('#dxOut').firstChild)placeholder();drawDz();writeSnap()}
 $('#langBtn').addEventListener('click',()=>{S.lang=S.lang==='ar'?'en':'ar';save();$('#dxOut').textContent='';renderAll()});
-$('#citySel').addEventListener('change',e=>{if(e.target.value==='loc')return;S.city=e.target.value;S.loc=null;W=null;save();renderAll();loadWeather(true)});
+$('#citySel').addEventListener('change',e=>{if(e.target.value==='custom')return;S.city=e.target.value;S.loc=null;S.wx=null;saveLocal();renderAll();loadWeather(true)});
 $('#addBtn').addEventListener('click',openModal);
 $('#heroAdd').addEventListener('click',openModal);
+$('#locBtn').addEventListener('click',useMyLocation);
+$('#wRefresh').addEventListener('click',()=>loadWeather(true));
+let qT=null;
+$('#locQ').addEventListener('input',e=>{clearTimeout(qT);const v=e.target.value.trim();if(v.length<2){$('#locRes').hidden=true;return}qT=setTimeout(()=>searchPlace(v),300)});
+document.addEventListener('click',e=>{if(!e.target.closest('.loc-search'))$('#locRes').hidden=true});
+$('#doneAll').addEventListener('click',()=>{S.plants.forEach(p=>{const i=info(p);if(i.wDue<=0&&!i.rainSkip)p.lw=TODAY;if(i.fDue<=0&&!i.resting)p.lf=TODAY});save();renderAll();toast(t('doneAllToast'))});
+$('#remOn').addEventListener('change',e=>setReminders(e.target.checked));
+$('#remTime').addEventListener('change',e=>{S.rem.time=e.target.value||'08:00';saveLocal();writeSnap()});
+$('#remW').addEventListener('change',e=>{S.rem.water=e.target.checked;saveLocal();writeSnap()});
+$('#remF').addEventListener('change',e=>{S.rem.feed=e.target.checked;saveLocal();writeSnap()});
+$('#remTest').addEventListener('click',async()=>{await writeSnap();swPost({type:'test'})});
+$('#remIcs').addEventListener('click',exportIcs);
+$('#remGcal').addEventListener('click',openCal);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){refreshDay();loadWeather();applyQueue();if(S.rem.on)swPost({type:'check'})}});
+setInterval(()=>{refreshDay();loadWeather();if(S.rem.on)swPost({type:'check'})},30000);
 renderAll();
 loadWeather();
-(async()=>{if(remOK()){await regSW();postPlan();remCheck()}else regSW()})();
-setInterval(dayTick,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)dayTick()});
-try{if(!S.loc){const first=!localStorage.getItem('pp-geo-asked'),go=()=>{try{localStorage.setItem('pp-geo-asked','1')}catch(e){}useMyLocation(true)};
-  if(navigator.permissions&&navigator.permissions.query)navigator.permissions.query({name:'geolocation'}).then(r=>{if(r.state==='granted'||(r.state==='prompt'&&first))go()}).catch(()=>{if(first)go()});
-  else if(first)go()}}catch(e){}
+if(remSupported()||('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))){
+  navigator.serviceWorker.register('sw.js').then(r=>{
+    swReg=r;
+    navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.type==='pp-queue')applyQueue()});
+    applyQueue();
+    if(S.rem.on){setupPeriodic();swPost({type:'check'})}
+  }).catch(()=>{});
+}
 })();
 </script>
 </body>
