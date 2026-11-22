@@ -1,11 +1,11 @@
 Plant Parent - deploy notes (GitHub Pages)
 ==========================================
-1. Put index.html at the root of your repo (or in /docs).
+1. Put ALL files in the same folder of your repo (or /docs): index.html, plants-more.js, plants-care.js, sw.js, manifest.json, icon.svg.
 2. Repo Settings > Pages > Deploy from a branch > pick the branch and folder > Save.
 3. Open https://<user>.github.io/<repo>/
 
 What works
-  - Arabic / English, 347 plants with common alternative names, climate-based schedules, add / water / feed.
+  - Arabic / English, about 500 plants with common alternative names, climate-based schedules, add / water / feed.
   - Real plant photos: each species has an exact English Wikipedia article title (WT list in the script).
     Photos are fetched in the visitor's browser in batches of up to 50 titles per request,
     only for what is on screen, and cached in localStorage (key pp-img-v2).
@@ -37,3 +37,11 @@ Care reminders (new)
   - A static site cannot push to a closed browser. For alerts that always fire use "Add to calendar" (.ics),
     which creates repeating events with alarms for every plant.
   - Reminder settings are stored per device (localStorage).
+
+Plant data and Leaf doctor (new)
+  - plants-more.js: extra species (id, names, intervals, care group, Wikipedia title, aliases) + group map for the older species.
+    To add a plant, add one row to the R list there. Old duplicate ids are migrated through MIG.
+  - plants-care.js: care groups (tags such as dry/mid/wet, pests, diseases), symptom fragments (causes, steps, prevention)
+    and OV, the per-species advice (e.g. olive, lemon, tomato, date palm). Add a species-specific line under OV[id][symptom].
+  - The Leaf doctor lets you pick any plant (or one from your garden); symptoms offered, causes and steps follow that
+    plant's group, indoor/outdoor, today's climate and the season.
